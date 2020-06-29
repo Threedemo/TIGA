@@ -37,6 +37,11 @@ public class Evaluate {
 	public void setEvaluateContent(String evaluateContent) {
 		this.evaluateContent = evaluateContent;
 	}
+
+	@Override
+	public String toString() {
+		return "Evaluate [evaluateId=" + evaluateId + ", teald=" + teald + ", evaluateContent=" + evaluateContent + "]";
+	}
 	
 	
 }

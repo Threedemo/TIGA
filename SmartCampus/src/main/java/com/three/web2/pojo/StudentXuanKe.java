@@ -39,6 +39,11 @@ public class StudentXuanKe {
 	public void setXkId(XuanKe xkId) {
 		this.xkId = xkId;
 	}
+
+	@Override
+	public String toString() {
+		return "StudentXuanKe [stuXkId=" + stuXkId + ", stuId=" + stuId + ", xkId=" + xkId + "]";
+	}
 	
 	
 }

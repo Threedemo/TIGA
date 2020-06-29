@@ -136,6 +136,14 @@ public class Student {
 	public void setSlaId(Calss claId) {
 		this.claId = claId;
 	}
+
+	@Override
+	public String toString() {
+		return "Student [stuid=" + stuid + ", loginName=" + loginName + ", stuName=" + stuName + ", stuSex=" + stuSex
+				+ ", stuAge=" + stuAge + ", stuIdNum=" + stuIdNum + ", stuNation=" + stuNation + ", stuAddress="
+				+ stuAddress + ", stuPhone=" + stuPhone + ", stuStart=" + stuStart + ", stuStop=" + stuStop + ", claId="
+				+ claId + "]";
+	}
 	
 	
 	

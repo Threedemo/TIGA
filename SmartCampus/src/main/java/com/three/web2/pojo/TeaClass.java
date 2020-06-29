@@ -39,6 +39,11 @@ public class TeaClass {
 	public void setClaId(Class claId) {
 		this.claId = claId;
 	}
+
+	@Override
+	public String toString() {
+		return "TeaClass [teaClassId=" + teaClassId + ", teaId=" + teaId + ", claId=" + claId + "]";
+	}
 	
 	
 	

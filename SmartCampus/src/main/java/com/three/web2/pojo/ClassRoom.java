@@ -26,6 +26,12 @@ public class ClassRoom {
 	public void setClassHomeName(String classHomeName) {
 		this.classHomeName = classHomeName;
 	}
+
+	@Override
+	public String toString() {
+		return "ClassRoom [classHomeId=" + classHomeId + ", classHomeName=" + classHomeName + "]";
+	}
+	
 	
 	
 }

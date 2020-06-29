@@ -26,6 +26,11 @@ public class ClassHours {
 	public void setClassHoursName(String classHoursName) {
 		this.classHoursName = classHoursName;
 	}
+
+	@Override
+	public String toString() {
+		return "ClassHours [classHouesId=" + classHouesId + ", classHoursName=" + classHoursName + "]";
+	}
 	
 	
 }

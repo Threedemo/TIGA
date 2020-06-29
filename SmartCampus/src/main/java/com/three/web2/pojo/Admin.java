@@ -75,8 +75,14 @@ public class Admin {
 	public void setAdmIdNum(String admIdNum) {
 		this.admIdNum = admIdNum;
 	}
+
+	//toString
+	@Override
+	public String toString() {
+		return "Admin [adminId=" + adminId + ", loginName=" + loginName + ", admName=" + admName + ", admSex=" + admSex
+				+ ", Age=" + Age + ", admIdNum=" + admIdNum + "]";
+	}
 	
-	//toString 
 	
 	
 }

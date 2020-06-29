@@ -61,6 +61,12 @@ public class Message {
 	public void setDepId(Department depId) {
 		this.depId = depId;
 	}
+
+	@Override
+	public String toString() {
+		return "Message [messageId=" + messageId + ", stuId=" + stuId + ", messageContent=" + messageContent
+				+ ", messageDate=" + messageDate + ", depId=" + depId + "]";
+	}
 	
 	
 }

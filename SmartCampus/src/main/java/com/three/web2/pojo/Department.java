@@ -36,6 +36,11 @@ public class Department {
 	public void setDepEnabled(String depEnabled) {
 		this.depEnabled = depEnabled;
 	}
+
+	@Override
+	public String toString() {
+		return "Department [depID=" + depID + ", depName=" + depName + ", depEnabled=" + depEnabled + "]";
+	}
 	
 	
 }

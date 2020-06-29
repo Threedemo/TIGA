@@ -81,6 +81,12 @@ public class ClassCourse {
 	public void setClassHomeId(ClassRoom classHomeId) {
 		this.classHomeId = classHomeId;
 	}
+
+	@Override
+	public String toString() {
+		return "ClassCourse [stuCourseId=" + stuCourseId + ", claId=" + claId + ", teaId=" + teaId + ", classHoursId="
+				+ classHoursId + ", weekId=" + weekId + ", zhouId=" + zhouId + ", classHomeId=" + classHomeId + "]";
+	}
 	
 	
 	

@@ -46,6 +46,12 @@ public class Notice {
 	public void setNoticeDate(String noticeDate) {
 		this.noticeDate = noticeDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Notice [noticeId=" + noticeId + ", noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent
+				+ ", noticeDate=" + noticeDate + "]";
+	}
 	
 	
 }

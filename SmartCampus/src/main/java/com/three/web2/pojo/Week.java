@@ -26,6 +26,11 @@ public class Week {
 	public void setWeekName(String weekName) {
 		WeekName = weekName;
 	}
+
+	@Override
+	public String toString() {
+		return "Week [weekId=" + weekId + ", WeekName=" + WeekName + "]";
+	}
 	
 	
 }

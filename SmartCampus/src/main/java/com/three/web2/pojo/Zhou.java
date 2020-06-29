@@ -26,6 +26,11 @@ public class Zhou {
 	public void setZhouName(String zhouName) {
 		this.zhouName = zhouName;
 	}
+
+	@Override
+	public String toString() {
+		return "Zhou [zhouId=" + zhouId + ", zhouName=" + zhouName + "]";
+	}
 	
 	
 }

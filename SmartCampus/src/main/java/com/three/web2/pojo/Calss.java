@@ -42,6 +42,12 @@ public class Calss {
 	public void setDepid(Department depid) {
 		this.depid = depid;
 	}
+
+	
+	@Override
+	public String toString() {
+		return "Calss [claID=" + claID + ", claName=" + claName + ", depid=" + depid + "]";
+	}
 	
 	
 	

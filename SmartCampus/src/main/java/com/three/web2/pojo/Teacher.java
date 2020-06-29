@@ -113,6 +113,13 @@ public class Teacher {
 	public void setDepId(Department depId) {
 		this.depId = depId;
 	}
+
+	@Override
+	public String toString() {
+		return "Teacher [teaId=" + teaId + ", loginName=" + loginName + ", teaName=" + teaName + ", teaSex=" + teaSex
+				+ ", teaAge=" + teaAge + ", teaIdNum=" + teaIdNum + ", teaNation=" + teaNation + ", teaDate=" + teaDate
+				+ ", courseId=" + courseId + ", depId=" + depId + "]";
+	}
 	
 	
 	

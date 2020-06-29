@@ -48,6 +48,12 @@ public class XuanKe {
 	public void setEnabled(String enabled) {
 		this.enabled = enabled;
 	}
+
+	@Override
+	public String toString() {
+		return "XuanKe [xkId=" + xkId + ", xkName=" + xkName + ", semesterId=" + semesterId + ", enabled=" + enabled
+				+ "]";
+	}
 	
 	
 }

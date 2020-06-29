@@ -43,6 +43,11 @@ public class DepCourse {
 	public void setCourseId(Course courseId) {
 		this.courseId = courseId;
 	}
+
+	@Override
+	public String toString() {
+		return "DepCourse [depCourseId=" + depCourseId + ", depId=" + depId + ", courseId=" + courseId + "]";
+	}
 	
 	
 	

@@ -63,6 +63,12 @@ public class Score {
 	public void setSemesterId(Semester semesterId) {
 		this.semesterId = semesterId;
 	}
+
+	@Override
+	public String toString() {
+		return "Score [scoreId=" + scoreId + ", score=" + score + ", claId=" + claId + ", stuId=" + stuId
+				+ ", semesterId=" + semesterId + "]";
+	}
 	
 	
 	
