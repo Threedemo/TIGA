@@ -9,7 +9,6 @@ public class Zhou {
 	@Id
 	int zhouId;
 	
-	
 	String zhouName;
 
 	public int getZhouId() {
