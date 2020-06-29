@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * 教室表
  */
 @Document
-public class Calss {
+public class Class {
 
 	@Id
 	int claID;

@@ -39,7 +39,7 @@ public class Student {
 	String stuStop;
 	
 	@DBRef
-	Calss claId;
+	Class claId;
 
 	public String getStuid() {
 		return stuid;
@@ -129,11 +129,11 @@ public class Student {
 		this.stuStop = stuStop;
 	}
 
-	public Calss getClaId() {
+	public Class getClaId() {
 		return claId;
 	}
 
-	public void setSlaId(Calss claId) {
+	public void setSlaId(Class claId) {
 		this.claId = claId;
 	}
 
