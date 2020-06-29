@@ -14,9 +14,12 @@ public class DepCourse {
 	@Id
 	int depCourseId;
 	
+	//院系id
 	@DBRef
 	Department depId;
 	
+	
+	//课程id
 	@DBRef
 	Course courseId;
 

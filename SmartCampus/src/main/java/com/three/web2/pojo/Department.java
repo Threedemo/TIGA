@@ -3,14 +3,19 @@ package com.three.web2.pojo;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 院系表
+ */
 @Document
 public class Department {
 
 	@Id
 	int depID;
 	
+	//院系名称
 	String depName;
 	
+	//是否开启选课状态
 	String  depEnabled;
 
 	public int getDepID() {

@@ -3,12 +3,16 @@ package com.three.web2.pojo;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 教室表
+ */
 @Document
 public class ClassRoom {
 
 	@Id
 	int classHomeId;
 	
+	//教室名字
 	String classHomeName;
 
 	public int getClassHomeId() {

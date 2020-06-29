@@ -2,17 +2,22 @@ package com.three.web2.pojo;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+/**
+ * 公告表
+ */
 @Document
 public class Notice {
 
 	@Id
 	int noticeId;
 	
+	//公告标题
 	String noticeTitle;
 	
+	//公告内容
 	String noticeContent;
 	
+	//公告发布时间
 	String noticeDate;
 
 	public int getNoticeId() {

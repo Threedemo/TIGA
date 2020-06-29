@@ -4,15 +4,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 教室班级表
+ */
 @Document
 public class TeaClass {
 
 	@Id
 	int teaClassId;
 	
+	//老师id
 	@DBRef
 	Teacher teaId;
 	
+	//班级id
 	@DBRef
 	Class claId;
 

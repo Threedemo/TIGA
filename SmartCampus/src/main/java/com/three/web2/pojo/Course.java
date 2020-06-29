@@ -3,14 +3,19 @@ package com.three.web2.pojo;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 课程表
+ */
 @Document
 public class Course {
 
 	@Id
 	int courseId;
 	
+	//课程名
 	String courseName;
 	
+	//课程学分
 	String courseNum;
 
 	public int getCourseId() {
