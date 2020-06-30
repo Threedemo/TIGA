@@ -7,5 +7,5 @@ import com.three.web2.pojo.Teacher;
 
 @Repository
 public interface TeacherRepository extends MongoRepository<Teacher, String> {
-
+//自定义
 }
