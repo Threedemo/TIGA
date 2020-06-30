@@ -17,6 +17,14 @@ public class ClassRoom {
 
 	
 
+	public String getClassHomeId() {
+		return classHomeId;
+	}
+
+	public void setClassHomeId(String classHomeId) {
+		this.classHomeId = classHomeId;
+	}
+
 	public String getClassHomeName() {
 		return classHomeName;
 	}
