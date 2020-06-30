@@ -4,21 +4,26 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 意见信息表
+ */
 @Document
 public class Message {
 
 	@Id
 	int messageId;
 	
+	//学生id
 	@DBRef
 	Student stuId;
 	
-	@DBRef
+	//意见内容
 	String messageContent;
 	
-	@DBRef
+	//时间
 	String messageDate;
 	
+	//院系
 	@DBRef
 	Department	depId;
 
@@ -60,6 +65,12 @@ public class Message {
 
 	public void setDepId(Department depId) {
 		this.depId = depId;
+	}
+
+	@Override
+	public String toString() {
+		return "Message [messageId=" + messageId + ", stuId=" + stuId + ", messageContent=" + messageContent
+				+ ", messageDate=" + messageDate + ", depId=" + depId + "]";
 	}
 	
 	

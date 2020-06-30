@@ -59,6 +59,12 @@ public class Login {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
+
+	@Override
+	public String toString() {
+		return "Login [lid=" + lid + ", loginName=" + loginName + ", loginPassword=" + loginPassword + ", endbled="
+				+ endbled + ", authority=" + authority + "]";
+	}
 	
 	
 }

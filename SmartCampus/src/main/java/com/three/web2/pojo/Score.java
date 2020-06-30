@@ -6,21 +6,28 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 成绩表
+ */
 @Document
 public class Score {
 
 	@Id
 	int scoreId;
 	
-	
+	//学生成绩集合
 	HashMap<String, Double> score;
 	
+	
+	//班级
 	@DBRef
 	Class claId;
 	
+	//学生
 	@DBRef
 	Student stuId;
 	
+	//第几学期
 	@DBRef
 	Semester semesterId;
 
@@ -62,6 +69,12 @@ public class Score {
 
 	public void setSemesterId(Semester semesterId) {
 		this.semesterId = semesterId;
+	}
+
+	@Override
+	public String toString() {
+		return "Score [scoreId=" + scoreId + ", score=" + score + ", claId=" + claId + ", stuId=" + stuId
+				+ ", semesterId=" + semesterId + "]";
 	}
 	
 	

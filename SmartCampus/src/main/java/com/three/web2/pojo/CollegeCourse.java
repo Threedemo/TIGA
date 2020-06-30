@@ -4,15 +4,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 院系选课表(每个院系的选课)
+ */
 @Document
-public class Collegecourse {
+public class CollegeCourse {
 
 	@Id
 	int depXkId;
 	
+	//选课表外键
 	@DBRef
 	XuanKe xkId;
 	
+	//院系
 	@DBRef
 	Department depId;
 
@@ -38,6 +43,11 @@ public class Collegecourse {
 
 	public void setDepId(Department depId) {
 		this.depId = depId;
+	}
+
+	@Override
+	public String toString() {
+		return "Collegecourse [depXkId=" + depXkId + ", xkId=" + xkId + ", depId=" + depId + "]";
 	}
 	
 	

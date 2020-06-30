@@ -13,24 +13,33 @@ public class Teacher {
 	@Id
 	int teaId;
 	
+	//职工号
 	@DBRef
 	Login loginName;
 	
+	//老师姓名
 	String teaName;
 	
+	//老师性别
 	String teaSex;
 	
+	//老师年龄
 	int teaAge;
 	
+	//老师身份证号
 	String teaIdNum;
 	
+	//老师名族
 	String teaNation;
 	
+	//入职时间
 	String teaDate;
 	
+	//授课课程
 	@DBRef
 	Course courseId;
 	
+	//所属院系
 	@DBRef
 	Department depId;
 
@@ -112,6 +121,13 @@ public class Teacher {
 
 	public void setDepId(Department depId) {
 		this.depId = depId;
+	}
+
+	@Override
+	public String toString() {
+		return "Teacher [teaId=" + teaId + ", loginName=" + loginName + ", teaName=" + teaName + ", teaSex=" + teaSex
+				+ ", teaAge=" + teaAge + ", teaIdNum=" + teaIdNum + ", teaNation=" + teaNation + ", teaDate=" + teaDate
+				+ ", courseId=" + courseId + ", depId=" + depId + "]";
 	}
 	
 	

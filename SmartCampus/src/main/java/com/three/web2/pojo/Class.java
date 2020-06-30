@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * 教室表
  */
 @Document
-public class Calss {
+public class Class {
 
 	@Id
 	int claID;
@@ -41,6 +41,12 @@ public class Calss {
 
 	public void setDepid(Department depid) {
 		this.depid = depid;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "Calss [claID=" + claID + ", claName=" + claName + ", depid=" + depid + "]";
 	}
 	
 	

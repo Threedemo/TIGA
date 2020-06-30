@@ -3,26 +3,35 @@ package com.three.web2.pojo;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 排课表
+ */
 @Document
 public class ClassCourse {
 
 	int stuCourseId;
 	
+	//班级
 	@DBRef
 	Class claId;
 	
+	//老师
 	@DBRef
 	Teacher teaId;
 	
+	//授课时间段
 	@DBRef
 	ClassHours classHoursId;
 	
+	//第几周
 	@DBRef
 	Week weekId;
 	
+	//星期几
 	@DBRef
 	Zhou zhouId;
 	
+	//教室
 	@DBRef
 	ClassRoom classHomeId;
 
@@ -80,6 +89,12 @@ public class ClassCourse {
 
 	public void setClassHomeId(ClassRoom classHomeId) {
 		this.classHomeId = classHomeId;
+	}
+
+	@Override
+	public String toString() {
+		return "ClassCourse [stuCourseId=" + stuCourseId + ", claId=" + claId + ", teaId=" + teaId + ", classHoursId="
+				+ classHoursId + ", weekId=" + weekId + ", zhouId=" + zhouId + ", classHomeId=" + classHomeId + "]";
 	}
 	
 	

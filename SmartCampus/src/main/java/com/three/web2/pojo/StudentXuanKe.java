@@ -4,15 +4,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 学生选课表
+ */
 @Document
 public class StudentXuanKe {
 
 	@Id
 	int stuXkId;
 	
+	//学生id
 	@DBRef
 	Student stuId;
 	 
+	//选课课程
 	@DBRef
 	XuanKe xkId;
 
@@ -38,6 +43,11 @@ public class StudentXuanKe {
 
 	public void setXkId(XuanKe xkId) {
 		this.xkId = xkId;
+	}
+
+	@Override
+	public String toString() {
+		return "StudentXuanKe [stuXkId=" + stuXkId + ", stuId=" + stuId + ", xkId=" + xkId + "]";
 	}
 	
 	

@@ -9,27 +9,38 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 学生基本信息
+ */
 @Document
 public class Student {
 
 	@Id
 	String stuid;
 	
+	//账号(学号)
 	@DBRef
 	Login loginName;
 	
+	//学生姓名
 	String stuName;
 	
+	//学生性别
 	String stuSex;
 	
+	//学生年龄
 	int stuAge;
 	
+	//学生身份证号
 	String stuIdNum;
 	
+	//学生名族
 	String stuNation;
 	
+	//家庭地址
 	String stuAddress;
 	
+	//联系电话
 	String stuPhone;
 	
 	//入学时间
@@ -38,8 +49,9 @@ public class Student {
 	//毕业时间
 	String stuStop;
 	
+	//班级
 	@DBRef
-	Calss claId;
+	Class claId;
 
 	public String getStuid() {
 		return stuid;
@@ -129,12 +141,20 @@ public class Student {
 		this.stuStop = stuStop;
 	}
 
-	public Calss getClaId() {
+	public Class getClaId() {
 		return claId;
 	}
 
-	public void setSlaId(Calss claId) {
+	public void setSlaId(Class claId) {
 		this.claId = claId;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [stuid=" + stuid + ", loginName=" + loginName + ", stuName=" + stuName + ", stuSex=" + stuSex
+				+ ", stuAge=" + stuAge + ", stuIdNum=" + stuIdNum + ", stuNation=" + stuNation + ", stuAddress="
+				+ stuAddress + ", stuPhone=" + stuPhone + ", stuStart=" + stuStart + ", stuStop=" + stuStop + ", claId="
+				+ claId + "]";
 	}
 	
 	

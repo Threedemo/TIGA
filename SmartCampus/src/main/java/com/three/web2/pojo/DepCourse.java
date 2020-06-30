@@ -14,9 +14,12 @@ public class DepCourse {
 	@Id
 	int depCourseId;
 	
+	//院系id
 	@DBRef
 	Department depId;
 	
+	
+	//课程id
 	@DBRef
 	Course courseId;
 
@@ -42,6 +45,11 @@ public class DepCourse {
 
 	public void setCourseId(Course courseId) {
 		this.courseId = courseId;
+	}
+
+	@Override
+	public String toString() {
+		return "DepCourse [depCourseId=" + depCourseId + ", depId=" + depId + ", courseId=" + courseId + "]";
 	}
 	
 	

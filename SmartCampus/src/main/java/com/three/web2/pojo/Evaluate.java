@@ -1,6 +1,7 @@
 package com.three.web2.pojo;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -9,8 +10,15 @@ public class Evaluate {
 	@Id
 	int evaluateId;
 	
-	String teald;
+	//教师
+	@DBRef
+	Teacher teald;
 	
+	//学生
+	@DBRef
+	Student stuId;
+	
+	//评价内容
 	String evaluateContent;
 
 	public int getEvaluateId() {
@@ -21,12 +29,22 @@ public class Evaluate {
 		this.evaluateId = evaluateId;
 	}
 
-	public String getTeald() {
+
+
+	public Teacher getTeald() {
 		return teald;
 	}
 
-	public void setTeald(String teald) {
+	public void setTeald(Teacher teald) {
 		this.teald = teald;
+	}
+
+	public Student getStuId() {
+		return stuId;
+	}
+
+	public void setStuId(Student stuId) {
+		this.stuId = stuId;
 	}
 
 	public String getEvaluateContent() {
@@ -36,6 +54,11 @@ public class Evaluate {
 
 	public void setEvaluateContent(String evaluateContent) {
 		this.evaluateContent = evaluateContent;
+	}
+
+	@Override
+	public String toString() {
+		return "Evaluate [evaluateId=" + evaluateId + ", teald=" + teald + ", evaluateContent=" + evaluateContent + "]";
 	}
 	
 	
