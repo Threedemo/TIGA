@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Admin {
 
 	@Id
-	int adminId;
+	String adminId;
 	
 	//教务账号
 	@DBRef
@@ -28,11 +28,13 @@ public class Admin {
 	//身份证
 	String admIdNum;
 
-	public int getAdminId() {
+	
+
+	public String getAdminId() {
 		return adminId;
 	}
 
-	public void setAdminId(int adminId) {
+	public void setAdminId(String adminId) {
 		this.adminId = adminId;
 	}
 

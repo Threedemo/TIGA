@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class ClassCourse {
 
-	int stuCourseId;
+	String classCourseId;
 	
 	//班级
 	@DBRef
@@ -35,12 +35,14 @@ public class ClassCourse {
 	@DBRef
 	ClassRoom classHomeId;
 
-	public int getStuCourseId() {
-		return stuCourseId;
+	
+
+	public String getClassCourseId() {
+		return classCourseId;
 	}
 
-	public void setStuCourseId(int stuCourseId) {
-		this.stuCourseId = stuCourseId;
+	public void setClassCourseId(String classCourseId) {
+		this.classCourseId = classCourseId;
 	}
 
 	public Class getClaId() {
@@ -93,11 +95,8 @@ public class ClassCourse {
 
 	@Override
 	public String toString() {
-		return "ClassCourse [stuCourseId=" + stuCourseId + ", claId=" + claId + ", teaId=" + teaId + ", classHoursId="
-				+ classHoursId + ", weekId=" + weekId + ", zhouId=" + zhouId + ", classHomeId=" + classHomeId + "]";
+		return "ClassCourse [classCourseId=" + classCourseId + ", claId=" + claId + ", teaId=" + teaId
+				+ ", classHoursId=" + classHoursId + ", weekId=" + weekId + ", zhouId=" + zhouId + ", classHomeId="
+				+ classHomeId + "]";
 	}
-	
-	
-	
-	
 }
