@@ -9,10 +9,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class ClassHours {
 
+	/**
+	 * 授课时间段id(主键)
+	 */
 	@Id
 	private String classHouesId;
 	
-	//授课时间段
+	/**
+	 * 授课时间段
+	 */
 	private String classHoursName;
 
 	

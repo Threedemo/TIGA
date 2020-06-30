@@ -9,13 +9,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Course {
 
+	/**
+	 * 课程表id(主键)
+	 */
 	@Id
 	private String courseId;
 	
-	//课程名
+	/**
+	 * 课程名
+	 */
 	private String courseName;
 	
-	//课程学分
+	/**
+	 * 课程学分
+	 */
 	private String courseNum;
 
 	

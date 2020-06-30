@@ -9,10 +9,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class ClassRoom {
 
+	/**
+	 * 教室表
+	 */
 	@Id
 	private String classHomeId;
 	
-	//教室名字
+	/**
+	 * 教室名字
+	 */
 	private String classHomeName;
 
 	

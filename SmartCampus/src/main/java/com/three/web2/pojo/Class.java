@@ -9,13 +9,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Class {
 
+	/**
+	 * 教室表id(主键)
+	 */
 	@Id
 	private String claID;
 	
-	//班级表
+	/**
+	 * 班级表
+	 */
 	private String claName;
 	
-	//所属院系
+	/**
+	 * 所属院系
+	 */
 	@DBRef
 	private Department depid;
 

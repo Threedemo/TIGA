@@ -11,15 +11,22 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class DepCourse {
 
+	/**
+	 * 院系课程表id(主键)
+	 */
 	@Id
 	private String  depCourseId;
 	
-	//院系id
+	/**
+	 * 院系id
+	 */
 	@DBRef
 	private Department depId;
 	
 	
-	//课程id
+	/**
+	 * 课程id
+	 */
 	@DBRef
 	private Course courseId;
 

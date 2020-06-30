@@ -9,17 +9,26 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class XuanKe {
 
+	/**
+	 * 选课表id(主键)
+	 */
 	@Id
 	private String xkId;
 	
-	//选修课名
+	/**
+	 * 选修课名
+	 */
 	private String xkName;
 	
-	//第几学期
+	/**
+	 * 第几学期
+	 */
 	@DBRef
 	private Semester semesterId;
 	
-	//教务是否启用选课
+	/**
+	 * 教务是否启用选课
+	 */
 	private String enabled;
 
 	

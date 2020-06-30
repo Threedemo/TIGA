@@ -8,16 +8,24 @@ public class Login {
 	
 	private int lid;
 	
-	//账号
+	/**
+	 * 账号
+	 */
 	private String loginName;
 	
-	//密码
+	/**
+	 * 密码
+	 */
 	private String loginPassword;
 	
-	//用户状态
+	/**
+	 * 用户状态
+	 */
 	private int endbled;
 	
-	//用户角色
+	/**
+	 * 用户角色
+	 */
 	private String authority;
 
 	public int getLid() {

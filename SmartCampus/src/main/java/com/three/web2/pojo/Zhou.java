@@ -10,10 +10,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Zhou {
 
+	/**
+	 * 周表id(主键)
+	 */
 	@Id
 	private String zhouId;
 	
-	//第几周
+	/**
+	 * 第几周
+	 */
 	private String zhouName;
 
 

@@ -10,14 +10,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class StudentXuanKe {
 
+	/**
+	 * 学生选课表id(主键)
+	 */
 	@Id
 	private String stuXkId;
 	
-	//学生id
+	/**
+	 * 学生id
+	 */
 	@DBRef
 	private Student stuId;
 	 
-	//选课课程
+	/**
+	 * 选课课程
+	 */
 	@DBRef
 	private XuanKe xkId;
 

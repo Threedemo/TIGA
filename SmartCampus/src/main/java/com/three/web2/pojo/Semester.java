@@ -9,10 +9,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Semester {
 
+	/**
+	 * 学期表id(主键)
+	 */
 	@Id
 	private String semesterId;
 	
-	//第几学期
+	/**
+	 * 第几学期
+	 */
 	private String semesterName;
 
 	

@@ -1,5 +1,6 @@
 package com.three.web2.pojo;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,29 +10,45 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class ClassCourse {
 
+	/**
+	 * 排课表id(主键)
+	 */
+	@Id
 	private String classCourseId;
 	
-	//班级
+	/**
+	 * 班级
+	 */
 	@DBRef
 	private Class claId;
 	
-	//老师
+	/**
+	 * 老师
+	 */
 	@DBRef
 	private Teacher teaId;
 	
-	//授课时间段
+	/**
+	 * 授课时间段
+	 */
 	@DBRef
 	private ClassHours classHoursId;
 	
-	//第几周
+	/**
+	 * 第几周
+	 */
 	@DBRef
 	private Week weekId;
 	
-	//星期几
+	/**
+	 * 星期几
+	 */
 	@DBRef
 	private Zhou zhouId;
 	
-	//教室
+	/**
+	 * 教室
+	 */
 	@DBRef
 	private ClassRoom classHomeId;
 

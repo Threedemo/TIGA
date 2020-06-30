@@ -12,22 +12,33 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Score {
 
+	/**
+	 * 成绩表id(主键)
+	 */
 	@Id
 	private String scoreId;
 	
-	//学生成绩集合
+	/**
+	 * 学生成绩集合
+	 */
 	private HashMap<String, Double> score;
 	
 	
-	//班级
+	/**
+	 * 班级
+	 */
 	@DBRef
 	private Class claId;
 	
-	//学生
+	/**
+	 * 学生
+	 */
 	@DBRef
 	private Student stuId;
 	
-	//第几学期
+	/**
+	 * 第几学期
+	 */
 	@DBRef
 	private Semester semesterId;
 

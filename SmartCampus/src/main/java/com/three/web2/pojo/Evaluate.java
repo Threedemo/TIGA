@@ -4,21 +4,35 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 教评表
+ * @author Sqi
+ * @version 2020年6月30日 下午2:58:15
+ */
 @Document
 public class Evaluate {
 
+	/**
+	 * 教评表id(主键)
+	 */
 	@Id
 	private String evaluateId;
 	
-	//教师
+	/**
+	 * 教师
+	 */
 	@DBRef
 	private Teacher teald;
 	
-	//学生
+	/**
+	 * 教师
+	 */
 	@DBRef
 	private Student stuId;
 	
-	//评价内容
+	/**
+	 * 评价内容
+	 */
 	private String evaluateContent;
 
 	

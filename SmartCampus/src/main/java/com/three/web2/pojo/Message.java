@@ -10,20 +10,31 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Message {
 
+	/**
+	 * 意见表id(主键)
+	 */
 	@Id
 	private String messageId;
 	
-	//学生id
+	/**
+	 * 学生id
+	 */
 	@DBRef
 	private Student stuId;
 	
-	//意见内容
+	/**
+	 * 意见内容
+	 */
 	private String messageContent;
 	
-	//时间
+	/**
+	 * 时间
+	 */
 	private String messageDate;
 	
-	//院系
+	/**
+	 * 院系
+	 */
 	@DBRef
 	private Department	depId;
 

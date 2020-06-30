@@ -10,36 +10,57 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Teacher {
 
+	/**
+	 * 教室信息表id(主键)
+	 */
 	@Id
 	private String teaId;
 	
-	//职工号
+	/**
+	 * 职工号
+	 */
 	@DBRef
 	private Login loginName;
 	
-	//老师姓名
+	/**
+	 * 老师姓名
+	 */
 	private String teaName;
 	
-	//老师性别
+	/**
+	 * 老师性别
+	 */
 	private String teaSex;
 	
-	//老师年龄
+	/**
+	 * 老师年龄
+	 */
 	private int teaAge;
 	
-	//老师身份证号
+	/**
+	 * 老师身份证号
+	 */
 	private String teaIdNum;
 	
-	//老师名族
+	/**
+	 * 老师名族
+	 */
 	private String teaNation;
 	
-	//入职时间
+	/**
+	 * 入职时间
+	 */
 	private String teaDate;
 	
-	//授课课程
+	/**
+	 * 授课课程
+	 */
 	@DBRef
 	private Course courseId;
 	
-	//所属院系
+	/**
+	 * 所属院系
+	 */
 	@DBRef
 	private Department depId;
 

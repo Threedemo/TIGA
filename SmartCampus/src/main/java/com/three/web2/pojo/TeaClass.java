@@ -10,14 +10,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class TeaClass {
 
+	/**
+	 * 教室表id(主键)
+	 */
 	@Id
 	private String teaClassId;
 	
-	//老师id
+	/**
+	 * 老师id
+	 */
 	@DBRef
 	private Teacher teaId;
 	
-	//班级id
+	/**
+	 * 班级id
+	 */
 	@DBRef
 	private Class claId;
 

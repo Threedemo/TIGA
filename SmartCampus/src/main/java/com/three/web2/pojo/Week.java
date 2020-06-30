@@ -9,10 +9,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Week {
 
+	/**
+	 * 星期几id(主键)
+	 */
 	@Id
 	private String weekId;
 	
-	//星期几
+	/**
+	 * 星期几
+	 */
 	private String WeekName;
 
 	

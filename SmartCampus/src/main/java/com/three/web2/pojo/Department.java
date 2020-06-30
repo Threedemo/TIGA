@@ -9,13 +9,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Department {
 
+	/**
+	 * 院系表
+	 */
 	@Id
 	private String depId;
 	
-	//院系名称
+	/**
+	 * 院系名称
+	 */
 	private String depName;
 	
-	//是否开启选课状态
+	/**
+	 * 是否开启选课状态
+	 */
 	private String  depEnabled;
 	
 	
