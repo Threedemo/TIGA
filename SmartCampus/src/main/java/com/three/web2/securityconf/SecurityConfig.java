@@ -41,15 +41,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 //		super.configure(http);
-		http
-		.authorizeRequests()
-			.antMatchers("/").permitAll()
-			.antMatchers("/student").hasRole("STUDENT")
-			.anyRequest().authenticated()
-			.and()
-		.formLogin().and()
-		.httpBasic();
-		
+		http.csrf().disable()
+        .formLogin()
+        .loginPage("/login.html")
+        .loginProcessingUrl("/logincheck")
+        .defaultSuccessUrl("/").successHandler(new LoginSuccessHandle())
+        .and()
+        .authorizeRequests()
+        .antMatchers("/login.html").permitAll()
+        .anyRequest().permitAll();
 	}
 	
 	//认证	1.基于内存 2.基于数据库
