@@ -11,21 +11,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class StudentXuanKe {
 
 	@Id
-	int stuXkId;
+	private String stuXkId;
 	
 	//学生id
 	@DBRef
-	Student stuId;
+	private Student stuId;
 	 
 	//选课课程
 	@DBRef
-	XuanKe xkId;
+	private XuanKe xkId;
 
-	public int getStuXkId() {
+	
+
+	public String getStuXkId() {
 		return stuXkId;
 	}
 
-	public void setStuXkId(int stuXkId) {
+	public void setStuXkId(String stuXkId) {
 		this.stuXkId = stuXkId;
 	}
 

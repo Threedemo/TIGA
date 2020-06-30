@@ -11,16 +11,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Zhou {
 
 	@Id
-	int zhouId;
+	private String zhouId;
 	
 	//第几周
-	String zhouName;
+	private String zhouName;
 
-	public int getZhouId() {
+
+	public String getZhouId() {
 		return zhouId;
 	}
 
-	public void setZhouId(int zhouId) {
+	public void setZhouId(String zhouId) {
 		this.zhouId = zhouId;
 	}
 

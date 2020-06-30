@@ -10,23 +10,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class XuanKe {
 
 	@Id
-	int xkId;
+	private String xkId;
 	
 	//选修课名
-	String xkName;
+	private String xkName;
 	
 	//第几学期
 	@DBRef
-	Semester semesterId;
+	private Semester semesterId;
 	
 	//教务是否启用选课
-	String enabled;
+	private String enabled;
 
-	public int getXkId() {
+	
+	public String getXkId() {
 		return xkId;
 	}
 
-	public void setXkId(int xkId) {
+	public void setXkId(String xkId) {
 		this.xkId = xkId;
 	}
 

@@ -10,16 +10,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ClassHours {
 
 	@Id
-	int classHouesId;
+	private String classHouesId;
 	
 	//授课时间段
-	String classHoursName;
+	private String classHoursName;
 
-	public int getClassHouesId() {
+	
+
+	public String getClassHouesId() {
 		return classHouesId;
 	}
 
-	public void setClassHouesId(int classHouesId) {
+	public void setClassHouesId(String classHouesId) {
 		this.classHouesId = classHouesId;
 	}
 

@@ -16,42 +16,42 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Student {
 
 	@Id
-	String stuid;
+	private String stuid;
 	
 	//账号(学号)
 	@DBRef
-	Login loginName;
+	private Login loginName;
 	
 	//学生姓名
-	String stuName;
+	private String stuName;
 	
 	//学生性别
-	String stuSex;
+	private String stuSex;
 	
 	//学生年龄
-	int stuAge;
+	private int stuAge;
 	
 	//学生身份证号
-	String stuIdNum;
+	private String stuIdNum;
 	
 	//学生名族
-	String stuNation;
+	private String stuNation;
 	
 	//家庭地址
-	String stuAddress;
+	private String stuAddress;
 	
 	//联系电话
-	String stuPhone;
+	private String stuPhone;
 	
 	//入学时间
-	String stuStart;
+	private String stuStart;
 	
 	//毕业时间
-	String stuStop;
+	private String stuStop;
 	
 	//班级
 	@DBRef
-	Class claId;
+	private Class claId;
 
 	public String getStuid() {
 		return stuid;

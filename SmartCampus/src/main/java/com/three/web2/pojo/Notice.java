@@ -9,22 +9,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Notice {
 
 	@Id
-	int noticeId;
+	private String noticeId;
 	
 	//公告标题
-	String noticeTitle;
+	private String noticeTitle;
 	
 	//公告内容
-	String noticeContent;
+	private String noticeContent;
 	
 	//公告发布时间
-	String noticeDate;
+	private String noticeDate;
 
-	public int getNoticeId() {
+	
+
+	public String getNoticeId() {
 		return noticeId;
 	}
 
-	public void setNoticeId(int noticeId) {
+	public void setNoticeId(String noticeId) {
 		this.noticeId = noticeId;
 	}
 

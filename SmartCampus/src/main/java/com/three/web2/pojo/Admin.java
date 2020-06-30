@@ -10,23 +10,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Admin {
 
 	@Id
-	String adminId;
+    private String adminId;
 	
 	//教务账号
 	@DBRef
-	Login loginName;
+	private	Login loginName;
 	
 	//姓名
-	String admName;
+	private String admName;
 	
 	//性别
-	String admSex;
+	private String admSex;
 	
 	//年龄
-	int Age;
+	private int Age;
 	
 	//身份证
-	String admIdNum;
+	private String admIdNum;
 
 	
 

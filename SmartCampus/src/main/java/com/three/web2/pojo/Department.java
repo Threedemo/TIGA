@@ -10,20 +10,22 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Department {
 
 	@Id
-	int depID;
+	private String depId;
 	
 	//院系名称
-	String depName;
+	private String depName;
 	
 	//是否开启选课状态
-	String  depEnabled;
+	private String  depEnabled;
+	
+	
 
-	public int getDepID() {
-		return depID;
+	public String getDepId() {
+		return depId;
 	}
 
-	public void setDepID(int depID) {
-		this.depID = depID;
+	public void setDepId(String depId) {
+		this.depId = depId;
 	}
 
 	public String getDepName() {
@@ -44,7 +46,7 @@ public class Department {
 
 	@Override
 	public String toString() {
-		return "Department [depID=" + depID + ", depName=" + depName + ", depEnabled=" + depEnabled + "]";
+		return "Department [depId=" + depId + ", depName=" + depName + ", depEnabled=" + depEnabled + "]";
 	}
 	
 	

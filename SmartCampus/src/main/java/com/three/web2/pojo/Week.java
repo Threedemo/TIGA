@@ -10,16 +10,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Week {
 
 	@Id
-	int weekId;
+	private String weekId;
 	
 	//星期几
-	String WeekName;
+	private String WeekName;
 
-	public int getWeekId() {
+	
+	public String getWeekId() {
 		return weekId;
 	}
 
-	public void setWeekId(int weekId) {
+	public void setWeekId(String weekId) {
 		this.weekId = weekId;
 	}
 

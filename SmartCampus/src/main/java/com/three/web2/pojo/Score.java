@@ -13,29 +13,31 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Score {
 
 	@Id
-	int scoreId;
+	private String scoreId;
 	
 	//学生成绩集合
-	HashMap<String, Double> score;
+	private HashMap<String, Double> score;
 	
 	
 	//班级
 	@DBRef
-	Class claId;
+	private Class claId;
 	
 	//学生
 	@DBRef
-	Student stuId;
+	private Student stuId;
 	
 	//第几学期
 	@DBRef
-	Semester semesterId;
+	private Semester semesterId;
 
-	public int getScoreId() {
+	
+
+	public String getScoreId() {
 		return scoreId;
 	}
 
-	public void setScoreId(int scoreId) {
+	public void setScoreId(String scoreId) {
 		this.scoreId = scoreId;
 	}
 

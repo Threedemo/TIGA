@@ -11,27 +11,28 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Message {
 
 	@Id
-	int messageId;
+	private String messageId;
 	
 	//学生id
 	@DBRef
-	Student stuId;
+	private Student stuId;
 	
 	//意见内容
-	String messageContent;
+	private String messageContent;
 	
 	//时间
-	String messageDate;
+	private String messageDate;
 	
 	//院系
 	@DBRef
-	Department	depId;
+	private Department	depId;
 
-	public int getMessageId() {
+	
+	public String getMessageId() {
 		return messageId;
 	}
 
-	public void setMessageId(int messageId) {
+	public void setMessageId(String messageId) {
 		this.messageId = messageId;
 	}
 

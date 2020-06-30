@@ -10,18 +10,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ClassRoom {
 
 	@Id
-	int classHomeId;
+	private String classHomeId;
 	
 	//教室名字
-	String classHomeName;
+	private String classHomeName;
 
-	public int getClassHomeId() {
-		return classHomeId;
-	}
-
-	public void setClassHomeId(int classHomeId) {
-		this.classHomeId = classHomeId;
-	}
+	
 
 	public String getClassHomeName() {
 		return classHomeName;

@@ -11,43 +11,45 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Teacher {
 
 	@Id
-	int teaId;
+	private String teaId;
 	
 	//职工号
 	@DBRef
-	Login loginName;
+	private Login loginName;
 	
 	//老师姓名
-	String teaName;
+	private String teaName;
 	
 	//老师性别
-	String teaSex;
+	private String teaSex;
 	
 	//老师年龄
-	int teaAge;
+	private int teaAge;
 	
 	//老师身份证号
-	String teaIdNum;
+	private String teaIdNum;
 	
 	//老师名族
-	String teaNation;
+	private String teaNation;
 	
 	//入职时间
-	String teaDate;
+	private String teaDate;
 	
 	//授课课程
 	@DBRef
-	Course courseId;
+	private Course courseId;
 	
 	//所属院系
 	@DBRef
-	Department depId;
+	private Department depId;
 
-	public int getTeaId() {
+	
+
+	public String getTeaId() {
 		return teaId;
 	}
 
-	public void setTeaId(int teaId) {
+	public void setTeaId(String teaId) {
 		this.teaId = teaId;
 	}
 

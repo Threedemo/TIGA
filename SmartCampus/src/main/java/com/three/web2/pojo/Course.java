@@ -10,19 +10,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Course {
 
 	@Id
-	int courseId;
+	private String courseId;
 	
 	//课程名
-	String courseName;
+	private String courseName;
 	
 	//课程学分
-	String courseNum;
+	private String courseNum;
 
-	public int getCourseId() {
+	
+	public String getCourseId() {
 		return courseId;
 	}
 
-	public void setCourseId(int courseId) {
+	public void setCourseId(String courseId) {
 		this.courseId = courseId;
 	}
 

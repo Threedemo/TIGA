@@ -6,19 +6,19 @@ package com.three.web2.pojo;
 public class Login {
 	
 	
-	int lid;
+	private int lid;
 	
 	//账号
-	String loginName;
+	private String loginName;
 	
 	//密码
-	String loginPassword;
+	private String loginPassword;
 	
 	//用户状态
-	int endbled;
+	private int endbled;
 	
 	//用户角色
-	String authority;
+	private String authority;
 
 	public int getLid() {
 		return lid;

@@ -10,16 +10,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Semester {
 
 	@Id
-	int semesterId;
+	private String semesterId;
 	
 	//第几学期
-	String semesterName;
+	private String semesterName;
 
-	public int getSemesterId() {
+	
+
+	public String getSemesterId() {
 		return semesterId;
 	}
 
-	public void setSemesterId(int semesterId) {
+	public void setSemesterId(String semesterId) {
 		this.semesterId = semesterId;
 	}
 

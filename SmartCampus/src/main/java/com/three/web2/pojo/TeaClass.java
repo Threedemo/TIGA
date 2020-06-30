@@ -11,21 +11,22 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class TeaClass {
 
 	@Id
-	int teaClassId;
+	private String teaClassId;
 	
 	//老师id
 	@DBRef
-	Teacher teaId;
+	private Teacher teaId;
 	
 	//班级id
 	@DBRef
-	Class claId;
+	private Class claId;
 
-	public int getTeaClassId() {
+	
+	public String getTeaClassId() {
 		return teaClassId;
 	}
 
-	public void setTeaClassId(int teaClassId) {
+	public void setTeaClassId(String teaClassId) {
 		this.teaClassId = teaClassId;
 	}
 

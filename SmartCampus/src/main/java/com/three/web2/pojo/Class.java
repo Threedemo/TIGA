@@ -10,20 +10,22 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Class {
 
 	@Id
-	int claID;
+	private String claID;
 	
 	//班级表
-	String claName;
+	private String claName;
 	
 	//所属院系
 	@DBRef
-	Department depid;
+	private Department depid;
 
-	public int getClaID() {
+
+
+	public String getClaID() {
 		return claID;
 	}
 
-	public void setClaID(int claID) {
+	public void setClaID(String claID) {
 		this.claID = claID;
 	}
 

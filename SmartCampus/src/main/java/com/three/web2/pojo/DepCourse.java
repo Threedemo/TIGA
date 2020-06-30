@@ -12,22 +12,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class DepCourse {
 
 	@Id
-	int depCourseId;
+	private String  depCourseId;
 	
 	//院系id
 	@DBRef
-	Department depId;
+	private Department depId;
 	
 	
 	//课程id
 	@DBRef
-	Course courseId;
+	private Course courseId;
 
-	public int getDepCourseId() {
+	
+	public String getDepCourseId() {
 		return depCourseId;
 	}
 
-	public void setDepCourseId(int depCourseId) {
+	public void setDepCourseId(String depCourseId) {
 		this.depCourseId = depCourseId;
 	}
 

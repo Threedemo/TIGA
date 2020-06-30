@@ -8,28 +8,28 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Evaluate {
 
 	@Id
-	int evaluateId;
+	private String evaluateId;
 	
 	//教师
 	@DBRef
-	Teacher teald;
+	private Teacher teald;
 	
 	//学生
 	@DBRef
-	Student stuId;
+	private Student stuId;
 	
 	//评价内容
-	String evaluateContent;
+	private String evaluateContent;
 
-	public int getEvaluateId() {
+	
+
+	public String getEvaluateId() {
 		return evaluateId;
 	}
 
-	public void setEvaluateId(int evaluateId) {
+	public void setEvaluateId(String evaluateId) {
 		this.evaluateId = evaluateId;
 	}
-
-
 
 	public Teacher getTeald() {
 		return teald;
