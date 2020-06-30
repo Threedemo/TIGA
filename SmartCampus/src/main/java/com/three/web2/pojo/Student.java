@@ -24,8 +24,7 @@ public class Student {
 	/**
 	 * 账号(学号)
 	 */
-	@DBRef
-	private Login loginName;
+	private String loginName;
 	
 	/**
 	 * 学生姓名
@@ -86,12 +85,16 @@ public class Student {
 		this.stuid = stuid;
 	}
 
-	public Login getLoginName() {
+	public String getLoginName() {
 		return loginName;
 	}
 
-	public void setLoginName(Login loginName) {
+	public void setLoginName(String loginName) {
 		this.loginName = loginName;
+	}
+
+	public void setClaId(Class claId) {
+		this.claId = claId;
 	}
 
 	public String getStuName() {

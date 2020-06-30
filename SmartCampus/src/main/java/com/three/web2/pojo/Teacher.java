@@ -19,8 +19,7 @@ public class Teacher {
 	/**
 	 * 职工号
 	 */
-	@DBRef
-	private Login loginName;
+	private String loginName;
 	
 	/**
 	 * 老师姓名
@@ -74,11 +73,11 @@ public class Teacher {
 		this.teaId = teaId;
 	}
 
-	public Login getLoginName() {
+	public String getLoginName() {
 		return loginName;
 	}
 
-	public void setLoginName(Login loginName) {
+	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}
 

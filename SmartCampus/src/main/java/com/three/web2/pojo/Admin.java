@@ -18,8 +18,7 @@ public class Admin {
 	/**
 	 * 教务账号
 	 */
-	@DBRef
-	private	Login loginName;
+	private	String loginName;
 	
 	/**
 	 * 姓名
@@ -51,11 +50,13 @@ public class Admin {
 		this.adminId = adminId;
 	}
 
-	public Login getLoginName() {
+	
+
+	public String getLoginName() {
 		return loginName;
 	}
 
-	public void setLoginName(Login loginName) {
+	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}
 

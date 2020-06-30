@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.three.web2.admin.repository.AdminRepository;
 import com.three.web2.pojo.Admin;
+import com.three.web2.repository.AdminRepository;
 
 @RestController
 @RequestMapping("/admin")
