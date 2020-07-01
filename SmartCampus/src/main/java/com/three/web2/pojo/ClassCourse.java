@@ -20,7 +20,7 @@ public class ClassCourse {
 	 * 班级
 	 */
 	@DBRef
-	private Class claId;
+	private Classes claId;
 	
 	/**
 	 * 老师
@@ -62,11 +62,11 @@ public class ClassCourse {
 		this.classCourseId = classCourseId;
 	}
 
-	public Class getClaId() {
+	public Classes getClaId() {
 		return claId;
 	}
 
-	public void setClaId(Class claId) {
+	public void setClaId(Classes claId) {
 		this.claId = claId;
 	}
 

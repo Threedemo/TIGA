@@ -26,31 +26,24 @@ public class Department {
 	private String  depEnabled;
 	
 	
-
 	public String getDepId() {
 		return depId;
 	}
-
 	public void setDepId(String depId) {
 		this.depId = depId;
 	}
-
 	public String getDepName() {
 		return depName;
 	}
-
 	public void setDepName(String depName) {
 		this.depName = depName;
 	}
-
 	public String getDepEnabled() {
 		return depEnabled;
 	}
-
 	public void setDepEnabled(String depEnabled) {
 		this.depEnabled = depEnabled;
 	}
-
 	@Override
 	public String toString() {
 		return "Department [depId=" + depId + ", depName=" + depName + ", depEnabled=" + depEnabled + "]";

@@ -7,13 +7,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * 教室表
  */
 @Document
-public class Class {
+public class Classes {
 
 	/**
 	 * 教室表id(主键)
 	 */
 	@Id
-	private String claID;
+	private String claId;
 	
 	/**
 	 * 班级表
@@ -26,14 +26,12 @@ public class Class {
 	@DBRef
 	private Department depid;
 
-
-
-	public String getClaID() {
-		return claID;
+	public String getClaId() {
+		return claId;
 	}
 
-	public void setClaID(String claID) {
-		this.claID = claID;
+	public void setClaId(String claId) {
+		this.claId = claId;
 	}
 
 	public String getClaName() {
@@ -52,13 +50,9 @@ public class Class {
 		this.depid = depid;
 	}
 
-	
 	@Override
 	public String toString() {
-		return "Calss [claID=" + claID + ", claName=" + claName + ", depid=" + depid + "]";
+		return "Classes [claId=" + claId + ", claName=" + claName + ", depid=" + depid + "]";
 	}
-	
-	
-	
-	
+
 }

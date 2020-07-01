@@ -14,16 +14,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 public class Student {
-
-	/**
-	 * 学生信息表id(主键)
-	 */
-	@Id
-	private String stuid;
 	
 	/**
 	 * 账号(学号)
+	 * 学生信息表id(主键)
 	 */
+	@Id
 	private String loginName;
 	
 	/**
@@ -75,15 +71,8 @@ public class Student {
 	 * 班级
 	 */
 	@DBRef
-	private Class claId;
+	private Classes claId;
 
-	public String getStuid() {
-		return stuid;
-	}
-
-	public void setStuid(String stuid) {
-		this.stuid = stuid;
-	}
 
 	public String getLoginName() {
 		return loginName;
@@ -93,7 +82,7 @@ public class Student {
 		this.loginName = loginName;
 	}
 
-	public void setClaId(Class claId) {
+	public void setClaId(Classes claId) {
 		this.claId = claId;
 	}
 
@@ -169,22 +158,20 @@ public class Student {
 		this.stuStop = stuStop;
 	}
 
-	public Class getClaId() {
+	public Classes getClaId() {
 		return claId;
 	}
 
-	public void setSlaId(Class claId) {
+	public void setSlaId(Classes claId) {
 		this.claId = claId;
 	}
 
 	@Override
 	public String toString() {
-		return "Student [stuid=" + stuid + ", loginName=" + loginName + ", stuName=" + stuName + ", stuSex=" + stuSex
-				+ ", stuAge=" + stuAge + ", stuIdNum=" + stuIdNum + ", stuNation=" + stuNation + ", stuAddress="
-				+ stuAddress + ", stuPhone=" + stuPhone + ", stuStart=" + stuStart + ", stuStop=" + stuStop + ", claId="
-				+ claId + "]";
+		return "Student [loginName=" + loginName + ", stuName=" + stuName + ", stuSex=" + stuSex + ", stuAge=" + stuAge
+				+ ", stuIdNum=" + stuIdNum + ", stuNation=" + stuNation + ", stuAddress=" + stuAddress + ", stuPhone="
+				+ stuPhone + ", stuStart=" + stuStart + ", stuStop=" + stuStop + ", claId=" + claId + "]";
 	}
-	
 	
 	
 }

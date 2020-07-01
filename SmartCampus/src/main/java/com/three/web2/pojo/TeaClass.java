@@ -26,7 +26,7 @@ public class TeaClass {
 	 * 班级id
 	 */
 	@DBRef
-	private Class claId;
+	private Classes claId;
 
 	
 	public String getTeaClassId() {
@@ -45,11 +45,11 @@ public class TeaClass {
 		this.teaId = teaId;
 	}
 
-	public Class getClaId() {
+	public Classes getClaId() {
 		return claId;
 	}
 
-	public void setClaId(Class claId) {
+	public void setClaId(Classes claId) {
 		this.claId = claId;
 	}
 
