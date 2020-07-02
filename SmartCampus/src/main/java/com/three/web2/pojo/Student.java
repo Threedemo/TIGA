@@ -1,7 +1,5 @@
 package com.three.web2.pojo;
 
-import java.sql.Date;
-
 /**
  * 学生信息表
  */
