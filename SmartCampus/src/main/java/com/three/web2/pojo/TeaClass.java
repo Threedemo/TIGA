@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class TeaClass {
 
 	/**
-	 * 教室表id(主键)
+	 * 教室班级表id(主键)
 	 */
 	@Id
 	private String teaClassId;

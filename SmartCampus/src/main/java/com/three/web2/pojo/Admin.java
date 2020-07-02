@@ -1,16 +1,12 @@
 package com.three.web2.pojo;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * 教务信息表
  */
 @Document
 public class Admin {
-
-
-	
 	/**
 	 * 教务账号
 	 * 教务表id(主键)
@@ -31,18 +27,12 @@ public class Admin {
 	/**
 	 * 年龄
 	 */
-	private int Age;
+	private int admAge;
 	
 	/**
 	 * 身份证
 	 */
 	private String admIdNum;
-
-	
-
-
-
-	
 
 	public String getLoginName() {
 		return loginName;
@@ -68,12 +58,12 @@ public class Admin {
 		this.admSex = admSex;
 	}
 
-	public int getAge() {
-		return Age;
+	public int getAdmAge() {
+		return admAge;
 	}
 
-	public void setAge(int age) {
-		Age = age;
+	public void setAdmAge(int admAge) {
+		this.admAge = admAge;
 	}
 
 	public String getAdmIdNum() {
@@ -84,13 +74,9 @@ public class Admin {
 		this.admIdNum = admIdNum;
 	}
 
-	//toString
 	@Override
 	public String toString() {
-		return "Admin [loginName=" + loginName + ", admName=" + admName + ", admSex=" + admSex
-				+ ", Age=" + Age + ", admIdNum=" + admIdNum + "]";
+		return "Admin [loginName=" + loginName + ", admName=" + admName + ", admSex=" + admSex + ", admAge=" + admAge
+				+ ", admIdNum=" + admIdNum + "]";
 	}
-	
-	
-	
 }

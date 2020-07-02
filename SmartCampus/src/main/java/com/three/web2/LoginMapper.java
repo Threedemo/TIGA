@@ -10,5 +10,5 @@ public interface LoginMapper {
 
 	@Insert("insert into login (loginName,loginPassword,enabled,authority)"
 			+ "values(#{loginName},#{loginPassword},#{endbled},#{authority})")
-	Login save(Login login);
+	void save(Login login);
 }

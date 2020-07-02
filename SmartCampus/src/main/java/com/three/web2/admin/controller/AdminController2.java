@@ -1,20 +1,23 @@
 package com.three.web2.admin.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.three.web2.LoginMapper;
+import com.three.web2.LoginService;
 import com.three.web2.pojo.Admin;
 import com.three.web2.pojo.Classes;
 import com.three.web2.pojo.Department;
 import com.three.web2.pojo.Login;
 import com.three.web2.pojo.Major;
 import com.three.web2.pojo.Student;
-import com.three.web2.pojo.TeaClass;
 import com.three.web2.pojo.Teacher;
 import com.three.web2.repository.AdminRepository;
 import com.three.web2.repository.ClassRepository;
@@ -44,7 +47,7 @@ public class AdminController2 {
 	MajorRepository majorrepository;
 	
 	@Autowired
-	LoginMapper loginmapper;
+	LoginService loginService;
 	
 	@Autowired
 	TeacherRepository teacherRepository;
@@ -80,7 +83,7 @@ public class AdminController2 {
 	@PostMapping("/student")
 	public Student savestudent(@RequestBody Student stu,@RequestBody Login login) {
 		//添加到登录表单中
-		loginmapper.save(login);
+		loginService.save(login);
 		return sturepository.save(stu);
 	}
 	/**
@@ -109,15 +112,25 @@ public class AdminController2 {
 	 * @return
 	 */
 	@PostMapping("/teacher")
-	public Teacher saveteacher(@RequestBody Teacher teacher
-			,@RequestBody Login login
-			,@RequestBody TeaClass teaClass) {
-		/**
-		 * 添加登录信息
-		 */
-		loginmapper.save(login);
+	@Transactional
+	public Teacher saveteacher(@RequestBody Teacher teacher) {
+		//获取对象
+		Login login=new Login();
+		login.setLoginName(teacher.getLoginName());
+		//获取密码
+		String pwd=teacher.getLoginName();
+		//加密密码
+		login.setLoginPassword(new BCryptPasswordEncoder().encode(pwd));
+		login.setEndbled(1);
+		login.setAuthority("ROLE_TEACHER");
+		//添加教师登录信息
+		loginService.save(login);
 		//添加教师班级表信息
-		teaClassRepository.save(teaClass);
 		return teacherRepository.save(teacher);
+	}
+	
+	@PostMapping("/admin")
+	public Admin saveadmin(@RequestBody Admin admin) {
+		return adminRepository.save(admin);
 	}
 }
