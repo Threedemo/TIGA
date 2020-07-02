@@ -21,10 +21,10 @@ public class Classes {
 	private String claName;
 	
 	/**
-	 * 所属院系
+	 * 所属专业
 	 */
 	@DBRef
-	private Department depid;
+	private Major mId;
 
 	public String getClaId() {
 		return claId;
@@ -41,18 +41,18 @@ public class Classes {
 	public void setClaName(String claName) {
 		this.claName = claName;
 	}
+	
 
-	public Department getDepid() {
-		return depid;
+	public Major getmId() {
+		return mId;
 	}
 
-	public void setDepid(Department depid) {
-		this.depid = depid;
+	public void setmId(Major mId) {
+		this.mId = mId;
 	}
 
 	@Override
 	public String toString() {
-		return "Classes [claId=" + claId + ", claName=" + claName + ", depid=" + depid + "]";
+		return "Classes [claId=" + claId + ", claName=" + claName + ", mId=" + mId + "]";
 	}
-
 }

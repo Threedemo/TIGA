@@ -1,6 +1,8 @@
 package com.three.web2.admin.controller;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,10 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.three.web2.pojo.Admin;
 import com.three.web2.pojo.Classes;
 import com.three.web2.pojo.Department;
+import com.three.web2.pojo.Major;
 import com.three.web2.pojo.Student;
 import com.three.web2.repository.AdminRepository;
 import com.three.web2.repository.ClassRepository;
 import com.three.web2.repository.DepartmentRepository;
+import com.three.web2.repository.MajorRepository;
 import com.three.web2.repository.StudentRepository;
 
 @RestController
@@ -31,6 +35,8 @@ public class AdminController2 {
 	@Autowired
 	StudentRepository sturepository;
 	
+	@Autowired
+	MajorRepository majorrepository;
 	
 	@PostMapping("/admin")
 	public Admin saveadmin(@RequestBody Admin admin) {
@@ -51,5 +57,15 @@ public class AdminController2 {
 	@PostMapping("/student")
 	public Student savestudent(@RequestBody Student stu) {
 		return sturepository.save(stu);
+	}
+	@DeleteMapping("/student")
+	public void savestudent() {
+		
+		sturepository.deleteAll();
+	}
+	
+	@PostMapping("/major")
+	public Major savemajor(@RequestBody Major major) {
+		return majorrepository.save(major);
 	}
 }

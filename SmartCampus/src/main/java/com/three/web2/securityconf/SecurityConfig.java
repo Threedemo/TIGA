@@ -49,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .and()
         .authorizeRequests()
         .antMatchers("/login.html").permitAll()
-        .anyRequest().permitAll();
+        .anyRequest()
+        .permitAll();
 	}
 	
 	//认证	1.基于内存 2.基于数据库
