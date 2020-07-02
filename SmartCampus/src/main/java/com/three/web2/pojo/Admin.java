@@ -9,15 +9,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Admin {
 
-	/**
-	 * 教务表id(主键)
-	 */
-	@Id
-    private String adminId;
+
 	
 	/**
 	 * 教务账号
+	 * 教务表id(主键)
 	 */
+    @Id
 	private	String loginName;
 	
 	/**
@@ -42,13 +40,7 @@ public class Admin {
 
 	
 
-	public String getAdminId() {
-		return adminId;
-	}
 
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
-	}
 
 	
 
@@ -95,7 +87,7 @@ public class Admin {
 	//toString
 	@Override
 	public String toString() {
-		return "Admin [adminId=" + adminId + ", loginName=" + loginName + ", admName=" + admName + ", admSex=" + admSex
+		return "Admin [loginName=" + loginName + ", admName=" + admName + ", admSex=" + admSex
 				+ ", Age=" + Age + ", admIdNum=" + admIdNum + "]";
 	}
 	

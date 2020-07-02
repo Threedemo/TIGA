@@ -9,16 +9,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 public class Teacher {
-
-	/**
-	 * 教室信息表id(主键)
-	 */
-	@Id
-	private String teaId;
 	
 	/**
 	 * 职工号
+	 * 教师信息表id(主键)
 	 */
+	@Id
 	private String loginName;
 	
 	/**
@@ -35,6 +31,12 @@ public class Teacher {
 	 * 老师年龄
 	 */
 	private int teaAge;
+	
+	/**
+	 * 老师电话
+	 */
+	
+	private String teaPhone;
 	
 	/**
 	 * 老师身份证号
@@ -65,13 +67,7 @@ public class Teacher {
 
 	
 
-	public String getTeaId() {
-		return teaId;
-	}
-
-	public void setTeaId(String teaId) {
-		this.teaId = teaId;
-	}
+	
 
 	public String getLoginName() {
 		return loginName;
@@ -103,6 +99,16 @@ public class Teacher {
 
 	public void setTeaAge(int teaAge) {
 		this.teaAge = teaAge;
+	}
+	
+	
+
+	public String getTeaPhone() {
+		return teaPhone;
+	}
+
+	public void setTeaPhone(String teaPhone) {
+		this.teaPhone = teaPhone;
 	}
 
 	public String getTeaIdNum() {
@@ -147,7 +153,7 @@ public class Teacher {
 
 	@Override
 	public String toString() {
-		return "Teacher [teaId=" + teaId + ", loginName=" + loginName + ", teaName=" + teaName + ", teaSex=" + teaSex
+		return "Teacher [ loginName=" + loginName + ", teaName=" + teaName + ", teaSex=" + teaSex
 				+ ", teaAge=" + teaAge + ", teaIdNum=" + teaIdNum + ", teaNation=" + teaNation + ", teaDate=" + teaDate
 				+ ", courseId=" + courseId + ", depId=" + depId + "]";
 	}

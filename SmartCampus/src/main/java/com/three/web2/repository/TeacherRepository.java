@@ -1,4 +1,4 @@
-package com.three.web2.teacher.repository;
+package com.three.web2.repository;
 
 import java.util.List;
 
