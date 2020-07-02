@@ -4,13 +4,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 /**
- * 教室表
+ * 班级表
  */
 @Document
 public class Classes {
 
 	/**
-	 * 教室表id(主键)
+	 * 班级表id(主键)
 	 */
 	@Id
 	private String claId;
