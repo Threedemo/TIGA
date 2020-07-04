@@ -1,28 +1,33 @@
 package com.three.web2.admin.controller;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.three.web2.LoginService;
-import com.three.web2.pojo.Admin;
 import com.three.web2.pojo.Classes;
 import com.three.web2.pojo.Department;
 import com.three.web2.pojo.Login;
 import com.three.web2.pojo.Major;
+import com.three.web2.pojo.Score;
+import com.three.web2.pojo.Semester;
 import com.three.web2.pojo.Student;
 import com.three.web2.pojo.Teacher;
 import com.three.web2.repository.AdminRepository;
 import com.three.web2.repository.ClassRepository;
 import com.three.web2.repository.DepartmentRepository;
 import com.three.web2.repository.MajorRepository;
+import com.three.web2.repository.ScoreRepository;
 import com.three.web2.repository.StudentRepository;
 import com.three.web2.repository.TeaClassRepository;
 import com.three.web2.repository.TeacherRepository;
@@ -55,6 +60,9 @@ public class AdminController2 {
 	@Autowired
 	TeaClassRepository teaClassRepository;
 	
+	@Autowired
+	ScoreRepository scoreRepository;
+	
 	/**
 	 * 添加院系API
 	 * @param department
@@ -81,7 +89,15 @@ public class AdminController2 {
 	 * @return
 	 */
 	@PostMapping("/student")
-	public Student savestudent(@RequestBody Student stu,@RequestBody Login login) {
+	public Student savestudent(@RequestBody Student stu) {
+		Login login =new Login();
+		login.setLoginName(stu.getLoginName());
+		//获取密码
+		String pwd=stu.getLoginName();
+		//加密密码
+		login.setLoginPassword(new BCryptPasswordEncoder().encode(pwd));
+		login.setEndbled(1);
+		login.setAuthority("ROLE_STUDENT");
 		//添加到登录表单中
 		loginService.save(login);
 		return sturepository.save(stu);
@@ -107,8 +123,6 @@ public class AdminController2 {
 	/**
 	 * 添加教师信息
 	 * @param teacher
-	 * @param login
-	 * @param teaClass
 	 * @return
 	 */
 	@PostMapping("/teacher")
@@ -128,9 +142,67 @@ public class AdminController2 {
 		//添加教师班级表信息
 		return teacherRepository.save(teacher);
 	}
+//	@PostMapping("/admin")
+//	public Admin saveadmin(@RequestBody Admin admin) {
+//		return adminRepository.save(admin);
+//	}
 	
-	@PostMapping("/admin")
-	public Admin saveadmin(@RequestBody Admin admin) {
-		return adminRepository.save(admin);
+	/**
+	 * 通过班级查询该班的学生
+	 * @param claId
+	 * @return
+	 */
+	@GetMapping("/student")
+	public List<Student> stulist(@RequestBody Classes classes){
+		
+		return sturepository.findByClaId(classes);
 	}
+	/**
+	 * 通过学号查询一个学生基本信息
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/student/{id}")
+	public Student stuload(@PathVariable String id) {
+		return sturepository.findById(id).get();
+	}
+	/**
+	 * 通过院系的选择显示该院系的专业
+	 * @param claId
+	 * @return
+	 */
+	@GetMapping("/major")
+	public List<Major> majorlist(@RequestBody Department department){
+		
+		return majorrepository.findByDepId(department);
+	}
+	
+	/**
+	 * 查询学院
+	 * @return
+	 */
+	@GetMapping("/department")
+	public List<Department>departments(){
+		return deprepository.findAll();
+	}
+	/**
+	 * 查询一个学生的成绩
+	 * @param stuId
+	 * @return
+	 */
+	@GetMapping("/score")
+	public Score scores(@RequestBody Student stuId,@RequestBody Semester semId){
+		
+		return scoreRepository.findByStuIdAndSemesterId(stuId, semId);
+	}
+	/**
+	 * 添加一条学生成绩
+	 * @param score
+	 * @return
+	 */
+	@PostMapping("/score")
+	public Score savescore(@RequestBody Score score) {
+		return scoreRepository.save(score);
+	}
+	
 }
