@@ -1,8 +1,12 @@
 package com.three.web2.admin.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,21 +21,29 @@ import org.springframework.web.bind.annotation.RestController;
 import com.three.web2.LoginService;
 import com.three.web2.pojo.Classes;
 import com.three.web2.pojo.Department;
+import com.three.web2.pojo.Evaluate;
 import com.three.web2.pojo.Login;
 import com.three.web2.pojo.Major;
+import com.three.web2.pojo.Message;
+import com.three.web2.pojo.Notice;
 import com.three.web2.pojo.Score;
 import com.three.web2.pojo.Semester;
 import com.three.web2.pojo.Student;
 import com.three.web2.pojo.Teacher;
+import com.three.web2.pojo.XuanKe;
 import com.three.web2.repository.AdminRepository;
 import com.three.web2.repository.ClassRepository;
 import com.three.web2.repository.DepartmentRepository;
+import com.three.web2.repository.EvaluateRepository;
 import com.three.web2.repository.MajorRepository;
+import com.three.web2.repository.MessageRepository;
+import com.three.web2.repository.NoticeRepository;
 import com.three.web2.repository.ScoreRepository;
 import com.three.web2.repository.SemesterRepository;
 import com.three.web2.repository.StudentRepository;
 import com.three.web2.repository.TeaClassRepository;
 import com.three.web2.repository.TeacherRepository;
+import com.three.web2.repository.XuanKeRepository;
 
 @RestController
 @RequestMapping("/admin")
@@ -67,6 +79,17 @@ public class AdminController2 {
 	@Autowired
 	SemesterRepository semesterRepository;
 	
+	@Autowired
+	NoticeRepository noticeRepository;
+	
+	@Autowired
+	EvaluateRepository evaluateRepository;
+	
+	@Autowired
+	MessageRepository messageRepository;
+	
+	@Autowired
+	XuanKeRepository xuanKeRepository;
 	/**
 	 * 添加院系API
 	 * @param department
@@ -213,7 +236,7 @@ public class AdminController2 {
 	}
 	
 	/**
-	 * 通过学院查询一个学学院的教师信息
+	 * 通过学院查询一个学院的教师信息
 	 * @param depId
 	 * @return
 	 */
@@ -222,6 +245,85 @@ public class AdminController2 {
 		return teacherRepository.findByDepId(depId);
 	}
 	
+	
+	@SuppressWarnings("deprecation")//抑制警告
+	@PostMapping("/notice")
+	public Notice saveNotice(@RequestBody Notice notice) {
+		notice.setNoticeDate(new Date().toLocaleString().toString());
+		return noticeRepository.save(notice);
+	}
+	
+	/**
+	 * 显示公告
+	 * @return
+	 */
+	@GetMapping("/notice")
+	public List<Notice> noticeList(@RequestParam(name = "p",defaultValue = "1") int page){
+		
+		return noticeRepository.findAll(PageRequest.of(page-1, 5)).getContent();
+	}
+	/**
+	 * 添加教评
+	 * @param evaluate
+	 * @return
+	 */
+	@PostMapping("/evaluate")
+	public Evaluate saveEvaluate(@RequestBody Evaluate evaluate) {
+		return evaluateRepository.save(evaluate);
+	}
+	/**
+	 * 分页查看教评
+	 * @param page
+	 * @return
+	 */
+	@GetMapping("/evaluate")
+	public List<Evaluate>evaluateList(@RequestParam(name = "p",defaultValue = "1") int page){
+		return evaluateRepository.findAll(PageRequest.of(page-1, 6)).getContent();
+	}
+	/**
+	 *	添加意见箱
+	 * @param message
+	 * @return
+	 */
+	@SuppressWarnings("deprecation")
+	@PostMapping("/message")
+	public Message saveMessage(@RequestBody Message message) {
+		message.setMessageDate(new Date().toLocaleString().toString());
+		System.out.println(message);
+		return messageRepository.save(message);
+	}
+	/**
+	 *	查询意见箱
+	 * @param page
+	 * @return
+	 */
+	@GetMapping("/message")
+	public List<Message>messageList(@RequestParam(name = "p",defaultValue = "1") int page){
+		return messageRepository.findAll(PageRequest.of(page-1, 10)).getContent();
+	}
+	/**
+	 * 添加选课表课程
+	 * @param xuanKe
+	 * @return
+	 */
+	@PostMapping("/xuanke")
+	public XuanKe saveXuanke(@RequestBody XuanKe xuanKe) {
+		return xuanKeRepository.save(xuanKe);
+	}
+	/**
+	 * 通过id查询一个教师的基本信息
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/teacher/{id}")
+	public Teacher loadteacher(@PathVariable String id) {
+		try {
+			teacherRepository.findById(id).get();
+		} catch (Exception e) {
+			return null;
+		}
+		return teacherRepository.findById(id).get();
+	}
 	/**
 	 * 添加学期
 	 * @param semester
