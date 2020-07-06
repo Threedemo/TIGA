@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.three.web2.pojo.ClassCourse;
 import com.three.web2.pojo.ClassHours;
 import com.three.web2.pojo.ClassRoom;
 import com.three.web2.pojo.Course;
@@ -17,6 +18,7 @@ import com.three.web2.pojo.TeaClass;
 import com.three.web2.pojo.Teacher;
 import com.three.web2.pojo.Week;
 import com.three.web2.pojo.Zhou;
+import com.three.web2.repository.ClassCourseRepository;
 import com.three.web2.repository.ClassHoursRepository;
 import com.three.web2.repository.ClassRoomRepository;
 import com.three.web2.repository.CourseRepository;
@@ -55,6 +57,8 @@ public class TeaherController {
 	@Autowired
 	ClassRoomRepository classRoomRepository;
 	
+	@Autowired
+	ClassCourseRepository  classCourseRepository;
 	/**
 	 * 添加教师信息
 	 * 后续放到教务Controller
@@ -120,20 +124,53 @@ public class TeaherController {
 		return zhouRrpository.save(zhou);
 	}
 	
+	/**
+	 * 添加授课时间表
+	 * @param classhours
+	 * @return
+	 */
 	@PostMapping("/classhours")
 	public ClassHours fi(@RequestBody ClassHours classhours) {
 		return classHoursRepository.save(classhours);
 	}
 	
+	/**
+	 * 添加教室
+	 * @param classRoom
+	 * @return
+	 */
 	@PostMapping("/classroom")
 	public ClassRoom classroom(@RequestBody ClassRoom classRoom) {
 		return classRoomRepository.save(classRoom);
 	}
 	
-	
-	
-	
-	
+	/**
+	 * 添加课程表
+	 * @param classCourse
+	 * @return
+	 */
+	@PostMapping("/classcourse")
+	public ClassCourse classcourse(@RequestBody ClassCourse classCourse) {
+		return classCourseRepository.save(classCourse);
+	}
+	/**
+	 * 通过班级查询课表  学生课程表
+	 * @param claId
+	 * @return
+	 */
+	@GetMapping("/classCou/{claId}")
+	public List<ClassCourse> courseclassAll(@PathVariable String claId){
+		return classCourseRepository.classc(claId);
+	}
+	/**
+	 *通过老师查询课表  老师课程表
+	 * @param teaId
+	 * @return
+	 */
+	@GetMapping("/teacou/{teaId}")
+	public List<ClassCourse> courseteaAll(@PathVariable String teaId){
+		return classCourseRepository.classtea(teaId);
+	}
 	
 	
 	/**
@@ -145,7 +182,11 @@ public class TeaherController {
 		return tr.findAll();
 	}
 	
-	
+	/**
+	 * 查询某个班级学生信息
+	 * @param claId
+	 * @return
+	 */
 	@GetMapping("/stu/{claId}")
 	public List<Student> findAll(@PathVariable String claId){
 		return studentRepository.all(claId);

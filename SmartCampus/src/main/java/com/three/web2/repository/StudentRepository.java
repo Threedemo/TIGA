@@ -20,5 +20,7 @@ public interface StudentRepository extends MongoRepository<Student, String> {
 	@Query(value = "{'claId': ?0}")
 	List<Student> all(String claId);
 	
+	
+	
 	List<Student> findByClaId(Classes claId);
 }

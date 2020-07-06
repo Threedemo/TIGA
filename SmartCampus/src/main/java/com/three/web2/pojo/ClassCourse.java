@@ -50,7 +50,7 @@ public class ClassCourse {
 	 * 教室
 	 */
 	@DBRef
-	private ClassRoom classHomeId;
+	private ClassRoom classRoomId;
 
 	
 
@@ -102,18 +102,20 @@ public class ClassCourse {
 		this.zhouId = zhouId;
 	}
 
-	public ClassRoom getClassHomeId() {
-		return classHomeId;
+	
+
+	public ClassRoom getClassRoomId() {
+		return classRoomId;
 	}
 
-	public void setClassHomeId(ClassRoom classHomeId) {
-		this.classHomeId = classHomeId;
+	public void setClassRoomId(ClassRoom classRoomId) {
+		this.classRoomId = classRoomId;
 	}
 
 	@Override
 	public String toString() {
 		return "ClassCourse [classCourseId=" + classCourseId + ", claId=" + claId + ", teaId=" + teaId
 				+ ", classHoursId=" + classHoursId + ", weekId=" + weekId + ", zhouId=" + zhouId + ", classHomeId="
-				+ classHomeId + "]";
+				+ classRoomId + "]";
 	}
 }
