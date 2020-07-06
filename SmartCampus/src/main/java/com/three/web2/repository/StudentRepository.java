@@ -20,7 +20,10 @@ public interface StudentRepository extends MongoRepository<Student, String> {
 	@Query(value = "{'claId': ?0}")
 	List<Student> all(String claId);
 	
-	
-	
+	/**
+	 * 查询一个班的学生基本信息
+	 * @param claId
+	 * @return
+	 */
 	List<Student> findByClaId(Classes claId);
 }
