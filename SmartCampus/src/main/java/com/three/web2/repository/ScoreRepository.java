@@ -31,6 +31,7 @@ public interface ScoreRepository extends MongoRepository<Score, String>{
 	@Query(value = "{'claId':?0,'semesterId':?1}")
 	List<Score> findByClaId(String claId,String semesterId);
 	
+	
 	@Query(value = "{'semesterId':?0,'stuId':?1}")
 	Score findByStuIdScore(String stuId,String semId);
 }

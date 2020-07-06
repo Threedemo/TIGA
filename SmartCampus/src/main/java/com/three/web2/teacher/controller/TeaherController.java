@@ -1,4 +1,6 @@
 package com.three.web2.teacher.controller;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,42 +42,44 @@ import com.three.web2.repository.ZhouRrpository;
 @RequestMapping("/teacher")
 public class TeaherController {
 
+	private static final HashMap<String, Double> Score = null;
+
 	@Autowired
 	TeacherRepository tr;
-	
+
 	@Autowired
 	StudentRepository studentRepository;
-	
+
 	@Autowired
 	CourseRepository courseRepository;
-	
+
 	@Autowired
 	TeaClassRepository teaClassRepository;
-	
+
 	@Autowired
 	WeekRepository weekrepositpry;
-	
+
 	@Autowired
 	ZhouRrpository zhouRrpository;
-	
+
 	@Autowired
 	ClassHoursRepository classHoursRepository;
-	
-	
+
 	@Autowired
 	ClassRoomRepository classRoomRepository;
-	
+
 	@Autowired
-	ClassCourseRepository  classCourseRepository;
-	
+	ClassCourseRepository classCourseRepository;
+
 	@Autowired
 	ScoreRepository scoreRepository;
-	
+
 	@Autowired
 	SemesterRepository semesterRepository;
+
 	/**
-	 * 添加教师信息
-	 * 后续放到教务Controller
+	 * 添加教师信息 后续放到教务Controller
+	 * 
 	 * @param teacher
 	 * @return
 	 */
@@ -83,9 +87,10 @@ public class TeaherController {
 	public Teacher saveTeacher(@RequestBody Teacher teacher) {
 		return tr.save(teacher);
 	}
-	
+
 	/**
-	 * 添加成绩  后续放到  adminController
+	 * 添加成绩 后续放到 adminController
+	 * 
 	 * @param course
 	 * @return
 	 */
@@ -93,11 +98,10 @@ public class TeaherController {
 	public Course saveCourse(@RequestBody Course course) {
 		return courseRepository.save(course);
 	}
-	
+
 	/**
-	 * 老师班级表，
-	 * 老师上课的班级
-	 * 后放到AdminController
+	 * 老师班级表， 老师上课的班级 后放到AdminController
+	 * 
 	 * @param teaClass
 	 * @return
 	 */
@@ -105,41 +109,42 @@ public class TeaherController {
 	public TeaClass saveTeaClass(@RequestBody TeaClass teaClass) {
 		return teaClassRepository.save(teaClass);
 	}
-	
+
 	@GetMapping("/tea/{teaId}")
-	public List<TeaClass> findAl(@PathVariable String teaId){
+	public List<TeaClass> findAl(@PathVariable String teaId) {
 		return teaClassRepository.all(teaId);
 	}
-	
+
 	@GetMapping("/teac/{claId}")
-	public List<TeaClass> findA(@PathVariable String claId){
+	public List<TeaClass> findA(@PathVariable String claId) {
 		return teaClassRepository.al(claId);
 	}
-	
+
 	/**
 	 * 添加星期表
+	 * 
 	 * @param week
-	 * @return
-	 * 后放到AdminRepository
+	 * @return 后放到AdminRepository
 	 */
 	@PostMapping("/week")
 	public Week find(@RequestBody Week week) {
 		return weekrepositpry.save(week);
 	}
-	
+
 	/**
 	 * 添加周表
+	 * 
 	 * @param zhou
-	 * @return
-	 * 后放到AdminRepository
+	 * @return 后放到AdminRepository
 	 */
 	@PostMapping("/zhou")
 	public Zhou fin(@RequestBody Zhou zhou) {
 		return zhouRrpository.save(zhou);
 	}
-	
+
 	/**
 	 * 添加授课时间表
+	 * 
 	 * @param classhours
 	 * @return
 	 */
@@ -147,9 +152,10 @@ public class TeaherController {
 	public ClassHours fi(@RequestBody ClassHours classhours) {
 		return classHoursRepository.save(classhours);
 	}
-	
+
 	/**
 	 * 添加教室
+	 * 
 	 * @param classRoom
 	 * @return
 	 */
@@ -157,9 +163,10 @@ public class TeaherController {
 	public ClassRoom classroom(@RequestBody ClassRoom classRoom) {
 		return classRoomRepository.save(classRoom);
 	}
-	
+
 	/**
 	 * 添加课程表
+	 * 
 	 * @param classCourse
 	 * @return
 	 */
@@ -167,34 +174,32 @@ public class TeaherController {
 	public ClassCourse classcourse(@RequestBody ClassCourse classCourse) {
 		return classCourseRepository.save(classCourse);
 	}
+
 	/**
-	 * 通过班级查询课表  学生课程表
+	 * 通过班级查询课表 学生课程表
+	 * 
 	 * @param claId
 	 * @return
 	 */
 	@GetMapping("/classCou/{claId}")
-	public List<ClassCourse> courseclassAll(@PathVariable String claId){
+	public List<ClassCourse> courseclassAll(@PathVariable String claId) {
 		return classCourseRepository.classc(claId);
 	}
-	
-	
-	
-	
-		
-	
+
 	/**
-	 *通过老师查询课表  老师课程表
+	 * 通过老师查询课表 老师课程表
+	 * 
 	 * @param teaId
 	 * @return
 	 */
 	@GetMapping("/teacou/{teaId}")
-	public List<ClassCourse> courseteaAll(@PathVariable String teaId){
+	public List<ClassCourse> courseteaAll(@PathVariable String teaId) {
 		return classCourseRepository.classtea(teaId);
 	}
-	
-	
+
 	/**
 	 * 查询老师任课课程
+	 * 
 	 * @param loginName
 	 * @return
 	 */
@@ -202,93 +207,130 @@ public class TeaherController {
 //	public Teacher teachercourse(@PathVariable String loginName) {
 //		return tr.teacourse(loginName);
 //	}
-	
+
 	/**
 	 * 添加成绩
-	 * @param stuId   学生对象
-	 * @param semId   学期
-	 * @param claId   班级
-	 * @param loginName  老师编号
-	 * @param ping    平时成绩*0.4
-	 * @param kao  考试成绩*0.6
+	 * 
+	 * @param stuId     学生对象
+	 * @param semId     学期
+	 * @param claId     班级
+	 * @param loginName 老师编号
+	 * @param ping      平时成绩*0.4
+	 * @param kao       考试成绩*0.6
 	 * @return
 	 */
 	@PostMapping("/stuScore")
-	public Score stuScore(
-			@RequestParam String stuId ,
-			@RequestParam String semId ,
-			@RequestParam String loginName,
-			@RequestParam Double ping,
-			@RequestParam Double kao) {
+	public Score stuScore(@RequestParam String stuId, @RequestParam String semId, @RequestParam String loginName,
+			@RequestParam Double ping, @RequestParam Double kao) {
 		Score score = new Score();
-		Map<String, Double> stuscore=new HashedMap<>();
-		//判断成绩表是否为空
-		if(scoreRepository.findByStuIdScore(stuId, semId)!=null) {
-			
-			score=scoreRepository.findByStuIdScore(stuId, semId);
-			
-			stuscore=score.getScore();
-			//老师授课课程
-			Teacher teacher=tr.teaload(loginName);
-			String name=teacher.getCourseId().getCourseName();
-			Double src=ping*0.6+kao*0.4;
+		Map<String, Double> stuscore = new HashedMap<>();
+		// 判断成绩表是否为空
+		if (scoreRepository.findByStuIdScore(stuId, semId) != null) {
+
+			score = scoreRepository.findByStuIdScore(stuId, semId);
+
+			stuscore = score.getScore();
+			// 老师授课课程
+			Teacher teacher = tr.teaload(loginName);
+			String name = teacher.getCourseId().getCourseName();
+			Double src = ping * 0.6 + kao * 0.4;
 			stuscore.put(name, src);
 			return scoreRepository.save(score);
-			
-		}else {
-			Teacher teacher=tr.teaload(loginName);
-			String name=teacher.getCourseId().getCourseName();
-			Double src=ping*0.6+kao*0.4;
+
+		} else {
+			Teacher teacher = tr.teaload(loginName);
+			String name = teacher.getCourseId().getCourseName();
+			Double src = ping * 0.6 + kao * 0.4;
 			score.setStuId(studentRepository.findById(stuId).get());
 			score.setClaId(studentRepository.findById(stuId).get().getClaId());
 			score.setSemesterId(semesterRepository.findById(semId).get());
 			stuscore.put(name, src);
 			return scoreRepository.save(score);
 		}
-		
-	
+
 	}
-	
-	
+
 	/**
-	 * 查询教师基本信息
-	 * 邵琪
+	 * 查询教师基本信息 邵琪
 	 */
 	@GetMapping
-	public List<Teacher> FindAll(){
+	public List<Teacher> FindAll() {
 		return tr.findAll();
 	}
-	
+
 	/**
 	 * 查询某个班级学生信息
+	 * 
 	 * @param claId
 	 * @return
 	 */
 	@GetMapping("/stu/{claId}")
-	public List<Student> findAll(@PathVariable String claId){
+	public List<Student> findAll(@PathVariable String claId) {
 		return studentRepository.all(claId);
 	}
+
 	/**
 	 * 查询任课班级
 	 */
-	
-	
-	
+
 	/**
 	 * 查询任课班级详细信息
 	 */
-	
-	
+
 	/**
 	 * 查询任课成绩
 	 * 
+	 * @return
+	 * 
 	 */
-	@GetMapping("/stuscorelist/{claId}")
-	public List<Score> stuscorelist(
-			@PathVariable String claId){
-		return null;
+//	@GetMapping("/stuscorelist/{claId}/{semesterId}")
+//	public List<Score> stuscorelist(
+//			@PathVariable String claId,
+//			@PathVariable String semesterId){
+//		
+//		List<Score> scorelist=scoreRepository.findByClaId(claId,semesterId);
+//		for (Score score : scorelist) {
+//			HashMap<String,Double>hash=score.getScore();
+//			for (String Key : hash.keySet()) {
+//				if (!Key.equals("")) {
+//					
+//				}
+//			}
+//		}
+//		return null;
+//		
+//	
+//		 
+//	}
+
+	@GetMapping("/stuscorelist/{claId}/{loginName}/{semesterId}")
+	public List<Score> stuscorelist(@PathVariable String claId,
+			@PathVariable String loginName,
+			@PathVariable String semesterId ) {
+
+		Teacher teacher = tr.teaload(loginName);
+		String name = teacher.getCourseId().getCourseName();
 		
-	
-		 
+
+		 System.out.println(name);
+		
+		List<Score> scorelist = scoreRepository.findByClaId(claId, semesterId);
+		System.out.println(scorelist);
+		
+		for (Score score : scorelist) {
+			//遍历map
+			HashMap<String,Double>map=score.getScore();
+			
+			for (String key : map.keySet()) {
+				if (!name.equals(key)) {
+//					map.remove(key);
+				}
+			}
+			System.out.println(map);
+			
+		}
+		return scorelist ;
+
 	}
+
 }
