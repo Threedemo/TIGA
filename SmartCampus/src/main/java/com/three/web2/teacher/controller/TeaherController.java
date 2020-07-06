@@ -1,18 +1,24 @@
 package com.three.web2.teacher.controller;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.three.web2.pojo.ClassCourse;
 import com.three.web2.pojo.ClassHours;
 import com.three.web2.pojo.ClassRoom;
+import com.three.web2.pojo.Classes;
 import com.three.web2.pojo.Course;
+import com.three.web2.pojo.Score;
+import com.three.web2.pojo.Semester;
 import com.three.web2.pojo.Student;
 import com.three.web2.pojo.TeaClass;
 import com.three.web2.pojo.Teacher;
@@ -22,6 +28,8 @@ import com.three.web2.repository.ClassCourseRepository;
 import com.three.web2.repository.ClassHoursRepository;
 import com.three.web2.repository.ClassRoomRepository;
 import com.three.web2.repository.CourseRepository;
+import com.three.web2.repository.ScoreRepository;
+import com.three.web2.repository.SemesterRepository;
 import com.three.web2.repository.StudentRepository;
 import com.three.web2.repository.TeaClassRepository;
 import com.three.web2.repository.TeacherRepository;
@@ -59,6 +67,12 @@ public class TeaherController {
 	
 	@Autowired
 	ClassCourseRepository  classCourseRepository;
+	
+	@Autowired
+	ScoreRepository scoreRepository;
+	
+	@Autowired
+	SemesterRepository semesterRepository;
 	/**
 	 * 添加教师信息
 	 * 后续放到教务Controller
@@ -162,6 +176,12 @@ public class TeaherController {
 	public List<ClassCourse> courseclassAll(@PathVariable String claId){
 		return classCourseRepository.classc(claId);
 	}
+	
+	
+	
+	
+		
+	
 	/**
 	 *通过老师查询课表  老师课程表
 	 * @param teaId
@@ -170,6 +190,63 @@ public class TeaherController {
 	@GetMapping("/teacou/{teaId}")
 	public List<ClassCourse> courseteaAll(@PathVariable String teaId){
 		return classCourseRepository.classtea(teaId);
+	}
+	
+	
+	/**
+	 * 查询老师任课课程
+	 * @param loginName
+	 * @return
+	 */
+//	@GetMapping("/teachercourse/{loginName}")
+//	public Teacher teachercourse(@PathVariable String loginName) {
+//		return tr.teacourse(loginName);
+//	}
+	
+	/**
+	 * 添加成绩
+	 * @param stuId   学生对象
+	 * @param semId   学期
+	 * @param claId   班级
+	 * @param loginName  老师编号
+	 * @param ping    平时成绩*0.4
+	 * @param kao  考试成绩*0.6
+	 * @return
+	 */
+	@PostMapping("/stuScore")
+	public Score stuScore(
+			@RequestParam String stuId ,
+			@RequestParam String semId ,
+			@RequestParam String loginName,
+			@RequestParam Double ping,
+			@RequestParam Double kao) {
+		Score score = new Score();
+		Map<String, Double> stuscore=new HashedMap<>();
+		//判断成绩表是否为空
+		if(scoreRepository.findByStuIdScore(stuId, semId)!=null) {
+			
+			score=scoreRepository.findByStuIdScore(stuId, semId);
+			
+			stuscore=score.getScore();
+			//老师授课课程
+			Teacher teacher=tr.teaload(loginName);
+			String name=teacher.getCourseId().getCourseName();
+			Double src=ping*0.6+kao*0.4;
+			stuscore.put(name, src);
+			return scoreRepository.save(score);
+			
+		}else {
+			Teacher teacher=tr.teaload(loginName);
+			String name=teacher.getCourseId().getCourseName();
+			Double src=ping*0.6+kao*0.4;
+			score.setStuId(studentRepository.findById(stuId).get());
+			score.setClaId(studentRepository.findById(stuId).get().getClaId());
+			score.setSemesterId(semesterRepository.findById(semId).get());
+			stuscore.put(name, src);
+			return scoreRepository.save(score);
+		}
+		
+	
 	}
 	
 	
@@ -200,4 +277,18 @@ public class TeaherController {
 	/**
 	 * 查询任课班级详细信息
 	 */
+	
+	
+	/**
+	 * 查询任课成绩
+	 * 
+	 */
+	@GetMapping("/stuscorelist/{claId}")
+	public List<Score> stuscorelist(
+			@PathVariable String claId){
+		return null;
+		
+	
+		 
+	}
 }

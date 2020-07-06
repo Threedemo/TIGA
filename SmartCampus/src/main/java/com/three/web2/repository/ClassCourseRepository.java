@@ -20,6 +20,7 @@ public interface ClassCourseRepository extends MongoRepository<ClassCourse,Strin
 	 * 通过班级查课表
 	 * @param claId
 	 * @return
+	 * 邵琪
 	 */
 	@Query(value = "{'claId': ?0}")
 	List<ClassCourse> classc(String claId);
@@ -28,6 +29,7 @@ public interface ClassCourseRepository extends MongoRepository<ClassCourse,Strin
 	 * 通过教师id查询课表
 	 * @param claId
 	 * @return
+	 * 邵琪
 	 */
 	@Query(value = "{'teaId': ?0}")
 	List<ClassCourse> classtea(String teaId);

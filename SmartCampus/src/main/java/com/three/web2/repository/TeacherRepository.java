@@ -17,4 +17,10 @@ public interface TeacherRepository extends MongoRepository<Teacher, String> {
 	
 	@Query(value = "{'loginName': ?0}", fields = "{'_id':0,'oginName':1,'teaName':1}")
 	List<Teacher> aa(String loginName);
+	
+	
+	@Query(value ="{'loginName':?0}" ,fields = "{'courseId':1}")
+	Teacher teaload(String loginName); 
+	
+	List<Teacher>findByDepId(String depId);
 }
