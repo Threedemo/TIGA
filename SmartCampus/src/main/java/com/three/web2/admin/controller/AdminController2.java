@@ -28,6 +28,7 @@ import com.three.web2.repository.ClassRepository;
 import com.three.web2.repository.DepartmentRepository;
 import com.three.web2.repository.MajorRepository;
 import com.three.web2.repository.ScoreRepository;
+import com.three.web2.repository.SemesterRepository;
 import com.three.web2.repository.StudentRepository;
 import com.three.web2.repository.TeaClassRepository;
 import com.three.web2.repository.TeacherRepository;
@@ -62,6 +63,9 @@ public class AdminController2 {
 	
 	@Autowired
 	ScoreRepository scoreRepository;
+	
+	@Autowired
+	SemesterRepository semesterRepository;
 	
 	/**
 	 * 添加院系API
@@ -148,7 +152,7 @@ public class AdminController2 {
 //	}
 	
 	/**
-	 * 通过班级查询该班的学生
+	 * 通过班级查询该班的学生基本学生
 	 * @param claId
 	 * @return
 	 */
@@ -191,9 +195,41 @@ public class AdminController2 {
 	 * @return
 	 */
 	@GetMapping("/score")
-	public Score scores(@RequestBody Student stuId,@RequestBody Semester semId){
+	public Score scores(@RequestParam String semesterId
+						,@RequestParam String stuId){
 		
-		return scoreRepository.findByStuIdAndSemesterId(stuId, semId);
+		return scoreRepository.findByStuIdAndSemesterId(semesterId,stuId);
+	}
+	/**
+	 * 查询一个班级学生的成绩
+	 * @param claId
+	 * @return
+	 */
+	@GetMapping("/score/{semesterId}/{claId}")
+	public List<Score>scorelist(@PathVariable String semesterId
+			,@PathVariable String claId){
+		
+		return scoreRepository.findByClaId(claId,semesterId);
+	}
+	
+	/**
+	 * 通过学院查询一个学学院的教师信息
+	 * @param depId
+	 * @return
+	 */
+	@GetMapping("/teacher")
+	public List<Teacher>teacherBydep(@RequestParam String depId){
+		return teacherRepository.findByDepId(depId);
+	}
+	
+	/**
+	 * 添加学期
+	 * @param semester
+	 * @return
+	 */
+	@PostMapping("/semester")
+	public Semester saveseme(@RequestBody Semester semester) {
+		return semesterRepository.save(semester);
 	}
 	/**
 	 * 添加一条学生成绩
