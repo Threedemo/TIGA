@@ -99,7 +99,7 @@ public class TeaherController {
 	}
 
 	/**
-	 * 老师班级表， 老师上课的班级 后放到AdminController
+	 * 老师班级表， 老师上课的班级 
 	 * 
 	 * @param teaClass
 	 * @return
@@ -109,13 +109,23 @@ public class TeaherController {
 		return teaClassRepository.save(teaClass);
 	}
 
+	/**
+	 * 通过老师id查询在上课班级
+	 * @param teaId
+	 * @return
+	 */
 	@GetMapping("/tea/{teaId}")
-	public List<TeaClass> findAl(@PathVariable String teaId) {
+	public List<TeaClass> findteaClass(@PathVariable String teaId) {
 		return teaClassRepository.all(teaId);
 	}
 
+	/**
+	 * 通过班级查询班级任课老师
+	 * @param claId
+	 * @return
+	 */
 	@GetMapping("/teac/{claId}")
-	public List<TeaClass> findA(@PathVariable String claId) {
+	public List<TeaClass> findClaTeacher(@PathVariable String claId) {
 		return teaClassRepository.al(claId);
 	}
 
@@ -126,7 +136,7 @@ public class TeaherController {
 	 * @return 后放到AdminRepository
 	 */
 	@PostMapping("/week")
-	public Week find(@RequestBody Week week) {
+	public Week saveWeek(@RequestBody Week week) {
 		return weekrepositpry.save(week);
 	}
 
@@ -137,7 +147,7 @@ public class TeaherController {
 	 * @return 后放到AdminRepository
 	 */
 	@PostMapping("/zhou")
-	public Zhou fin(@RequestBody Zhou zhou) {
+	public Zhou saveZhou(@RequestBody Zhou zhou) {
 		return zhouRrpository.save(zhou);
 	}
 
@@ -148,7 +158,7 @@ public class TeaherController {
 	 * @return
 	 */
 	@PostMapping("/classhours")
-	public ClassHours fi(@RequestBody ClassHours classhours) {
+	public ClassHours saveClassHours(@RequestBody ClassHours classhours) {
 		return classHoursRepository.save(classhours);
 	}
 
@@ -159,7 +169,7 @@ public class TeaherController {
 	 * @return
 	 */
 	@PostMapping("/classroom")
-	public ClassRoom classroom(@RequestBody ClassRoom classRoom) {
+	public ClassRoom saveClassroom(@RequestBody ClassRoom classRoom) {
 		return classRoomRepository.save(classRoom);
 	}
 
@@ -170,7 +180,7 @@ public class TeaherController {
 	 * @return
 	 */
 	@PostMapping("/classcourse")
-	public ClassCourse classcourse(@RequestBody ClassCourse classCourse) {
+	public ClassCourse saveClasscourse(@RequestBody ClassCourse classCourse) {
 		return classCourseRepository.save(classCourse);
 	}
 
@@ -270,13 +280,7 @@ public class TeaherController {
 		return studentRepository.all(claId);
 	}
 
-	/**
-	 * 查询任课班级
-	 */
 
-	/**
-	 * 查询任课班级详细信息
-	 */
 
 	/**
 	 * 查询任课成绩
