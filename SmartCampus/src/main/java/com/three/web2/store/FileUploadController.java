@@ -45,8 +45,7 @@ public class FileUploadController {
 	public FileUploadController(StorageService storageService) {
 		this.storageService = storageService;
 	}
-
-	@GetMapping("/admin/student/excel")
+	@GetMapping("/admin/excel")
 	public String listUploadedFiles(Model model) throws IOException {
 
 		model.addAttribute("files", storageService.loadAll().map(

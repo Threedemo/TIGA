@@ -26,4 +26,12 @@ public interface StudentRepository extends MongoRepository<Student, String> {
 	 * @return
 	 */
 	List<Student> findByClaId(Classes claId);
+	/**
+	 * 匹配信息
+	 * @param stuId
+	 * @param stuIdNum
+	 * @return
+	 */
+	@Query(value = "{'loginName': ?0,stuIdNum:?1}")
+	Student cheko(String stuId,String stuIdNum);
 }
