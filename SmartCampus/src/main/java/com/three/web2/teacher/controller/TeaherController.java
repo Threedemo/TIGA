@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -220,21 +221,23 @@ public class TeaherController {
 	 * @return
 	 */
 	@PostMapping("/stuScore")
-	public Score stuScore(@RequestParam String stuId, @RequestParam String semId, @RequestParam String loginName,
+	@Transactional
+	public Score stuScore(@RequestParam String stuId,
+			@RequestParam String semesterId, @RequestParam String loginName,
 			@RequestParam Double ping, @RequestParam Double kao) {
 		Score score = new Score();
-		Map<String, Double> stuscore = new HashedMap<>();
+		HashMap<String, Double> stuscore = new HashMap<>();
 		// 判断成绩表是否为空
-		if (scoreRepository.findByStuIdScore(stuId, semId) != null) {
-
-			score = scoreRepository.findByStuIdScore(stuId, semId);
-
+		if (scoreRepository.findByStuIdScore(stuId, semesterId) != null) {
+			score = scoreRepository.findByStuIdScore(stuId, semesterId);
 			stuscore = score.getScore();
 			// 老师授课课程
 			Teacher teacher = tr.teaload(loginName);
 			String name = teacher.getCourseId().getCourseName();
+			
 			Double src = ping * 0.6 + kao * 0.4;
 			stuscore.put(name, src);
+			score.setScore(stuscore);
 			return scoreRepository.save(score);
 
 		} else {
@@ -243,7 +246,7 @@ public class TeaherController {
 			Double src = ping * 0.6 + kao * 0.4;
 			score.setStuId(studentRepository.findById(stuId).get());
 			score.setClaId(studentRepository.findById(stuId).get().getClaId());
-			score.setSemesterId(semesterRepository.findById(semId).get());
+			score.setSemesterId(semesterRepository.findById(semesterId).get());
 			stuscore.put(name, src);
 			return scoreRepository.save(score);
 		}
