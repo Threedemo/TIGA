@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -41,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 //		super.configure(http);
+		http.headers().contentTypeOptions().disable();
 		http.csrf().disable()
         .formLogin()
         .loginPage("/login.html")
@@ -75,5 +77,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			
 			.authoritiesByUsernameQuery("select loginName,authority from login where loginName = ?");//查询用户权限
 			
+	}
+	
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		//记载静态资源
+		web.ignoring().antMatchers("/js/*","/static/*","/templates/*");
 	}
 }
