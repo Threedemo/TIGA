@@ -21,17 +21,17 @@ public class AdminController1 {
 		return "erro.html";
 	}
 	
-	@GetMapping("/studentHome")
+	@GetMapping("/student/studentHome")
 	public String stuhome() {
 		return "studentHome.html";
 	}
 	
-	@GetMapping("/adminHome")
+	@GetMapping("/admin/adminHome")
 	public String adminHome() {
 		return "adminHome.html";
 	}
 	
-	@GetMapping("/teacherHome")
+	@GetMapping("/teacher/teacherHome")
 	public String teacherHome() {
 		return "teacherHome.html";
 	}

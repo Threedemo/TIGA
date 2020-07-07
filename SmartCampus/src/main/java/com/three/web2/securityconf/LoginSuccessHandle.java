@@ -22,13 +22,13 @@ public class LoginSuccessHandle implements AuthenticationSuccessHandler {
 				+ "/";
 		System.out.println(basePath);
 		if (roles.contains("ROLE_STUDENT")) {
-			response.sendRedirect(basePath + "studentHome");
+			response.sendRedirect(basePath + "student/studentHome");
 			return;
 		}else if (roles.contains("ROLE_TEACHER")) {
-			response.sendRedirect(basePath + "teacherHome");
+			response.sendRedirect(basePath + "teacher/teacherHome");
 			return;
 		}else if (roles.contains("ROLE_ADMIN")) {
-			response.sendRedirect(basePath + "adminHome");
+			response.sendRedirect(basePath + "admin/adminHome");
 			return;
 		}
 		response.sendRedirect(basePath + "/");
