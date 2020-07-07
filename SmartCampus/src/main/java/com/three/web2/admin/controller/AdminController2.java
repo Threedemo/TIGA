@@ -116,6 +116,7 @@ public class AdminController2 {
 	 * @return
 	 */
 	@PostMapping("/student")
+	@Transactional
 	public Student savestudent(@RequestBody Student stu) {
 		Login login =new Login();
 		login.setLoginName(stu.getLoginName());
@@ -245,7 +246,11 @@ public class AdminController2 {
 		return teacherRepository.findByDepId(depId);
 	}
 	
-	
+	/**
+	 * 添加公告的方法
+	 * @param notice
+	 * @return
+	 */
 	@SuppressWarnings("deprecation")//抑制警告
 	@PostMapping("/notice")
 	public Notice saveNotice(@RequestBody Notice notice) {

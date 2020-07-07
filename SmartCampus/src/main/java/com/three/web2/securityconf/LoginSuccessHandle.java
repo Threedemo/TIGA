@@ -31,6 +31,6 @@ public class LoginSuccessHandle implements AuthenticationSuccessHandler {
 			response.sendRedirect(basePath + "adminHome");
 			return;
 		}
-		response.sendRedirect(basePath + "home");
+		response.sendRedirect(basePath + "/");
 	}
 }
