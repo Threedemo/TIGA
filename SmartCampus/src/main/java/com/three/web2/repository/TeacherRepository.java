@@ -15,8 +15,7 @@ public interface TeacherRepository extends MongoRepository<Teacher, String> {
 
 	//自定义
 	
-	@Query(value = "{'loginName': ?0}", fields = "{'_id':0,'oginName':1,'teaName':1}")
-	List<Teacher> aa(String loginName);
+
 	
 	
 	@Query(value ="{'loginName':?0}" ,fields = "{'courseId':1}")
