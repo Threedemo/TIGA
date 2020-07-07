@@ -43,8 +43,6 @@ import com.three.web2.repository.ZhouRrpository;
 @RequestMapping("/teacher")
 public class TeaherController {
 
-	private static final HashMap<String, Double> Score = null;
-
 	@Autowired
 	TeacherRepository tr;
 
