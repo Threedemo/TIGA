@@ -30,4 +30,7 @@ public interface LoginMapper {
 	 */
 	@Update("update `login` set loginPassword=#{lp} where loginName=#{ln}")
 	void upl(String ln,String lp);
+	
+	@Update("update login set endbled=0 where id=#{loginName} ")
+	void update(String loginName);
 }
