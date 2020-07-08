@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .defaultSuccessUrl("/").successHandler(new LoginSuccessHandle())
         .and()
         .authorizeRequests()
-        .antMatchers("/login.html","index.html","/","/admin/notice").permitAll()
+        .antMatchers("/login.html","index.html","/","/admin/notice","/admin/notice/*").permitAll()
         .antMatchers("/student","/student/*").hasRole("STUDENT")
         .antMatchers("/teacher","/teacher/*").hasRole("TEACHER")
         .antMatchers("/admin","/admin/*").hasRole("ADMIN")
