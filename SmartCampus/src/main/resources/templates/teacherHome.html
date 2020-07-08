@@ -12,22 +12,218 @@
     <script src="js/vue.js"></script>
     <script src="js/axios.js"></script>
 </head>
+<style>
+    #hard {
+        color: aliceblue;
+        font-size: 100px;
+        line-height: 140px;
+        text-align: center;
+        margin-top: 20px;
+        margin-left: 24%;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: blue;
+        border: 1px solid pink;
+    }
+    
+    #card_title {
+        padding-left: 20px;
+    }
+    
+    #card_img {
+        padding-left: 20px;
+    }
+    
+    #gong ul li {
+        list-style-type: none;
+        padding-left: 20px;
+    }
+    
+    #gong ul li div {
+        width: 100px;
+        height: 100px;
+        float: left;
+        /* padding-left: 20px; */
+        margin-top: 20px;
+        margin-left: 20px;
+        border: 1px solid pink;
+    }
+    
+    .card {
+        border: 1px solid blue;
+    }
+</style>
 
 <body>
-    <h1>教师界面</h1>
+    <h1></h1>
+    <div id="app" class="container-fluid">
+        <div class="jumbotron">
+            <h1 class="display-3">教师管理页面</h1>
+            <h2>{{tian.date}}--{{tian.week}}</h2>
+            <h2 class="lead">欢迎您 xx老师</h2>
+            <p>{{tian.city}}--{{tian.wea}}--{{tian.air_level}}--{{tian.tem}}℃</p>
 
-    <div class="jumbotron">
-        <h1 class="display-3">教师管理页面</h1>
-        <p class="lead">欢迎您 xx老师</p>
+        </div>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand">老师</a>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </nav>
+
+        <div class="row">
+            <div class="col-lg-3" id="card_img">
+                <h1> <span class="badge badge-primary"> 老师信息</span></h1>
+                <div class="card" style=" height: 400px;">
+                    <div id="hard">邵</div>
+                    <div class="card-body">
+                        <h5 class="card-title">姓名：邵琪</h5>
+                        <h5 class="card-title">职工号：邵琪</h5>
+                        <h5 class="card-title">所属院系：</h5>
+                        <h5 class="card-title">姓名：邵琪</h5>
+                        <a href="#" class="btn btn-primary">详情信息</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9" id="card_title">
+                <h1> <span class="badge badge-primary"> 功能</span></h1>
+                <div id="gong" class="card" style=" height: 400px;">
+                    <ul>
+                        <li>
+                            <div>任课班级信息</div>
+                        </li>
+                        <li>
+                            <div>修改成绩</div>
+                        </li>
+                        <li>
+                            <div>添加成绩</div>
+                        </li>
+                        <li>
+                            <div>修改密码</div>
+                        </li>
+                        <li>
+                            <div>个人详细信息</div>
+                        </li>
+                        <li>
+                            <div>查看学生对自己的评价</div>
+                        </li>
+                        <li>
+                            <div>查看任课程成绩</div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3" id="card_img">
+                <h1> <span class="badge badge-primary"> 老师信息</span></h1>
+                <div class="card" style="width:260px; height: 400px;">
+
+                </div>
+            </div>
+            <div class="col-xs-1">
+
+            </div>
+            <div class="col-xs-8" id="card_title">
+                <h1> <span class="badge badge-primary"> 课表</span></h1>
+                <div class="card" style="width:1200px; height: 400px;">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">星期一</th>
+                                <th scope="col">星期二</th>
+                                <th scope="col">星期三</th>
+                                <th scope="col">星期四</th>
+                                <th scope="col">星期五</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
 
     </div>
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand">Navbar</a>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </nav>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                time: new Date(),
+                timer: "",
+                tian: {
+                    city: "",
+                    date: "",
+                    week: "",
+                    wea: "",
+                    air_level: "",
+                    tem: ""
+                }
+            },
+            methods: {
+                tianqi: function() {
+                    axios.get("https://tianqiapi.com/api?version=v6&appid=95422873&appsecret=tP2m5YyV")
+                        .then(res => {
+                            this.tian.city = res.data.city
+                            this.tian.date = res.data.date
+                            this.tian.week = res.data.week
+                            this.tian.air_level = res.data.air_level
+                            this.tian.tem = res.data.tem
+                            this.tian.wea = res.data.wea
+                            console.log(this.tian)
+
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
+                }
+
+            },
+            created() {
+                var _this = this;
+                this.timer = setInterval(function() {
+                        _this.time = new Date();
+                    }, 1000),
+
+                    this.tianqi()
+
+
+            },
+            beforeDestory() {
+                if (this.timer) {
+                    clearInterval(this.timer)
+                }
+            }
+        })
+    </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
