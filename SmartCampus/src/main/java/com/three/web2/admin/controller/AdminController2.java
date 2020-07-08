@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.three.web2.LoginService;
+import com.three.web2.jwt.JwtUtil;
 import com.three.web2.pojo.Classes;
 import com.three.web2.pojo.Department;
 import com.three.web2.pojo.Evaluate;
@@ -91,6 +94,9 @@ public class AdminController2 {
 	
 	@Autowired
 	XuanKeRepository xuanKeRepository;
+	
+	@Autowired
+	JwtUtil jwtUtil;
 	/**
 	 * 添加院系API
 	 * @param department
@@ -265,7 +271,6 @@ public class AdminController2 {
 	 */
 	@GetMapping("/notice")
 	public List<Notice> noticeList(@RequestParam(name = "p",defaultValue = "1") int page){
-		
 		return noticeRepository.findAll(PageRequest.of(page-1, 5)).getContent();
 	}
 	/**
@@ -347,6 +352,13 @@ public class AdminController2 {
 	@PostMapping("/score")
 	public Score savescore(@RequestBody Score score) {
 		return scoreRepository.save(score);
+	}
+	
+	@GetMapping("/gettoken")
+	public String b(@RequestHeader(name = "token") String token) {
+		String loginName=jwtUtil.gettoken(token);
+		System.out.println(loginName);
+		return loginName;
 	}
 	
 }

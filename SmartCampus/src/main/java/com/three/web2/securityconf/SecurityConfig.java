@@ -49,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .defaultSuccessUrl("/").successHandler(new LoginSuccessHandle())
         .and()
         .authorizeRequests()
-        .antMatchers("/login.html","index.html","/","/admin/notice","/admin/notice/*").permitAll()
+        .antMatchers("/login.html","index.html","/"
+        		,"/admin/notice","/admin/notice/*","student/js/*").permitAll()
         .antMatchers("/student","/student/*").hasRole("STUDENT")
         .antMatchers("/teacher","/teacher/*").hasRole("TEACHER")
         .antMatchers("/admin","/admin/*").hasRole("ADMIN")
@@ -81,6 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		//记载静态资源
-		web.ignoring().antMatchers("/img/*","/js/*","/templates/js/*");
+		web.ignoring().antMatchers("/**/*.js", "/lang/*.json", "/**/*.css", "/**/*.js", "/**/*.map",
+	            "/**/*.png");
 	}
 }

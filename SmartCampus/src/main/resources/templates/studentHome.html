@@ -1,36 +1,48 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <title>学生界面</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="js/vue.js"></script>
-    <script src="js/axios.js"></script>
+    <script th:src="@{/js/vue.js}" type="text/javascript"></script>
+    <script th:src="@{/js/axios.js}" type="text/javascript"></script>
 </head>
 
 <body>
     <div class="container" id="app">
-        <h1>学生界面</h1>
+        <h1 @click="a">学生界面</h1>
     </div>
     <script>
         new Vue({
             el: "#app",
             mounted() {
-                this.gettoken();
+
             },
             methods: {
-                gettoken() {
-                    let req = new XMLHttpRequest();
-                    req.open('POST', document.location, false);
+                a() {
+                    var req = new XMLHttpRequest();
+                    req.open('GET', document.location, false);
                     req.send(null);
-                    console.log(req)
-                    let content = req.getResponseHeader('token')
-                    console.log(content)
+                    var token = req.getResponseHeader("token");
+                    sessionStorage.setItem("token", token);
+                    console.log(sessionStorage.getItem("token"));
+                    axios.get({
+                            methods: 'GET',
+                            url: '/admin/gettoken',
+                            handers: {
+                                'token': window.sessionStorage['token']
+                            }
+                        })
+                        .then(res => {
+                            console.log(res)
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
                 }
             }
         })
