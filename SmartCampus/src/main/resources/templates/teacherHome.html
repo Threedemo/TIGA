@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="js/vue.js"></script>
     <script src="js/axios.js"></script>
+
 </head>
 <style>
     #hard {
@@ -53,6 +54,28 @@
     .card {
         border: 1px solid blue;
     }
+    
+    #table_k.card {
+        text-align: center;
+    }
+    
+    #table_ke {
+        margin-left: 100px;
+        margin-top: 10px;
+        border: 1px solid blue;
+        width: 1000px;
+        /* background-color: pink; */
+        background: rgba(0, 0, 225, 0.1)
+    }
+    
+    #fy {
+        margin-top: 30px;
+        margin-left: 850px;
+    }
+    
+    #table_kebiao {
+        border-radius: 5%;
+    }
 </style>
 
 <body>
@@ -76,7 +99,7 @@
         <div class="row">
             <div class="col-lg-3" id="card_img">
                 <h1> <span class="badge badge-primary"> 老师信息</span></h1>
-                <div class="card" style=" height: 400px;">
+                <div class="card" style=" height: 450px;">
                     <div id="hard">邵</div>
                     <div class="card-body">
                         <h5 class="card-title">姓名：邵琪</h5>
@@ -90,7 +113,7 @@
 
             <div class="col-lg-9" id="card_title">
                 <h1> <span class="badge badge-primary"> 功能</span></h1>
-                <div id="gong" class="card" style=" height: 400px;">
+                <div id="gong" class="card" style=" height: 450px;">
                     <ul>
                         <li>
                             <div>任课班级信息</div>
@@ -131,38 +154,73 @@
             </div>
             <div class="col-xs-8" id="card_title">
                 <h1> <span class="badge badge-primary"> 课表</span></h1>
-                <div class="card" style="width:1200px; height: 400px;">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">星期一</th>
-                                <th scope="col">星期二</th>
-                                <th scope="col">星期三</th>
-                                <th scope="col">星期四</th>
-                                <th scope="col">星期五</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div id="table_k" class="card" style="width:1200px; height: 400px;">
+
+                    <nav id="fy" aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <span class="page-link">上一周</span>
+                            </li>
+                            <li class="page-item active" aria-current="page">
+                                <span class="page-link">
+                              1
+                              <span class="sr-only">(current)</span>
+                                </span>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link">下一周</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div id="table_ke">
+                        <table id="table_kebiao" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">星期一</th>
+                                    <th scope="col">星期二</th>
+                                    <th scope="col">星期三</th>
+                                    <th scope="col">星期四</th>
+                                    <th scope="col">星期五</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">上午1、2节</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">上午3、4节</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                    <td>@fat</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">下午1、2节</th>
+                                    <td>Larry the Bird</td>
+                                    <td>@twitter</td>
+                                    <td>@fat</td>
+                                    <td>@fat</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">下午3、4节</th>
+                                    <td>Larry the Bird</td>
+                                    <td>@twitter</td>
+                                    <td>@fat</td>
+                                    <td>@fat</td>
+                                    <td>@fat</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -224,11 +282,13 @@
             }
         })
     </script>
+    <script src="js/fairyDustCursor.js" type="text/javascript"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
