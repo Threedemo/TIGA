@@ -24,31 +24,16 @@ public class AdminController1 {
 	
 	@PostMapping("/student/studentHome")
 	public String stuhome() {
-		return "redirect:/studentHome";
-	}
-	
-	@GetMapping("/studentHome")
-	public String stuhome1() {
 		return "studentHome.html";
 	}
 	
 	@PostMapping("/admin/adminHome")
 	public String adminHome() {
-		return "redirect:/adminHome";
-	}
-	
-	@GetMapping("/adminHome")
-	public String adminHome1() {
 		return "adminHome.html";
 	}
 	
 	@PostMapping("/teacher/teacherHome")
 	public String teacherHome() {
-		return "redirect:/teacherHome";
-	}
-	
-	@GetMapping("/teacherHome")
-	public String teacherHome1() {
 		return "teacherHome.html";
 	}
 	

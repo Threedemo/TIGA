@@ -29,12 +29,10 @@ public class LoginSuccessHandle implements AuthenticationSuccessHandler {
 		if (roles.contains("ROLE_STUDENT")) {
 			response.setHeader("token", jwtUtil.creattoken(request.getParameter("username")));
 			request.getRequestDispatcher("student/studentHome").forward(request, response);
-			System.out.println(request.getParameter("username"));
 			return;
 		}else if (roles.contains("ROLE_TEACHER")) {
 			response.setHeader("token", jwtUtil.creattoken(request.getParameter("username")));
 			request.getRequestDispatcher("teacher/teacherHome").forward(request, response);
-			response.sendRedirect(basePath + "teacher/teacherHome");
 			return;
 		}else if (roles.contains("ROLE_ADMIN")) {
 			response.setHeader("token", jwtUtil.creattoken(request.getParameter("username")));
