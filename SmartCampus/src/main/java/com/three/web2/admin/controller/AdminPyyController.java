@@ -41,7 +41,7 @@ public class AdminPyyController {
 	/**
 	 * 修改学生成绩
 	 */
-	@PutMapping
+	@PutMapping("/score")
 	public Score updateScore(@RequestBody Score score) {
 		return	scor.save(score);
 	}
@@ -50,7 +50,7 @@ public class AdminPyyController {
 	 * 修改学生信息
 	 */
 	
-	@PutMapping
+	@PutMapping("/student")
 	public Student updateStudent(@RequestBody Student student) {
 		return stur.save(student);
 	}
@@ -60,7 +60,7 @@ public class AdminPyyController {
 	 * 修改老师信息
 	 */
 	
-	@PutMapping
+	@PutMapping("/teacher")
 	public Teacher updateTeacher(@RequestBody Teacher teacher) {
 		return tr.save(teacher);
 	}
@@ -72,7 +72,7 @@ public class AdminPyyController {
 	 * @param id
 	 * @return
 	 */
-	@PutMapping
+	@PutMapping("/del")
 	public void delStudent(@RequestParam String loginName) {
 		 ls.update(loginName);
 	}
