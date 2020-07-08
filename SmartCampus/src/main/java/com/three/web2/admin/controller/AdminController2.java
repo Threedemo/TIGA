@@ -1,13 +1,12 @@
 package com.three.web2.admin.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,7 +48,8 @@ import com.three.web2.repository.XuanKeRepository;
 @RestController
 @RequestMapping("/admin")
 public class AdminController2 {
-
+	
+	
 	@Autowired
 	AdminRepository adminRepository;
 	
@@ -330,6 +330,27 @@ public class AdminController2 {
 		}
 		return teacherRepository.findById(id).get();
 	}
+	
+	@GetMapping("/teacher/getTotal")
+	public Map<String, Object> getTotal() {
+		Map<String,Object> map=new HashMap<String, Object>();
+		long c=noticeRepository.count();
+		map.put("c", c);
+		
+		//n 当前页  c总页数
+		long n=c/5;
+		if(c/5==0) {
+			n=1;
+		}else if(c%5!=0&&c/5!=0) {
+			n=c/5+1;
+		}else if(c/5!=0&&c%5==0) {
+			n=c/5;
+		}
+		map.put("n", n);
+		return map;
+	}
+	
+	
 	/**
 	 * 添加学期
 	 * @param semester
