@@ -42,7 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 //		super.configure(http);
-		http.headers().contentTypeOptions().disable();
 		http.csrf().disable()
         .formLogin()
         .loginPage("/login.html")
