@@ -360,7 +360,8 @@ public class AdminController2 {
 	}
 	
 	@GetMapping("/admin")
-	public Admin Load(@RequestHeader String id) {
+	public Admin Load(@RequestHeader(name = "token") String token) {
+		String id=jwtUtil.gettoken(token);
 		return adminRepository.findById(id).get();
 	}
 	@GetMapping("/gettoken")

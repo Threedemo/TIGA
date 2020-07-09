@@ -103,16 +103,16 @@
                 </ul>
                 <ul class="pagination ml-5">
                     <li class="page-item">
-                        <a class="page-link" @click="load(p-1)" aria-label="Previous">
+                        <button class="page-link" @click="load(p-1)" aria-label="Previous">
                             <span aria-hidden="true">上一页</span>
                             <span class="sr-only">上一页</span>
-                        </a>
+                        </button>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" @click="load(p+1)" aria-label="Next">
+                        <button class="page-link" @click="load(p+1)" aria-label="Next">
                             <span aria-hidden="true">下一页</span>
                             <span class="sr-only">下一页</span>
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -131,7 +131,7 @@
             },
             created() {
                 this.load(1);
-                axios.get("/admin/teacher/getTotal")
+                axios.get("/teacher/getTotal")
                     .then(res => {
                         this.total = res.data.n;
                         this.number = res.data.c;
@@ -147,14 +147,13 @@
                     } else if (p > this.total) {
                         p = this.total;
                     }
-                    axios.get("/admin/notice", {
+                    axios.get("/notice", {
                             params: {
                                 p: p
                             }
                         })
                         .then(res => {
                             this.notice = res.data;
-                            alert(this.notice);
                         })
                         .catch(err => {
                             console.error(err);
