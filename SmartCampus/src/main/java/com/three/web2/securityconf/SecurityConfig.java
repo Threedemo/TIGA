@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .and()
         .authorizeRequests()
         .antMatchers("/login.html","index.html","/"
-        		,"/admin/notice","/admin/notice/*","student/js/*").permitAll()
+        		,"/admin/notice","/admin/notice/*").permitAll()
         .antMatchers("/student","/student/*").hasRole("STUDENT")
         .antMatchers("/teacher","/teacher/*").hasRole("TEACHER")
         .antMatchers("/admin","/admin/*").hasRole("ADMIN")
@@ -83,6 +83,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public void configure(WebSecurity web) throws Exception {
 		//记载静态资源
 		web.ignoring().antMatchers("/**/*.js", "/lang/*.json", "/**/*.css", "/**/*.js", "/**/*.map",
-	            "/**/*.png");
+	            "/**/*.png","/**/*.jpg");
 	}
 }
