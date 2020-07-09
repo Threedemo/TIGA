@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,7 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.three.web2.LoginService;
 import com.three.web2.pojo.Classes;
+import com.three.web2.pojo.Login;
 import com.three.web2.pojo.Student;
 import com.three.web2.repository.ClassRepository;
 import com.three.web2.repository.StudentRepository;
@@ -40,6 +43,9 @@ public class FileUploadController {
 	
 	@Autowired
 	StudentRepository studentRepository;
+	
+	@Autowired
+	LoginService loginService;
 
 	@Autowired
 	public FileUploadController(StorageService storageService) {
@@ -65,7 +71,8 @@ public class FileUploadController {
 				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
 	}
 
-	@PostMapping("/")
+	@PostMapping("/admin/addstudents")
+	@ResponseBody
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
 		try {
@@ -92,17 +99,24 @@ public class FileUploadController {
 		            System.out.println(row.getCell(10).toString());
 		            Classes cla=classRepository.findById(row.getCell(10).toString()).get();
 		            student.setClaId(cla);
+		            Login login =new Login();
+		    		login.setLoginName(student.getLoginName());
+		    		//获取密码
+		    		String pwd=student.getLoginName();
+		    		//加密密码
+		    		login.setLoginPassword(new BCryptPasswordEncoder().encode(pwd));
+		    		login.setEndbled(1);
+		    		login.setAuthority("ROLE_STUDENT");
+		    		//添加到登录表单中
+		    		loginService.save(login);
 		            studentRepository.save(student);
+		            return "ok";
 		        }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		storageService.store(file);
-		redirectAttributes.addFlashAttribute("message",
-				"You successfully uploaded " + file.getOriginalFilename() + "!");
-
-		return "redirect:/";
+		return "err";
 	}
 
 	@ExceptionHandler(StorageFileNotFoundException.class)

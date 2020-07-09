@@ -24,6 +24,7 @@ import com.three.web2.LoginService;
 import com.three.web2.jwt.JwtUtil;
 import com.three.web2.pojo.Admin;
 import com.three.web2.pojo.Classes;
+import com.three.web2.pojo.Course;
 import com.three.web2.pojo.Department;
 import com.three.web2.pojo.Evaluate;
 import com.three.web2.pojo.Login;
@@ -36,7 +37,9 @@ import com.three.web2.pojo.Student;
 import com.three.web2.pojo.Teacher;
 import com.three.web2.pojo.XuanKe;
 import com.three.web2.repository.AdminRepository;
+import com.three.web2.repository.ClassCourseRepository;
 import com.three.web2.repository.ClassRepository;
+import com.three.web2.repository.CourseRepository;
 import com.three.web2.repository.DepartmentRepository;
 import com.three.web2.repository.EvaluateRepository;
 import com.three.web2.repository.MajorRepository;
@@ -95,6 +98,12 @@ public class AdminController2 {
 	
 	@Autowired
 	XuanKeRepository xuanKeRepository;
+	
+	@Autowired
+	CourseRepository courseRepository;
+	
+	@Autowired
+	ClassCourseRepository classCourseRepository;
 	
 	@Autowired
 	JwtUtil jwtUtil;
@@ -253,7 +262,6 @@ public class AdminController2 {
 	public List<Teacher>teacherBydep(@RequestParam String depId){
 		return teacherRepository.findByDepId(depId);
 	}
-	
 	/**
 	 * 添加公告的方法
 	 * @param notice
@@ -336,10 +344,6 @@ public class AdminController2 {
 		}
 		return teacherRepository.findById(id).get();
 	}
-	
-	
-	
-	
 	/**
 	 * 添加学期
 	 * @param semester
@@ -358,7 +362,22 @@ public class AdminController2 {
 	public Score savescore(@RequestBody Score score) {
 		return scoreRepository.save(score);
 	}
-	
+	/**
+	 * 查询所有班级
+	 * @return
+	 */
+	@GetMapping("/classes")
+	public List<Classes> clalist(){
+		return clarepository.findAll();
+	}
+	/**
+	 * 查询所有课程
+	 * @return
+	 */
+	@GetMapping("/course")
+	public List<Course>coulist(){
+		return courseRepository.findAll();
+	}
 	@GetMapping("/admin")
 	public Admin Load(@RequestHeader(name = "token") String token) {
 		String id=jwtUtil.gettoken(token);

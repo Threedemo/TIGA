@@ -79,9 +79,8 @@
         <h1></h1>
         <div id="app" class="container-fluid">
             <div class="jumbotron">
-                <h1 class="display-3">教务管理页面</h1>
+                <h1 class="display-3">添加教师</h1>
                 <h2>{{tian.date}}--{{tian.week}}</h2>
-                <h2 class="lead">欢迎您 {{info.admName}}</h2>
                 <p>{{tian.city}}--{{tian.wea}}--{{tian.air_level}}--{{tian.tem}}℃</p>
 
             </div>
@@ -98,21 +97,58 @@
                     </div>
                 </div>
 
+
                 <div class="col-lg-9" id="card_title">
-                    <h1> <span class="badge badge-primary"> 功能</span></h1>
-                    <div id="gong" class="card" style=" height: 450px;">
-                        <ul style="margin-top: 5%;" class="row">
-                            <li class="lg-2">
-                                <a href="/admin/toaddstudents" class="btn btn-primary">添加学生</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/toaddteachers" class="btn btn-primary">添加教师</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/toshowstudent" class="btn btn-primary">查询学生基本信息</a>
-                            </li>
-                        </ul>
+                    <div class="form-group">
+                        <label for="loginName">职工号</label>
+                        <input id="loginName" v-model="teacher.loginName" class="form-control" type="text" name="loginName">
                     </div>
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input id="name" v-model="teacher.teaName" class="form-control" type="text" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginName lg-3">性别</label>
+                        <div class="row">
+                            &nbsp;<input type="radio" name="sex" v-model="teacher.teaSex" id="sex1"> &nbsp;
+                            <label for="sex1">男</label>&nbsp;
+                            <input type="radio" name="sex" v-model="teacher.teaSex" id="sex2">&nbsp;
+                            <label for="sex2">女</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">年龄</label>
+                        <input id="age" v-model="teacher.teaAge" class="form-control" type="number" name="age">
+                    </div>
+                    <div class="form-group">
+                        <label for="teaPhone">联系电话</label>
+                        <input id="teaPhone" v-model="teacher.teaPhone" class="form-control" type="number" name="teaPhone">
+                    </div>
+                    <div class="form-group">
+                        <label for="teaIdNum">身份证号码</label>
+                        <input id="teaIdNum" v-model="teacher.teaIdNum" class="form-control" type="number" name="teaIdNum">
+                    </div>
+                    <div class="form-group">
+                        <label for="teaNation">民族</label>
+                        <input id="teaNation" v-model="teacher.teaNation" class="form-control" type="text" name="teaNation">
+                    </div>
+                    <div class="form-group">
+                        <label for="teaDate">入职时间</label>
+                        <input id="teaDate" v-model="teacher.teaDate" class="form-control" type="date" name="teaDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="stuPhone">所授课程</label>
+                        <select v-model="teacher.courseId.courseId">
+                            <option v-for="(item,index) in coulist" :key="index"  :value="item.courseName">{{item.courseName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="stuStart">所属院系</label>
+                        <select v-model="teacher.depId.depId">
+                            <option v-for="(item,index) in deplist" :key="index"  :value="item.depName">{{item.depName}}</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" @click="addtea">添加</button>
                 </div>
             </div>
         </div>
@@ -132,16 +168,32 @@
                         air_level: "",
                         tem: ""
                     },
-                    info: {}
+                    deplist: [],
+                    coulist: [],
+                    info: {},
+                    teacher: {
+                        loginName: "",
+                        teaName: "",
+                        teaSex: "",
+                        teaAge: "",
+                        teaPhone: "",
+                        teaIdNum: "",
+                        teaNation: "",
+                        teaDate: "",
+                        courseId: {
+                            courseId: ""
+                        },
+                        depId: {
+                            depId: ""
+                        }
+                    }
                 },
                 mounted() {
-                    var req = new XMLHttpRequest();
-                    req.open('GET', document.location, false);
-                    req.send(null);
-                    var token = req.getResponseHeader("token");
-                    sessionStorage.setItem("token", token);
+
                     console.log(sessionStorage.getItem("token"));
                     this.useinfo();
+                    this.getcou();
+                    this.getdep();
                 },
                 methods: {
                     tianqi: function() {
@@ -169,6 +221,33 @@
                             .then(res => {
                                 this.info = res.data;
                                 this.pic = res.data.admName.slice(0, 1);
+                            })
+                            .catch(err => {
+                                console.error(err);
+                            })
+                    },
+                    addtea() {
+                        axios.post("/admin/teacher", this.teacher)
+                            .then(res => {
+                                alert("添加成功");
+                            })
+                            .catch(err => {
+                                alert("添加失败");
+                            })
+                    },
+                    getcou() {
+                        axios.get("/admin/course")
+                            .then(res => {
+                                this.coulist = res.data;
+                            })
+                            .catch(err => {
+                                console.error(err);
+                            })
+                    },
+                    getdep() {
+                        axios.get("/admin/department")
+                            .then(res => {
+                                this.deplist = res.data;
                             })
                             .catch(err => {
                                 console.error(err);

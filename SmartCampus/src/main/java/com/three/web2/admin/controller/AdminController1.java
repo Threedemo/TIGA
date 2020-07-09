@@ -1,6 +1,5 @@
 package com.three.web2.admin.controller;
 
-import java.net.http.HttpResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,12 +22,31 @@ public class AdminController1 {
 	public String adc() {
 		return "index.html";
 	}
+	/**
+	 * 添加学生页面
+	 * @return
+	 */
+	@GetMapping("/admin/toaddstudents")
+	public String toaddclacou() {
+		return "addstudent.html";
+	}
+	/**
+	 * 添加教师页面
+	 * @return
+	 */
+	@GetMapping("/admin/toaddteachers")
+	public String toaddteacher() {
+		return "addteacher.html";
+	}
 	
+	@GetMapping("/admin/toshowstudent")
+	public String toshowstudent() {
+		return "showstudentById.html";
+	}
 	@GetMapping("/success")
 	public String ad() {
 		return "show.html";
 	}
-	
 	@GetMapping("/err")
 	public String error() {
 		return "erro.html";

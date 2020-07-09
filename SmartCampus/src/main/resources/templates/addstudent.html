@@ -79,9 +79,8 @@
         <h1></h1>
         <div id="app" class="container-fluid">
             <div class="jumbotron">
-                <h1 class="display-3">教务管理页面</h1>
+                <h1 class="display-3">添加学生</h1>
                 <h2>{{tian.date}}--{{tian.week}}</h2>
-                <h2 class="lead">欢迎您 {{info.admName}}</h2>
                 <p>{{tian.city}}--{{tian.wea}}--{{tian.air_level}}--{{tian.tem}}℃</p>
 
             </div>
@@ -98,21 +97,72 @@
                     </div>
                 </div>
 
+
                 <div class="col-lg-9" id="card_title">
-                    <h1> <span class="badge badge-primary"> 功能</span></h1>
-                    <div id="gong" class="card" style=" height: 450px;">
-                        <ul style="margin-top: 5%;" class="row">
-                            <li class="lg-2">
-                                <a href="/admin/toaddstudents" class="btn btn-primary">添加学生</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/toaddteachers" class="btn btn-primary">添加教师</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/toshowstudent" class="btn btn-primary">查询学生基本信息</a>
-                            </li>
-                        </ul>
+                    <form method="POST" enctype="multipart/form-data" action="/admin/addstudents">
+                        <table>
+                            <tr>
+                                <td>通过Excel批量添加学生</td>
+                                <td><input type="file" name="file" /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input class="btn btn-primary" type="submit" value="添加" /></td>
+                            </tr>
+                        </table>
+                    </form>
+                    <div class="form-group">
+                        <label for="loginName">学号</label>
+                        <input id="loginName" v-model="stu.loginName" class="form-control" type="text" name="loginName">
                     </div>
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input id="name" v-model="stu.stuName" class="form-control" type="text" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginName lg-3">性别</label>
+                        <div class="row">
+                            &nbsp;<input type="radio" v-model="stu.stuSex" value="男" name="sex" id="sex1"> &nbsp;
+                            <label for="sex1">男</label>&nbsp;
+                            <input type="radio" v-model="stu.stuSex" value="女" name="sex" id="sex2">&nbsp;
+                            <label for="sex2">女</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">年龄</label>
+                        <input id="age" v-model="stu.stuAge" class="form-control" type="number" name="age">
+                    </div>
+                    <div class="form-group">
+                        <label for="stuIdNum">身份证号码</label>
+                        <input id="stuIdNum" v-model="stu.stuIdNum" class="form-control" type="number" name="stuIdNum">
+                    </div>
+                    <div class="form-group">
+                        <label for="stuNation">民族</label>
+                        <input id="stuNation" v-model="stu.stuNation" class="form-control" type="text" name="stuNation">
+                    </div>
+                    <div class="form-group">
+                        <label for="stuAddress">家庭住址</label>
+                        <input id="stuAddress" v-model="stu.stuAddress" class="form-control" type="text" name="stuAddress">
+                    </div>
+                    <div class="form-group">
+                        <label for="stuPhone">联系电话</label>
+                        <input id="stuPhone" v-model="stu.stuPhone" class="form-control" type="number" name="stuPhone">
+                    </div>
+                    <div class="form-group">
+                        <label for="stuStart">入学时间</label>
+                        <input id="stuStart" v-model="stu.stuStart" class="form-control" type="date" name="stuStart">
+                    </div>
+                    <div class="form-group">
+                        <label for="stuStop">毕业时间</label>
+                        <input id="stuStop" v-model="stu.stuStop" class="form-control" type="date" name="stuStop">
+                    </div>
+                    <div class="form-group">
+                        <label for="stuStop">班级</label>
+                        <select v-model="stu.claId.claId">
+                            <option v-for="(item,index) in clalist" :key="index"  :value="item.claName">{{item.claName}}</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" @click="addstu">添加</button>
                 </div>
             </div>
         </div>
@@ -132,16 +182,30 @@
                         air_level: "",
                         tem: ""
                     },
+                    clalist: [],
+                    cla: {},
+                    stu: {
+                        loginName: "",
+                        stuName: "",
+                        stuSex: "",
+                        stuAge: "",
+                        stuIdNum: "",
+                        stuNation: "",
+                        stuAddress: "",
+                        stuPhone: "",
+                        stuStart: "",
+                        stuStop: "",
+                        claId: {
+                            claId: ""
+                        }
+                    },
                     info: {}
                 },
                 mounted() {
-                    var req = new XMLHttpRequest();
-                    req.open('GET', document.location, false);
-                    req.send(null);
-                    var token = req.getResponseHeader("token");
-                    sessionStorage.setItem("token", token);
+
                     console.log(sessionStorage.getItem("token"));
                     this.useinfo();
+                    this.getClasser();
                 },
                 methods: {
                     tianqi: function() {
@@ -172,6 +236,24 @@
                             })
                             .catch(err => {
                                 console.error(err);
+                            })
+                    },
+                    getClasser() {
+                        axios.get("/admin/classes")
+                            .then(res => {
+                                this.clalist = res.data;
+                            })
+                            .catch(err => {
+                                console.error(err);
+                            })
+                    },
+                    addstu() {
+                        axios.post("/admin/student", this.stu)
+                            .then(res => {
+                                alert("添加成功");
+                            })
+                            .catch(err => {
+                                alert("添加失败");
                             })
                     }
 
