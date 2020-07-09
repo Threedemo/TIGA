@@ -11,4 +11,10 @@ public class teaController {
 	public String teamsg() {
 		return "stumsg.html";
 	}
+	
+	
+	@GetMapping("/evaluate")
+	public String evaluate() {
+		return "evaluate.html";
+	}
 }
