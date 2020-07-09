@@ -11,15 +11,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.three.web2.jwt.JwtUtil;
 import com.three.web2.pojo.ClassCourse;
 import com.three.web2.pojo.ClassHours;
 import com.three.web2.pojo.ClassRoom;
 import com.three.web2.pojo.Classes;
 import com.three.web2.pojo.Course;
+import com.three.web2.pojo.Evaluate;
 import com.three.web2.pojo.Score;
 import com.three.web2.pojo.Semester;
 import com.three.web2.pojo.Student;
@@ -31,6 +34,7 @@ import com.three.web2.repository.ClassCourseRepository;
 import com.three.web2.repository.ClassHoursRepository;
 import com.three.web2.repository.ClassRoomRepository;
 import com.three.web2.repository.CourseRepository;
+import com.three.web2.repository.EvaluateRepository;
 import com.three.web2.repository.ScoreRepository;
 import com.three.web2.repository.SemesterRepository;
 import com.three.web2.repository.StudentRepository;
@@ -75,6 +79,12 @@ public class TeaherController {
 
 	@Autowired
 	SemesterRepository semesterRepository;
+	
+	@Autowired
+	EvaluateRepository evaluateRepository;
+	
+	@Autowired
+	JwtUtil jwtUtil;
 
 	/**
 	 * 添加教师信息 后续放到教务Controller
@@ -114,8 +124,9 @@ public class TeaherController {
 	 * @param teaId
 	 * @return
 	 */
-	@GetMapping("/tea/{teaId}")
-	public List<TeaClass> findteaClass(@PathVariable String teaId) {
+	@GetMapping("/tea")
+	public List<TeaClass> findteaClass(@RequestHeader(name = "token") String token) {
+		String teaId=jwtUtil.gettoken(token);
 		return teaClassRepository.all(teaId);
 	}
 
@@ -201,8 +212,9 @@ public class TeaherController {
 	 * @param teaId
 	 * @return
 	 */
-	@GetMapping("/teacou/{teaId}")
-	public List<ClassCourse> courseteaAll(@PathVariable String teaId) {
+	@GetMapping("/teacou")
+	public List<ClassCourse> courseteaAll(@RequestHeader(name = "token") String token) {
+String teaId=jwtUtil.gettoken(token);		
 		return classCourseRepository.classtea(teaId);
 	}
 
@@ -264,10 +276,20 @@ public class TeaherController {
 	/**
 	 * 查询教师基本信息 邵琪
 	 */
-	@GetMapping
-	public List<Teacher> FindAll() {
-		return tr.findAll();
+//	@GetMapping
+//	public List<Teacher> FindAll() {
+//		return tr.findAll();
+//	}
+	
+	@GetMapping("/teaAll")
+	public Teacher FindTea(@RequestHeader(name="token") String token) {
+		String loginName=jwtUtil.gettoken(token);
+		System.out.println(loginName);
+		return tr.findById(loginName).get();
+		
 	}
+	
+	
 
 	/**
 	 * 查询某个班级学生信息
@@ -337,5 +359,19 @@ public class TeaherController {
 		return scorelist ;
 
 	}
+	
+	 /**
+	   * wmm
+	   * 教师查看教评
+	   * @param teaId
+	   * @return
+	   */
+	  @GetMapping("/teaEva")
+	  public List<Evaluate> findTeaEvaluateById(@RequestHeader(name = "token") String token){
+	    String teaId=jwtUtil.gettoken(token);
+	    return evaluateRepository.teaEvaluatae(teaId);
+//	    return evaluateRepository.findById(teaId);
+	    
+	  }
 
 }

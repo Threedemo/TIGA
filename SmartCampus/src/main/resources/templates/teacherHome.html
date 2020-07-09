@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <title>教师界面</title>
@@ -9,8 +9,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="js/vue.js"></script>
-    <script src="js/axios.js"></script>
+    <script th:src="@{/js/vue.js}" type="text/javascript"></script>
+    <script th:src="@{/js/axios.js}" type="text/javascript"></script>
+    <script th:src="@{/js/fairyDustCursor.js}" type="text/javascript"></script>
 
 </head>
 <style>
@@ -84,7 +85,7 @@
         <div class="jumbotron">
             <h1 class="display-3">教师管理页面</h1>
             <h2>{{tian.date}}--{{tian.week}}</h2>
-            <h2 class="lead">欢迎您 xx老师</h2>
+            <h2 class="lead">欢迎您 {{teacher.teaName}} 老师</h2>
             <p>{{tian.city}}--{{tian.wea}}--{{tian.air_level}}--{{tian.tem}}℃</p>
 
         </div>
@@ -100,12 +101,13 @@
             <div class="col-lg-3" id="card_img">
                 <h1> <span class="badge badge-primary"> 老师信息</span></h1>
                 <div class="card" style=" height: 450px;">
-                    <div id="hard">邵</div>
+                    <div id="hard">{{name}}</div>
                     <div class="card-body">
-                        <h5 class="card-title">姓名：邵琪</h5>
-                        <h5 class="card-title">职工号：邵琪</h5>
-                        <h5 class="card-title">所属院系：</h5>
-                        <h5 class="card-title">姓名：邵琪</h5>
+                        <h5 class="card-title">姓名：{{teacher.teaName}}</h5>
+                        <h5 class="card-title">职工号：{{teacher.loginName}}</h5>
+                        <h5 class="card-title">所属院系：{{teacher.depId.depName}}</h5>
+                        <h5 class="card-title">入职时间：{{teacher.teaDate}}</h5>
+                        <h5 class="card-title">授课课程：{{teacher.courseId.courseName}}</h5>
                         <a href="#" class="btn btn-primary">详情信息</a>
                     </div>
                 </div>
@@ -116,7 +118,9 @@
                 <div id="gong" class="card" style=" height: 450px;">
                     <ul>
                         <li>
-                            <div>任课班级信息</div>
+                            <div>任课班级信息
+                                <a href="stumsg.html">任课班级信息</a>
+                            </div>
                         </li>
                         <li>
                             <div>修改成绩</div>
@@ -230,13 +234,14 @@
 
 
     </div>
-
     <script>
         new Vue({
             el: '#app',
             data: {
                 time: new Date(),
                 timer: "",
+                name: "",
+                teacher: {},
                 tian: {
                     city: "",
                     date: "",
@@ -246,7 +251,90 @@
                     tem: ""
                 }
             },
+            mounted() {
+                var req = new XMLHttpRequest();
+                req.open('GET', document.location, false);
+                req.send(null);
+                var token = req.getResponseHeader("token");
+                sessionStorage.setItem("token", token);
+                console.log(sessionStorage.getItem("token"));
+
+                this.useinfo()
+                this.teaClass()
+                this.teaCourse()
+                this.teaEvaluate()
+            },
             methods: {
+                teaClass() {
+                    axios({
+                            method: 'get',
+                            url: '/teacher/tea',
+                            headers: {
+                                "token": sessionStorage.getItem("token")
+                            }
+                        })
+                        .then(res => {
+                            console.log(res);
+
+
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
+                },
+                useinfo() {
+                    axios({
+                            method: 'get',
+                            url: '/teacher/teaAll',
+                            headers: {
+                                "token": sessionStorage.getItem("token")
+                            }
+                        })
+                        .then(res => {
+                            this.teacher = res.data;
+                            this.name = res.data.teaName.slice(0, 1);
+                            console.log(this.teacher);
+
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
+                },
+                teaCourse() {
+                    axios({
+                            method: 'get',
+                            url: '/teacher/teacou',
+                            headers: {
+                                "token": sessionStorage.getItem("token")
+                            }
+                        })
+                        .then(res => {
+                            console.log(res);
+
+
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
+                },
+                teaEvaluate() {
+                    axios({
+                            method: 'get',
+                            url: '/teacher/teaEva',
+                            headers: {
+                                "token": sessionStorage.getItem("token")
+                            }
+                        })
+                        .then(res => {
+                            console.log(res);
+
+
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
+                },
+
                 tianqi: function() {
                     axios.get("https://tianqiapi.com/api?version=v6&appid=95422873&appsecret=tP2m5YyV")
                         .then(res => {
@@ -282,6 +370,7 @@
             }
         })
     </script>
+
     <script src="js/fairyDustCursor.js" type="text/javascript"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

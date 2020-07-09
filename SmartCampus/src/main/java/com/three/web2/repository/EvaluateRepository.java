@@ -22,7 +22,7 @@ public interface EvaluateRepository extends MongoRepository<Evaluate, String> {
 	 * @param teaId
 	 * @return
 	 */
-	@Query(value = "{'teaId': ?0}")
-	List<Evaluate> all(String teaId);
+	@Query(value = "{'teald': ?0}")
+	List<Evaluate> teaEvaluatae(String teaId);
 
 }
