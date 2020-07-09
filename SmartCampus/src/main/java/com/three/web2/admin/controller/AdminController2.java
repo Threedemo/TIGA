@@ -337,24 +337,7 @@ public class AdminController2 {
 		return teacherRepository.findById(id).get();
 	}
 	
-	@GetMapping("/teacher/getTotal")
-	public Map<String, Object> getTotal() {
-		Map<String,Object> map=new HashMap<String, Object>();
-		long c=noticeRepository.count();
-		map.put("c", c);
-		
-		//n 当前页  c总页数
-		long n=c/5;
-		if(c/5==0) {
-			n=1;
-		}else if(c%5!=0&&c/5!=0) {
-			n=c/5+1;
-		}else if(c/5!=0&&c%5==0) {
-			n=c/5;
-		}
-		map.put("n", n);
-		return map;
-	}
+	
 	
 	
 	/**

@@ -81,29 +81,19 @@
             <div class="jumbotron">
                 <h1 class="display-3">教师管理页面</h1>
                 <h2>{{tian.date}}--{{tian.week}}</h2>
-                <h2 class="lead">欢迎您 xx老师</h2>
+                <h2 class="lead">欢迎您 {{info.admName}}老师</h2>
                 <p>{{tian.city}}--{{tian.wea}}--{{tian.air_level}}--{{tian.tem}}℃</p>
 
             </div>
-            <nav class="navbar navbar-light bg-light">
-                <a class="navbar-brand">老师</a>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </nav>
-
             <div class="row">
                 <div class="col-lg-3" id="card_img">
                     <h1> <span class="badge badge-primary"> 老师信息</span></h1>
                     <div class="card" style=" height: 450px;">
-                        <div id="hard">邵</div>
+                        <div id="hard">{{pic}}</div>
                         <div class="card-body">
-                            <h5 class="card-title">姓名：邵琪</h5>
-                            <h5 class="card-title">职工号：邵琪</h5>
-                            <h5 class="card-title">所属院系：</h5>
-                            <h5 class="card-title">姓名：邵琪</h5>
-                            <a href="#" class="btn btn-primary">详情信息</a>
+                            <h5 class="card-title">姓名：{{info.admName}}</h5>
+                            <h5 class="card-title">职工号：{{info.loginName}}</h5>
+                            <h5 class="card-title">性别：{{info.admSex}}</h5>
                         </div>
                     </div>
                 </div>
@@ -112,112 +102,8 @@
                     <h1> <span class="badge badge-primary"> 功能</span></h1>
                     <div id="gong" class="card" style=" height: 450px;">
                         <ul>
-                            <li>
-                                <div>任课班级信息</div>
-                            </li>
-                            <li>
-                                <div>修改成绩</div>
-                            </li>
-                            <li>
-                                <div>添加成绩</div>
-                            </li>
-                            <li>
-                                <div>修改密码</div>
-                            </li>
-                            <li>
-                                <div>个人详细信息</div>
-                            </li>
-                            <li>
-                                <div>查看学生对自己的评价</div>
-                            </li>
-                            <li>
-                                <div>查看任课程成绩</div>
-                            </li>
-
+                            <li> <button>查询学生</button></li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-3" id="card_img">
-                    <h1> <span class="badge badge-primary"> 老师信息</span></h1>
-                    <div class="card" style="width:260px; height: 400px;">
-
-                    </div>
-                </div>
-                <div class="col-xs-1">
-
-                </div>
-                <div class="col-xs-8" id="card_title">
-                    <h1> <span class="badge badge-primary"> 课表</span></h1>
-                    <div id="table_k" class="card" style="width:1200px; height: 400px;">
-
-                        <nav id="fy" aria-label="...">
-                            <ul class="pagination">
-                                <li class="page-item disabled">
-                                    <span class="page-link">上一周</span>
-                                </li>
-                                <li class="page-item active" aria-current="page">
-                                    <span class="page-link">
-                              1
-                              <span class="sr-only">(current)</span>
-                                    </span>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link">下一周</a>
-                                </li>
-                            </ul>
-                        </nav>
-
-                        <div id="table_ke">
-                            <table id="table_kebiao" class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">星期一</th>
-                                        <th scope="col">星期二</th>
-                                        <th scope="col">星期三</th>
-                                        <th scope="col">星期四</th>
-                                        <th scope="col">星期五</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">上午1、2节</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>@mdo</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">上午3、4节</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">下午1、2节</th>
-                                        <td>Larry the Bird</td>
-                                        <td>@twitter</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">下午3、4节</th>
-                                        <td>Larry the Bird</td>
-                                        <td>@twitter</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -227,6 +113,7 @@
             new Vue({
                 el: '#app',
                 data: {
+                    pic: undefined,
                     time: new Date(),
                     timer: "",
                     tian: {
@@ -236,7 +123,8 @@
                         wea: "",
                         air_level: "",
                         tem: ""
-                    }
+                    },
+                    info: {}
                 },
                 mounted() {
                     var req = new XMLHttpRequest();
@@ -244,7 +132,8 @@
                     req.send(null);
                     var token = req.getResponseHeader("token");
                     sessionStorage.setItem("token", token);
-                    console.log(sessionStorage.getItem("token"));
+                    // console.log(sessionStorage.getItem("token"));
+                    this.useinfo();
                 },
                 methods: {
                     tianqi: function() {
@@ -256,8 +145,22 @@
                                 this.tian.air_level = res.data.air_level
                                 this.tian.tem = res.data.tem
                                 this.tian.wea = res.data.wea
-                                console.log(this.tian)
-
+                            })
+                            .catch(err => {
+                                console.error(err);
+                            })
+                    },
+                    useinfo() {
+                        axios({
+                                method: 'get',
+                                url: '/admin/admin',
+                                headers: {
+                                    "token": sessionStorage.getItem("token")
+                                }
+                            })
+                            .then(res => {
+                                this.info = res.data;
+                                this.pic = res.data.admName.slice(0, 1);
                             })
                             .catch(err => {
                                 console.error(err);
@@ -270,10 +173,7 @@
                     this.timer = setInterval(function() {
                             _this.time = new Date();
                         }, 1000),
-
-                        this.tianqi()
-
-
+                        this.tianqi();
                 },
                 beforeDestory() {
                     if (this.timer) {
