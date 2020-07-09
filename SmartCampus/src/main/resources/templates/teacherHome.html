@@ -126,7 +126,7 @@
                             <div>修改成绩</div>
                         </li>
                         <li>
-                            <div>添加成绩</div>
+                            <div><a href="/teaScore">添加成績</a></div>
                         </li>
                         <li>
                             <div>修改密码</div>
@@ -238,6 +238,7 @@
         new Vue({
             el: '#app',
             data: {
+                teaCou: [],
                 time: new Date(),
                 timer: "",
                 name: "",
@@ -260,28 +261,11 @@
                 console.log(sessionStorage.getItem("token"));
 
                 this.useinfo()
-                this.teaClass()
                 this.teaCourse()
                 this.teaEvaluate()
             },
             methods: {
-                teaClass() {
-                    axios({
-                            method: 'get',
-                            url: '/teacher/tea',
-                            headers: {
-                                "token": sessionStorage.getItem("token")
-                            }
-                        })
-                        .then(res => {
-                            console.log(res);
 
-
-                        })
-                        .catch(err => {
-                            console.error(err);
-                        })
-                },
                 useinfo() {
                     axios({
                             method: 'get',
@@ -309,7 +293,9 @@
                             }
                         })
                         .then(res => {
+                            this.teaCou = res.data;
                             console.log(res);
+
 
 
                         })

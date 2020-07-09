@@ -17,4 +17,10 @@ public class teaController {
 	public String evaluate() {
 		return "evaluate.html";
 	}
+	
+	
+	@GetMapping("/teaScore")
+	public String teaScore() {
+		return"teaScore.html";
+	}
 }

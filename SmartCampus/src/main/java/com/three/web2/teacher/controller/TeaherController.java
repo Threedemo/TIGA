@@ -228,6 +228,12 @@ String teaId=jwtUtil.gettoken(token);
 //	public Teacher teachercourse(@PathVariable String loginName) {
 //		return tr.teacourse(loginName);
 //	}
+	
+	
+	@GetMapping("/stuClassScore")
+	public List<Score> stuClaScore(@RequestParam(name = "CId") String ClaId, @RequestParam(name = "SId", defaultValue = "1") String semesterId){
+		return  scoreRepository.findByClaId(ClaId, semesterId);
+	}
 
 	/**
 	 * 添加成绩
@@ -297,8 +303,8 @@ String teaId=jwtUtil.gettoken(token);
 	 * @param claId
 	 * @return
 	 */
-	@GetMapping("/stu/{claId}")
-	public List<Student> findAll(@PathVariable String claId) {
+	@GetMapping("/stuxin")
+	public List<Student> findAll(@RequestParam(name = "Cid") String claId) {
 		return studentRepository.all(claId);
 	}
 
