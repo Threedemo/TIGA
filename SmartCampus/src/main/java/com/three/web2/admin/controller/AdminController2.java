@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.graalvm.compiler.lir.aarch64.AArch64Move.LoadAddressOp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.three.web2.LoginService;
 import com.three.web2.jwt.JwtUtil;
+import com.three.web2.pojo.Admin;
 import com.three.web2.pojo.Classes;
 import com.three.web2.pojo.Department;
 import com.three.web2.pojo.Evaluate;
@@ -375,6 +377,10 @@ public class AdminController2 {
 		return scoreRepository.save(score);
 	}
 	
+	@GetMapping("/admin")
+	public Admin Load(@RequestHeader String id) {
+		return adminRepository.findById(id).get();
+	}
 	@GetMapping("/gettoken")
 	public String b(@RequestHeader(name = "token") String token) {
 		String loginName=jwtUtil.gettoken(token);
