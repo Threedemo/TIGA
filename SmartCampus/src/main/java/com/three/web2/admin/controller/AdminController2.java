@@ -197,10 +197,10 @@ public class AdminController2 {
 	 * @param claId
 	 * @return
 	 */
-	@GetMapping("/student")
-	public List<Student> stulist(@RequestBody Classes classes){
+	@GetMapping("/studentbycla/{claId}")
+	public List<Student> stulist(@PathVariable String claId){
 		
-		return sturepository.findByClaId(classes);
+		return sturepository.findByClaId(claId);
 	}
 	/**
 	 * 通过学号查询一个学生基本信息
@@ -216,10 +216,18 @@ public class AdminController2 {
 	 * @param claId
 	 * @return
 	 */
+	@GetMapping("/major/{depid}")
+	public List<Major> majorlistbydep(@PathVariable String depid){
+		return majorrepository.findByDepId(depid);
+	}
+	/**
+	 * 通过院系的选择显示该院系的专业
+	 * @param claId
+	 * @return
+	 */
 	@GetMapping("/major")
-	public List<Major> majorlist(@RequestBody Department department){
-		
-		return majorrepository.findByDepId(department);
+	public List<Major> majorlist(){
+		return majorrepository.findAll();
 	}
 	
 	/**
@@ -353,6 +361,11 @@ public class AdminController2 {
 	public Semester saveseme(@RequestBody Semester semester) {
 		return semesterRepository.save(semester);
 	}
+	
+	@GetMapping("/semester")
+	public List<Semester>semelist(){
+		return semesterRepository.findAll();
+	}
 	/**
 	 * 添加一条学生成绩
 	 * @param score
@@ -369,6 +382,14 @@ public class AdminController2 {
 	@GetMapping("/classes")
 	public List<Classes> clalist(){
 		return clarepository.findAll();
+	}
+	/**
+	 * 查询一个专业的班级
+	 * @return
+	 */
+	@GetMapping("/classesbm/{mid}")
+	public List<Classes> clalist1(@PathVariable String mid){
+		return clarepository.findByMId(mid);
 	}
 	/**
 	 * 查询所有课程

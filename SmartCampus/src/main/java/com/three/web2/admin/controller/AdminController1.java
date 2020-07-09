@@ -43,6 +43,19 @@ public class AdminController1 {
 	public String toshowstudent() {
 		return "showstudentById.html";
 	}
+	
+	@GetMapping("/admin/showstusco")
+	public String toshowstusco() {
+		return "showstusco.html";
+	}
+	@GetMapping("/admin/showstuinfo")
+	public String toshowstuinfo() {
+		return "showstuinfo.html";
+	}
+	@GetMapping("/admin/showmessage")
+	public String toshowmessage() {
+		return "showmessage.html";
+	}
 	@GetMapping("/success")
 	public String ad() {
 		return "show.html";

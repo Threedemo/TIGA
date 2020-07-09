@@ -25,7 +25,8 @@ public interface StudentRepository extends MongoRepository<Student, String> {
 	 * @param claId
 	 * @return
 	 */
-	List<Student> findByClaId(Classes claId);
+	@Query(value = "{'claId': ?0}")
+	List<Student> findByClaId(String claId);
 	/**
 	 * 匹配信息
 	 * @param stuId

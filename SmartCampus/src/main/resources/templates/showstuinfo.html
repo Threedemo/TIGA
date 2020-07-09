@@ -80,9 +80,7 @@
         <h1></h1>
         <div id="app" class="container-fluid">
             <div class="jumbotron">
-                <h1 class="display-3">教务管理页面</h1>
                 <h2>{{tian.date}}--{{tian.week}}</h2>
-                <h2 class="lead">欢迎您 {{info.admName}}</h2>
                 <p>{{tian.city}}--{{tian.wea}}--{{tian.air_level}}--{{tian.tem}}℃</p>
 
             </div>
@@ -99,34 +97,65 @@
                     </div>
                 </div>
 
-                <div class="col-lg-9" id="card_title">
-                    <h1> <span class="badge badge-primary"> 功能</span></h1>
-                    <div id="gong" class="card" style=" height: 450px;">
-                        <ul style="margin-top: 5%;" class="row">
-                            <li class="lg-2">
-                                <a href="/admin/toaddstudents" class="btn btn-primary">添加学生</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/toaddteachers" class="btn btn-primary">添加教师</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/toshowstudent" class="btn btn-primary">查询学生基本信息</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/showstusco" class="btn btn-primary">查询成绩</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/showstuinfo" class="btn btn-primary">查询班级学生基本信息</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/showmessage" class="btn btn-primary">查看意见箱</a>
-                            </li>
-                        </ul>
+                <div class="col-lg-9 row" id="card_title">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>专业</label>
+                            <select @change="getClasser" v-model="mar" style="width: 80%;">
+                                <option v-for="(item,index) in marlist" :key="index" :value="item.mid">{{item.mName}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>班级</label>
+                            <select v-model="cla" style="width: 80%;">
+                                <option v-for="(item,index) in clalist" :value="item.claId">{{item.claName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <button type="button" @click="getstuinfo" class="btn btn-primary">查询</button>
+                    </div>
+
+                    <div class="row">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>学号</th>
+                                    <th>姓名</th>
+                                    <th>性别</th>
+                                    <th>年龄</th>
+                                    <th>身份证号码</th>
+                                    <th>民族</th>
+                                    <th>家庭住址</th>
+                                    <th>联系电话</th>
+                                    <th>入学时间</th>
+                                    <th>预计毕业时间</th>
+                                    <th>所属班级</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item,index) in stuinfo">
+                                    <th>{{item.loginName}}</th>
+                                    <th>{{item.stuName}}</th>
+                                    <th>{{item.stuSex}}</th>
+                                    <th>{{item.stuAge}}</th>
+                                    <th>{{item.stuIdNum}}</th>
+                                    <th>{{item.stuNation}}</th>
+                                    <th>{{item.stuAddress}}</th>
+                                    <th>{{item.stuPhone}}</th>
+                                    <th>{{item.stuStart}}</th>
+                                    <th>{{item.stuStop}}</th>
+                                    <th>{{item.claId.claName}}</th>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-
         <script>
             new Vue({
                 el: '#app',
@@ -142,16 +171,16 @@
                         air_level: "",
                         tem: ""
                     },
-                    info: {}
+                    info: {},
+                    stuinfo: [],
+                    mar: "",
+                    cla: "",
+                    clalist: [],
+                    marlist: []
                 },
                 mounted() {
-                    var req = new XMLHttpRequest();
-                    req.open('GET', document.location, false);
-                    req.send(null);
-                    var token = req.getResponseHeader("token");
-                    sessionStorage.setItem("token", token);
-                    console.log(sessionStorage.getItem("token"));
                     this.useinfo();
+                    this.getmar();
                 },
                 methods: {
                     tianqi: function() {
@@ -183,8 +212,34 @@
                             .catch(err => {
                                 console.error(err);
                             })
+                    },
+                    getmar() {
+                        axios.get("/admin/major")
+                            .then(res => {
+                                this.marlist = res.data;
+                            })
+                            .catch(err => {
+                                console.error(err);
+                            })
+                    },
+                    getClasser() {
+                        axios.get(`/admin/classesbm/${this.mar}`)
+                            .then(res => {
+                                this.clalist = res.data;
+                            })
+                            .catch(err => {
+                                console.error(err);
+                            })
+                    },
+                    getstuinfo() {
+                        axios.get(`/admin/studentbycla/${this.cla}`)
+                            .then(res => {
+                                this.stuinfo = res.data;
+                            })
+                            .catch(err => {
+                                console.error(err);
+                            })
                     }
-
                 },
                 created() {
                     var _this = this;

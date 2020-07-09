@@ -100,33 +100,11 @@
                 </div>
 
                 <div class="col-lg-9" id="card_title">
-                    <h1> <span class="badge badge-primary"> 功能</span></h1>
-                    <div id="gong" class="card" style=" height: 450px;">
-                        <ul style="margin-top: 5%;" class="row">
-                            <li class="lg-2">
-                                <a href="/admin/toaddstudents" class="btn btn-primary">添加学生</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/toaddteachers" class="btn btn-primary">添加教师</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/toshowstudent" class="btn btn-primary">查询学生基本信息</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/showstusco" class="btn btn-primary">查询成绩</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/showstuinfo" class="btn btn-primary">查询班级学生基本信息</a>
-                            </li>
-                            <li class="lg-2">
-                                <a href="/admin/showmessage" class="btn btn-primary">查看意见箱</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <h1> <span class="badge badge-primary"> </span></h1>
+
                 </div>
             </div>
         </div>
-
         <script>
             new Vue({
                 el: '#app',
@@ -145,12 +123,7 @@
                     info: {}
                 },
                 mounted() {
-                    var req = new XMLHttpRequest();
-                    req.open('GET', document.location, false);
-                    req.send(null);
-                    var token = req.getResponseHeader("token");
-                    sessionStorage.setItem("token", token);
-                    console.log(sessionStorage.getItem("token"));
+
                     this.useinfo();
                 },
                 methods: {

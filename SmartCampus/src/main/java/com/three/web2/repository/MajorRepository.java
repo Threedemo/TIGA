@@ -11,5 +11,5 @@ import com.three.web2.pojo.Major;
 @Repository
 public interface MajorRepository extends MongoRepository<Major, String>{
 	
-	List<Major>findByDepId(Department department);
+	List<Major>findByDepId(String depid);
 }
