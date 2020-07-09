@@ -166,6 +166,7 @@
                     req.send(null);
                     var token = req.getResponseHeader("token");
                     sessionStorage.setItem("token", token);
+                    console.log(sessionStorage.getItem("token"));
                     this.useinfo();
                 },
                 methods: {
