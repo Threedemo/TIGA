@@ -327,7 +327,7 @@ public class AdminController2 {
 	 */
 	@GetMapping("/message")
 	public List<Message>messageList(@RequestParam(name = "p",defaultValue = "1") int page){
-		return messageRepository.findAll(PageRequest.of(page-1, 10)).getContent();
+		return messageRepository.findAll(PageRequest.of(page-1, 7)).getContent();
 	}
 	/**
 	 * 添加选课表课程

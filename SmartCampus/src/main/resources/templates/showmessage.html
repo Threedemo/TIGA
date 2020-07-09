@@ -100,7 +100,26 @@
                 </div>
 
                 <div class="col-lg-9" id="card_title">
-                    <h1> <span class="badge badge-primary"> </span></h1>
+                    <h1> <span class="badge badge-primary">学校信箱 </span></h1>
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for="(item,index) in messlist">{{item.messageContent}}
+                            <span style="float: right;">{{item.messageDate}}</span></li>
+                    </ul>
+                    <br/>
+                    <ul class="pagination ml-5" style="margin-left: 40%;">
+                        <li class="page-item">
+                            <button class="page-link" @click="getmessage(p-1)" aria-label="Previous">
+                                <span aria-hidden="true">上一页</span>
+                                <span class="sr-only">上一页</span>
+                            </button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link" @click="getmessage(p+1)" aria-label="Next">
+                                <span aria-hidden="true">下一页</span>
+                                <span class="sr-only">下一页</span>
+                            </button>
+                        </li>
+                    </ul>
 
                 </div>
             </div>
@@ -120,11 +139,15 @@
                         air_level: "",
                         tem: ""
                     },
-                    info: {}
+                    info: {},
+                    messlist: [],
+                    p: 1,
+                    total: undefined
                 },
                 mounted() {
 
                     this.useinfo();
+                    this.getmessage(1);
                 },
                 methods: {
                     tianqi: function() {
@@ -152,6 +175,26 @@
                             .then(res => {
                                 this.info = res.data;
                                 this.pic = res.data.admName.slice(0, 1);
+                            })
+                            .catch(err => {
+                                console.error(err);
+                            })
+                    },
+                    getmessage(p) {
+                        if (p <= 0) {
+                            p = 1;
+                        } else if (this.total < 7) {
+                            p -= 1;
+                        }
+                        axios.get("/admin/message", {
+                                params: {
+                                    p: p
+                                }
+                            })
+                            .then(res => {
+                                this.messlist = res.data;
+                                this.total = Object.keys(res.data).length
+                                console.log(this.total);
                             })
                             .catch(err => {
                                 console.error(err);
