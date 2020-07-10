@@ -13,37 +13,476 @@
 </head>
 
 <body>
-    <div class="container" id="app">
-        <h1 @click="a">学生界面</h1>
+    <div id="app">
+        <div class="jumbotron">
+            <div>
+                <h1 class="display-4">学生管理模块</h1>
+                <h4>{{tian.date}}--{{tian.week}}</h4>
+                <p>{{this.tian.city}}--{{tian.wea}}--{{tian.air_level}}--{{tian.tem}}℃</p>
+            </div>
+            <div style="float: right;margin-top: -140px;">
+                <div style="margin-top: 5px;">
+                    <p class="lead">欢迎<span>{{student.stuName}}</span>同学登录</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">个人信息</a>
+                        <a @click="selfmotion" class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">我的选课</a>
+                        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">课程表查询</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">我的成绩</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-setps" role="tab" aria-controls="setps">修改密码</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-addxk" role="tab" aria-controls="addxk">添加选课</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-forgetmm" role="tab" aria-controls="forgetmm">忘记密码</a>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="container">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                                <table style="width: 620px;" class="table table-bordered table-warning">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 110px;">学号：</td>
+                                            <td style="width: 125px;"><span>{{student.loginName}}</span></td>
+                                            <td style="width: 110px;"><span id="Label1">学生证号：</span></td>
+                                            <td style="width: 125px;"><span></span></td>
+                                            <td rowspan="3"><img alt="照片" align="AbsMiddle" border="0" height="144" width="112"><br>
+                                                <span><b><font color="Red">建议照片大小不超过100k<br>照片像素（宽×高）为：
+                                                        144×172<br>照片格式为BMP/JPG/JPEG</font></b></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 110px;">姓名：
+                                            </td>
+                                            <td style="width: 125px;"><span>{{student.stuName}}</span></td>
+                                            <td style="width: 110px;">民族：</td>
+                                            <td style="width: 125px;"><span>{{student.stuNation}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 110px;">曾用名：</td>
+                                            <td style="width: 125px;">
+                                                <p></p>
+                                                <p><span></span></p>
+                                            </td>
+                                            <td style="width: 110px;">手机号码：</td>
+                                            <td style="width: 125px;"><span>{{student.stuPhone}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 110px;">身份证号：</td>
+                                            <td style="width: 125px;"><span>{{student.stuIdNum}}</span></td>
+                                            <td style="width: 110px;">家庭邮编：
+                                            </td>
+                                            <td style="width: 125px;"><span></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 110px;">性别：</td>
+                                            <td style="width: 125px;"><span>{{student.stuSex}}</span></td>
+                                            <td style="width: 110px;">班级
+                                            </td>
+                                            <td style="width: 125px;"><span>{{student.claId.claName}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 110px;">年龄：</td>
+                                            <td style="width: 125px;"><span>{{student.stuAge}}</span></td>
+                                            <td style="width: 110px;">入学时间
+                                            </td>
+                                            <td style="width: 125px;"><span>{{student.stuStart}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 110px;">毕业时间：</td>
+                                            <td style="width: 125px;"><span>{{student.stuStop}}</span></td>
+                                            <td style="width: 110px;">家庭住址：
+                                            </td>
+                                            <td style="width: 125px;"><span></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                                <div class="input-group">
+                                    <select class="custom-select" id="inputGroupSelect04">
+                                                      <option selected>第一学期</option>
+                                                      <option value="1">第二学期</option>
+                                                      <option value="2">第三学期</option>
+                                                      <option value="3">第四学期</option>
+                                                    </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button">搜索</button>
+                                    </div>
+                                </div>
+                                <ul class="list-group">
+                                    <li v-for="(sxk,ind) in stuxuanke" class="list-group-item list-group-item-success">{{sxk.xkId.xkName}}
+                                        <button style="float: right;" @click="delstuxk(sxk.stuXkId)" class="btn btn-outline-danger">删除</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+                                <div class="input-group">
+                                    <select v-model="classid" class="custom-select" id="inputGroupSelect04">
+                                                      <option v-for="(cla,i) in classlist" :value="cla.claId">{{cla.claName}}</option>
+                                                    </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" @click="cgv(classid)">查询</button>
+                                    </div>
+                                </div>
+                                <div v-if="viw==1">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>星期一</th>
+                                                <th>星期二</th>
+                                                <th>星期三</th>
+                                                <th>星期四</th>
+                                                <th>星期五</th>
+                                                <th>星期六</th>
+                                                <th>星期天</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td scope="row">第一节</td>
+                                                <td>{{td1}}</td>
+                                                <td>{{td5}}</td>
+                                                <td>{{td9}}</td>
+                                                <td>{{td13}}</td>
+                                                <td>{{td17}}</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row">第二节</td>
+                                                <td>{{td2}}</td>
+                                                <td>{{td6}}</td>
+                                                <td>{{td10}}</td>
+                                                <td>{{td14}}</td>
+                                                <td>{{td18}}</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row">第三节</td>
+                                                <td>{{td3}}</td>
+                                                <td>{{td7}}</td>
+                                                <td>{{td11}}</td>
+                                                <td>{{td15}}</td>
+                                                <td>{{td19}}</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row">第四节</td>
+                                                <td>{{td4}}</td>
+                                                <td>{{td8}}</td>
+                                                <td>{{td12}}</td>
+                                                <td>{{td16}}</td>
+                                                <td>{{td20}}</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list"></div>
+                            <div class="tab-pane fade" id="list-setps" role="tabpanel" aria-labelledby="list-setps-list">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">旧密码</label>
+                                        <input v-model="pwd1" type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword2">新密码</label>
+                                        <input v-model="pwd2" type="password" class="form-control" id="exampleInputPassword2" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword3">确认密码</label>
+                                        <input v-model="pwd3" type="password" class="form-control" id="exampleInputPassword3" placeholder="">
+                                    </div>
+                                    <button @click="changep(this.pwd1,this.pwd2)" class="btn btn-primary">确认</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="list-addxk" role="tabpanel" aria-labelledby="list-addxk-list">
+                                <div class="input-group">
+                                    <select class="custom-select" id="inputGroupSelect04">
+                                                              <option selected>第一学期</option>
+                                                              <option value="1">第二学期</option>
+                                                              <option value="2">第三学期</option>
+                                                              <option value="3">第四学期</option>
+                                                            </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button">搜索</button>
+                                    </div>
+                                </div>
+                                <ul class="list-group">
+                                    <li name="xklis" v-for="(xk,id) in xuankelist" :value="xk.xkId" class="list-group-item list-group-item-primary">{{xk.xkName}}
+                                        <button name="b1" @click="xkSta($event,xk.xkId)" style="float: right;" class="btn btn-success">添加</button>
+                                        <button disabled name="b2" style="float: right;display: none;" class="btn btn-secondary ">已选</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane fade" id="list-forgetmm" role="tabpanel" aria-labelledby="list-forgetmm-list">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">身份证号</label>
+                                        <input v-model="lgna" type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword2">新密码</label>
+                                        <input v-model="pwd4" type="password" class="form-control" id="exampleInputPassword2" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword3">确认密码</label>
+                                        <input v-model="pwd5" type="password" class="form-control" id="exampleInputPassword3" placeholder="">
+                                    </div>
+                                    <button @click="changepw(lgna,pwd4)" class="btn btn-primary">提交</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
-        new Vue({
+        var v = new Vue({
             el: "#app",
+            data: {
+                viw: 0,
+                classid: undefined,
+                xuankelist: undefined,
+                stuxuanke: undefined,
+                classlist: undefined,
+                student: undefined,
+                pwd1: undefined,
+                pwd2: undefined,
+                pwd3: undefined,
+                lgna: undefined,
+                pwd4: undefined,
+                pwd5: undefined,
+                classcc: undefined,
+                td1: "",
+                td2: "",
+                td3: "",
+                td4: "",
+                td5: "",
+                td6: "",
+                td7: "",
+                td8: "",
+                td9: "",
+                td10: "",
+                td11: "",
+                td12: "",
+                td13: "",
+                td14: "",
+                td15: "",
+                td16: "",
+                td17: "",
+                td18: "",
+                td19: "",
+                td20: "",
+                tian: {
+                    city: "",
+                    date: "",
+                    week: "",
+                    wea: "",
+                    air_level: "",
+                    tem: ""
+                }
+            },
             mounted() {
-
+                var req = new XMLHttpRequest();
+                req.open('GET', document.location, false);
+                req.send(null);
+                var token = req.getResponseHeader("token");
+                sessionStorage.setItem("token", token);
+                console.log(sessionStorage.getItem("token"));
+                this.selfmotion();
+                this.selxk();
             },
             methods: {
-                a() {
-                    var req = new XMLHttpRequest();
-                    req.open('GET', document.location, false);
-                    req.send(null);
-                    var token = req.getResponseHeader("token");
-                    sessionStorage.setItem("token", token);
-                    console.log(sessionStorage.getItem("token"));
-                    axios.get({
-                            methods: 'GET',
-                            url: '/admin/gettoken',
-                            handers: {
-                                'token': window.sessionStorage['token']
-                            }
-                        })
+                tianqi: function() {
+                    axios.get("https://tianqiapi.com/api?version=v6&appid=95422873&appsecret=tP2m5YyV")
                         .then(res => {
-                            console.log(res)
+                            this.tian.city = res.data.city
+                            this.tian.date = res.data.date
+                            this.tian.week = res.data.week
+                            this.tian.air_level = res.data.air_level
+                            this.tian.tem = res.data.tem
+                            this.tian.wea = res.data.wea
+                            console.log(this.tian)
                         })
                         .catch(err => {
                             console.error(err);
                         })
+                },
+                changep(i1, i2) {
+                    axios({
+                            method: 'put',
+                            url: `/student/ups/${i1,i2}`,
+                            headers: {
+                                "token": sessionStorage.getItem("token")
+                            }
+                        })
+                        .then(res => {
+                            window.location.href = "http://127.0.0.1:8080/login.html";
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
+                },
+                changepw(i1, i2) {
+                    axios({
+                            method: 'post',
+                            url: `/student/cko/${i1,i2}`,
+                            headers: {
+                                "token": sessionStorage.getItem("token")
+                            }
+                        })
+                        .then(res => {})
+                        .catch(err => {
+                            console.error(err);
+                        })
+                },
+                delstuxk(id) {
+                    axios({
+                        method: 'delete',
+                        url: `/student/delxk/${id}`
+                    }).then(res => {
+                        console.log(res.data);
+                        this.selfmotion();
+                    }).catch(err => {
+                        console.error(err);
+                    })
+                },
+                xkSta: function(e, id) {
+                    var b1 = e.target;
+                    var b2 = b1.nextSibling.nextSibling;
+                    b1.style.display = "none";
+                    b2.style.display = "block";
+                    axios({
+                            method: 'post',
+                            url: `/student/sxk/${id}`,
+                            headers: {
+                                "token": sessionStorage.getItem("token")
+                            }
+                        })
+                        .then(res => {
+                            console.log(id);
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
+                },
+                cgv: function(id) {
+                    this.viw = 1;
+                    axios({
+                            method: 'get',
+                            url: `/student/stuCour/${id}`,
+                            headers: {
+                                "token": sessionStorage.getItem("token")
+                            }
+                        })
+                        .then(res => {
+                            this.classcc = res.data
+                            console.log(res.data)
+                            this.paike()
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        });
+                },
+                paike() {
+                    var classc = this.classcc;
+                    for (var i = 0; i < 20; i++) {
+                        if (classc[i].weekId.weekId == 1 && classc[i].classHoursId.classHoursId == 1) {
+                            this.td1 = classc[i].teaId.teaName;
+                        } else if (classc[i].weekId.weekId == 1 && classc[i].classHoursId.classHoursId == 2) {
+                            this.td2 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 1 && classc[i].classHoursId.classHoursId == 3) {
+                            this.td3 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 1 && classc[i].classHoursId.classHoursId == 4) {
+                            this.td4 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 2 && classc[i].classHoursId.classHoursId == 1) {
+                            this.td5 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 2 && classc[i].classHoursId.classHoursId == 2) {
+                            this.td6 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 2 && classc[i].classHoursId.classHoursId == 3) {
+                            this.td7 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 2 && classc[i].classHoursId.classHoursId == 4) {
+                            this.td8 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 3 && classc[i].classHoursId.classHoursId == 1) {
+                            this.td9 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 3 && classc[i].classHoursId.classHoursId == 2) {
+                            this.td10 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 3 && classc[i].classHoursId.classHoursId == 3) {
+                            this.td11 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 3 && classc[i].classHoursId.classHoursId == 4) {
+                            this.td12 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 4 && classc[i].classHoursId.classHoursId == 1) {
+                            this.td13 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 4 && classc[i].classHoursId.classHoursId == 2) {
+                            this.td14 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 4 && classc[i].classHoursId.classHoursId == 3) {
+                            this.td15 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 4 && classc[i].classHoursId.classHoursId == 4) {
+                            this.td16 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 5 && classc[i].classHoursId.classHoursId == 1) {
+                            this.td17 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 5 && classc[i].classHoursId.classHoursId == 2) {
+                            this.td18 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 5 && classc[i].classHoursId.classHoursId == 3) {
+                            this.td19 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        } else if (classc[i].weekId.weekId == 5 && classc[i].classHoursId.classHoursId == 4) {
+                            this.td20 = classc[i].teaId.teaName + classc[i].teaId.courseId.courseName + classc[i].classRoomId.classHomeName;
+                        }
+                    }
+                },
+                selfmotion() {
+                    axios({
+                            method: 'get',
+                            url: '/student/me',
+                            headers: {
+                                "token": sessionStorage.getItem("token")
+                            }
+                        })
+                        .then(res => {
+                            this.student = res.data;
+                            console.log(sessionStorage.getItem("token"))
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        }), axios({
+                            method: 'get',
+                            url: '/student/myxk',
+                            headers: {
+                                "token": sessionStorage.getItem("token")
+                            }
+                        }).then(res => {
+                            this.stuxuanke = res.data;
+                        }).catch(err => {
+                            console.error(err);
+                        })
+                },
+                selxk() {
+                    axios.get("/student/selxk").then(res => {
+                            this.xuankelist = res.data
+                        }).catch(err => {
+                            console.error(err);
+                        }),
+                        axios.get("/student/selclass").then(res => {
+                            this.classlist = res.data
+                        }).catch(err => {
+                            console.error(err);
+                        })
                 }
+            },
+            created() {
+                this.tianqi()
             }
         })
     </script>

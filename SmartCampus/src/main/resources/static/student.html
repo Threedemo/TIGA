@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>学生管理系统
+    </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="js/vue.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style>
+    * {
+        margin: 0 0;
+        padding: 0 0;
+    }
+    
+    #stu-row {
+        width: 100%;
+        height: 900px;
+    }
+</style>
+
+<body>
+    <div class="jumbotron">
+        <div>
+            <h1 class="display-4">学生管理模块</h1>
+            <div>
+                天气--小雨--28℃
+            </div>
+        </div>
+        <div style="float: right;margin-top: -120px;">
+            <div>
+                <a style="color: rgb(255, 253, 251);">【退出】</a>
+            </div>
+            <div style="margin-top: 5px;">
+                <p class="lead">欢迎<span>XX</span>同学登录</p>
+            </div>
+        </div>
+    </div>
+    <div id="app">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">个人信息</a>
+                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">我的选课</a>
+                        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">课程表查询</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">我的成绩</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-setps" role="tab" aria-controls="setps">修改密码</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-addxk" role="tab" aria-controls="addxk">添加选课</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-forgetmm" role="tab" aria-controls="forgetmm">忘记密码</a>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="container">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                                <table style="width: 620px;" class="table table-bordered table-warning">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 110px;">学号：</td>
+                                            <td style="width: 125px;"><span>1725123734</span></td>
+                                            <td style="width: 110px;"><span id="Label1">学生证号：</span></td>
+                                            <td style="width: 125px;"><span></span></td>
+                                            <td rowspan="3"><img id="xszp" src="readimagexs.aspx?xh=1725123734&amp;timestamp=1278571128&amp;secret=a191ea7db9bb294cd73823fa66d32772" alt="照片" align="AbsMiddle" border="0" height="144" width="112"><br>
+                                                <span id="Label7"><b><font color="Red">建议照片大小不超过100k<br>照片像素（宽×高）为：
+                                                    144×172<br>照片格式为BMP/JPG/JPEG</font></b></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 110px;">姓名：
+                                            </td>
+                                            <td style="width: 125px;"><span id="xm">{{student.stuName}}</span></td>
+                                            <td style="width: 110px;">民族：</td>
+                                            <td style="width: 125px;"><span>{{stuNation}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 110px;">曾用名：</td>
+                                            <td style="width: 125px;">
+                                                <p></p>
+                                                <p><span></span></p>
+                                            </td>
+                                            <td style="width: 110px;">手机号码：</td>
+                                            <td style="width: 125px;"><span>{{student.stuPhone}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 110px;">身份证号：</td>
+                                            <td style="width: 125px;"><span>{{student.stuIdNum}}</span></td>
+                                            <td style="width: 110px;">家庭邮编：
+                                            </td>
+                                            <td style="width: 125px;"><span></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 110px;">性别：</td>
+                                            <td style="width: 125px;"><span>{{student.stuSex}}</span></td>
+                                            <td style="width: 110px;">班级
+                                            </td>
+                                            <td style="width: 125px;"><span>{{student.claId.claName}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 110px;">年龄：</td>
+                                            <td style="width: 125px;"><span></span></td>
+                                            <td style="width: 110px;">入学时间
+                                            </td>
+                                            <td style="width: 125px;"><span>{{student.stuStart}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 110px;">毕业时间：</td>
+                                            <td style="width: 125px;"><span>{{student.stuStop}}</span></td>
+                                            <td style="width: 110px;">家庭住址：
+                                            </td>
+                                            <td style="width: 125px;"><span></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                                <div class="input-group">
+                                    <select class="custom-select" id="inputGroupSelect04">
+                                                  <option selected>第一学期</option>
+                                                  <option value="1">第二学期</option>
+                                                  <option value="2">第三学期</option>
+                                                  <option value="3">第四学期</option>
+                                                </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button">搜索</button>
+                                    </div>
+                                </div>
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-success">历史
+                                        <button style="float: right;" class="btn btn-outline-danger">删除</button>
+                                    </li>
+                                    <li class="list-group-item list-group-item-danger">文言文
+                                        <button style="float: right;" class="btn btn-outline-danger">删除</button></li>
+                                    <li class="list-group-item list-group-item-warning">地理文化
+                                        <button style="float: right;" class="btn btn-outline-danger">删除</button></li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+                                <div class="input-group">
+                                    <select v-model="classid" class="custom-select" id="inputGroupSelect04">
+                                                  <option v-for="(cla,i) in classlist" :value="cla.claId">{{cla.claName}}</option>
+                                                </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" @click="cgv">查询</button>
+                                    </div>
+                                </div>
+                                <div v-if="viw==1">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>星期一</th>
+                                                <th>星期二</th>
+                                                <th>星期三</th>
+                                                <th>星期四</th>
+                                                <th>星期五</th>
+                                                <th>星期六</th>
+                                                <th>星期天</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td scope="row">第一节</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row">第二节</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row">第三节</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row">第四节</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list"></div>
+                            <div class="tab-pane fade" id="list-setps" role="tabpanel" aria-labelledby="list-setps-list">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Old Password</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword2">New Password</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword3">Verify Password</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword3" placeholder="">
+                                    </div>
+                                    <button class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="list-addxk" role="tabpanel" aria-labelledby="list-addxk-list">
+                                <div class="input-group">
+                                    <select class="custom-select" id="inputGroupSelect04">
+                                                          <option selected>第一学期</option>
+                                                          <option value="1">第二学期</option>
+                                                          <option value="2">第三学期</option>
+                                                          <option value="3">第四学期</option>
+                                                        </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button">搜索</button>
+                                    </div>
+                                </div>
+                                <ul class="list-group">
+                                    <li v-for="(xk,i) in xuankelist" class="list-group-item list-group-item-primary">{{xk.xkName}}
+                                        <button style="float: right;" class="btn btn-success">添加</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane fade" id="list-forgetmm" role="tabpanel" aria-labelledby="list-forgetmm-list">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">身份证号</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword2">新密码</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword3">确认密码</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword3" placeholder="">
+                                    </div>
+                                    <button class="btn btn-primary">提交</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script>
+        var v = new Vue({
+            el: "#app",
+            data: {
+                viw: 0,
+                classid: undefined,
+                xuankelist: undefined,
+                stuxuanke: undefined,
+                classlist: undefined,
+                student: undefined
+            },
+            methods: {
+                cgv: function() {
+                    this.viw = 1;
+                },
+                // showone: function() {
+                //     axios.get("/student/me/s1").then(res => {
+                //         this.list1 = res.data
+                //     }).catch(err => {
+                //         console.error(err);
+                //     })
+                // },
+                selfmotion: function() {
+                    axios({
+                            methods: 'GET',
+                            url: '/me',
+                            handers: {
+                                'token': sessionStorage.getItem("token")
+                            }
+                        }).then(res => {
+                            this.student = res.data
+                        }).catch(err => {
+                            console.error(err);
+                        })
+                        //     axios.get("/student/selxk").then(res => {
+                        //             this.xuankelist = res.data
+                        //         }).catch(err => {
+                        //             console.error(err);
+                        //         }),
+                        //         axios.get("/student/selclass").then(res => {
+                        //             this.classlist = res.data
+                        //         }).catch(err => {
+                        //             console.error(err);
+                        //         })
+                }
+            }
+        })
+    </script> -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
