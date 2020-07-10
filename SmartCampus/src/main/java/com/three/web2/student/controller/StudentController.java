@@ -104,6 +104,7 @@ public class StudentController {
 			@PathVariable String ssr){
 		String loginName=jwtu.gettoken(token);
 		return sr.findByStuIdAndSemesterId(loginName, ssr);
+		
 	}
 	/**
 	 * 查询全部选课
