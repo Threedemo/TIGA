@@ -346,10 +346,10 @@ String teaId=jwtUtil.gettoken(token);
 //		 
 //	}
 
-	@GetMapping("/stuscorelist/{claId}/{loginName}/{semesterId}")
-	public List<Score> stuscorelist(@PathVariable String claId,
-			@PathVariable String loginName,
-			@PathVariable String semesterId ) {
+	@GetMapping("/stuscorelist")
+	public List<Score> stuscorelist(@RequestParam String claId,
+			@RequestParam String loginName,
+			@RequestParam String semesterId ) {
 
 		Teacher teacher = tr.teaload(loginName);
 		String name = teacher.getCourseId().getCourseName();
@@ -382,7 +382,6 @@ String teaId=jwtUtil.gettoken(token);
 	 * @param ln
 	 * @return
 	 */
-	@ResponseBody
 	@PutMapping("/ups/{lp}/{ln}/{odlp}")
 	public void upSm(@PathVariable String lp
 			,@PathVariable String ln,@PathVariable String odlp) {
