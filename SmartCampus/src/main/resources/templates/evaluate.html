@@ -19,7 +19,7 @@
 <style>
     .card {
         width: 20%;
-        height: 100%;
+        height: 50%;
         float: left;
     }
 </style>
@@ -28,35 +28,55 @@
     <div class="container-fluid" id="app">
         <div class="jumbotron">
             <h1 class="display-3">教师评价页面</h1>
-            <p class="lead">当前评价</p>
+            <p class="lead">我的评价</p>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <div class="card">
+                <div class="card" v-for="(eva,index) in evaList" :key="index">
                     <img class="card-img-top" alt="">
                     <div class="card-body">
-                        <h4 class="card-title">学生姓名：王梦梦</h4>
-                        <p class="card-text">班级：软件1709</p>
-                        <p>教师评价：啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+                        <h4 class="card-title">学生姓名：{{eva.stuId.stuName}}</h4>
+                        <p class="card-text">学号：{{eva.stuId.loginName}}</p>
+                        <p>教师评价：{{eva.evaluateContent}}</p>
                     </div>
                 </div>
-                <div class="card">
-                    <img class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">学生姓名：王梦梦</h4>
-                        <p class="card-text">班级：软件1709</p>
-                        <p>教师评价：啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
     <script>
         new Vue({
             el: "#app",
-            data: {},
+            data: {
+                evaList: new Array(),
+            },
+            mounted() {
+                this.evamsg()
+            },
             methods: {
+                evamsg() {
+                    axios({
+                            method: 'get',
+                            url: '/teacher/teaEva',
+                            headers: {
+                                "token": sessionStorage.getItem("token")
+                            }
+                        })
+                        .then(res => {
+                            this.evaList = res.data;
+                            console.log(res);
+
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        })
+                },
+                show: function() {
+                    axios.get('/teacher/teaEva')
+                        .then(res => {
+
+                            this.evaList = res.data;
+                        })
+                }
 
             },
         })
