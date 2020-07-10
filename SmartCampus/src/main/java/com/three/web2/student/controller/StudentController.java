@@ -88,20 +88,20 @@ public class StudentController {
 	 * @param zo
 	 * @return
 	 */
-	@GetMapping("/cl/{claid}")
-	public List<ClassCourse> getcc(
-			@PathVariable String claid){
-		return ccr.classc(claid);
-	}
+//	@GetMapping("/cl/{claid}")
+//	public List<ClassCourse> getcc(
+//			@PathVariable String claid){
+//		return ccr.classc(claid);
+//	}
 	/**
 	 * 查成绩
 	 * @param stu
 	 * @param ssr
 	 * @return
 	 */
-	@GetMapping("/sc")
+	@GetMapping("/sc/{ssr}")
 	public Score getss(@RequestHeader(name = "token") String token,
-			@RequestParam String ssr){
+			@PathVariable String ssr){
 		String loginName=jwtu.gettoken(token);
 		return sr.findByStuIdAndSemesterId(loginName, ssr);
 	}
@@ -158,9 +158,9 @@ public class StudentController {
 	 * @param sid
 	 * @param xk
 	 */
-	@DeleteMapping("/delxk/{xkid}")
-	public void delXk(@PathVariable String xkid) {
-		 sxkr.deleteById(xkid);
+	@DeleteMapping("/delxk/{sxkid}")
+	public void delXk(@PathVariable String sxkid) {
+		 sxkr.deleteById(sxkid);
 	}
 	
 	/**
