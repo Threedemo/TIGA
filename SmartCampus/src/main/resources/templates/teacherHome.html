@@ -192,11 +192,11 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">上午1、2节</th>
-                                    <td>Mark</td>
+                                    <td>111</td>
                                     <td>Otto</td>
                                     <td>@mdo</td>
                                     <td>@mdo</td>
-                                    <td>@mdo</td>
+
                                 </tr>
                                 <tr>
                                     <th scope="row">上午3、4节</th>
@@ -204,13 +204,12 @@
                                     <td>Thornton</td>
                                     <td>@fat</td>
                                     <td>@fat</td>
-                                    <td>@fat</td>
+
                                 </tr>
                                 <tr>
                                     <th scope="row">下午1、2节</th>
                                     <td>Larry the Bird</td>
                                     <td>@twitter</td>
-                                    <td>@fat</td>
                                     <td>@fat</td>
                                     <td>@fat</td>
                                 </tr>
@@ -220,7 +219,7 @@
                                     <td>@twitter</td>
                                     <td>@fat</td>
                                     <td>@fat</td>
-                                    <td>@fat</td>
+
                                 </tr>
                             </tbody>
                         </table>
@@ -238,6 +237,18 @@
         new Vue({
             el: '#app',
             data: {
+                kongde: {
+                    claId: {
+                        claName: ""
+                    },
+                    classRoomId: {
+                        classHomeName: ""
+                    }
+                },
+                fiveone: {},
+                fivetwo: {},
+                fivethree: {},
+                fivefour: {},
                 teaCou: [],
                 time: new Date(),
                 timer: "",
@@ -294,8 +305,7 @@
                         })
                         .then(res => {
                             this.teaCou = res.data;
-                            console.log(res);
-
+                            console.log(this.teaCou);
 
 
                         })

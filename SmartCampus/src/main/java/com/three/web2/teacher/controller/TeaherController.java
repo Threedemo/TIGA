@@ -6,16 +6,20 @@ import java.util.Map;
 
 import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.three.web2.LoginMapper;
 import com.three.web2.jwt.JwtUtil;
 import com.three.web2.pojo.ClassCourse;
 import com.three.web2.pojo.ClassHours;
@@ -85,6 +89,9 @@ public class TeaherController {
 	
 	@Autowired
 	JwtUtil jwtUtil;
+	
+	@Autowired
+	LoginMapper loginMapper;
 
 	/**
 	 * 添加教师信息 后续放到教务Controller
@@ -205,6 +212,8 @@ public class TeaherController {
 	public List<ClassCourse> courseclassAll(@PathVariable String claId) {
 		return classCourseRepository.classc(claId);
 	}
+	
+	
 
 	/**
 	 * 通过老师查询课表 老师课程表
@@ -217,6 +226,7 @@ public class TeaherController {
 String teaId=jwtUtil.gettoken(token);		
 		return classCourseRepository.classtea(teaId);
 	}
+
 
 	/**
 	 * 查询老师任课课程
@@ -365,6 +375,26 @@ String teaId=jwtUtil.gettoken(token);
 		return scorelist ;
 
 	}
+	
+	/**
+	 * 修改密码
+	 * @param lp
+	 * @param ln
+	 * @return
+	 */
+	@ResponseBody
+	@PutMapping("/ups/{lp}/{ln}/{odlp}")
+	public void upSm(@PathVariable String lp
+			,@PathVariable String ln,@PathVariable String odlp) {
+		System.out.println(loginMapper.getOne(ln).toString());
+		if(odlp.equals(loginMapper.getOne(ln).getLoginPassword())) {
+			//加密密码
+			lp=new BCryptPasswordEncoder().encode(lp);
+			loginMapper.upl(ln, lp);
+		}
+		
+	}
+	
 	
 	 /**
 	   * wmm
