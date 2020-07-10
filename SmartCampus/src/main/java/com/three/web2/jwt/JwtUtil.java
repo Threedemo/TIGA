@@ -19,7 +19,7 @@ public class JwtUtil {
 	//加密方式
 	private static Algorithm algorithm = Algorithm.HMAC256("thefirsttoken123");
 	//超时时间30分钟
-	private static Date expiresDate = new Date(System.currentTimeMillis() + 30*60*1000);
+	private static Date expiresDate = new Date(System.currentTimeMillis() + 120*60*1000);
 	/**
 	 * 生成带有用户名的token
 	 * @param username

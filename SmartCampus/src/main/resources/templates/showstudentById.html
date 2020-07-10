@@ -166,8 +166,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="stuStop">班级</label>
-                                    <select v-model="stu.claId.claId">
-                                        <option v-for="(item,index) in clalist" :key="index"  :value="item.claName">{{item.claName}}</option>
+                                    <select v-model="stu.claId">
+                                        <option v-for="(item,index) in clalist" :key="index"  :value="item">{{item.claName}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">学生信息</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">教师信息</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
@@ -199,10 +199,10 @@
                                 <div class="form-group">
                                     <label for="loginName lg-3">性别</label>
                                     <div class="row">
-                                        &nbsp;<input type="radio" name="sex" v-model="teacher.teaSex" id="sex1"> &nbsp;
-                                        <label for="sex1">男</label>&nbsp;
-                                        <input type="radio" name="sex" v-model="teacher.teaSex" id="sex2">&nbsp;
-                                        <label for="sex2">女</label>
+                                        &nbsp;<input type="radio" name="sex1" v-model="teacher.teaSex" value="男" id="sex3"> &nbsp;
+                                        <label for="sex3">男</label>&nbsp;
+                                        <input type="radio" name="sex1" v-model="teacher.teaSex" value="女" id="sex4">&nbsp;
+                                        <label for="sex4">女</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -227,14 +227,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="stuPhone">所授课程</label>
-                                    <select v-model="teacher.courseId.courseId">
-                                        <option v-for="(item,index) in coulist" :key="index"  :value="item.courseName">{{item.courseName}}</option>
+                                    <select v-model="teacher.courseId">
+                                        <option v-for="(item,index) in coulist" :key="index"  :value="item">{{item.courseName}}</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="stuStart">所属院系</label>
-                                    <select v-model="teacher.depId.depId">
-                                        <option v-for="(item,index) in deplist" :key="index"  :value="item.depName">{{item.depName}}</option>
+                                    <select v-model="teacher.depId">
+                                        <option v-for="(item,index) in deplist" :key="index"  :value="item">{{item.depName}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -299,7 +299,9 @@
                     clalist: [],
                     deplist: [],
                     coulist: [],
-                    info: {}
+                    info: {},
+                    smode: "s",
+                    tmode: "t"
                 },
                 mounted() {
                     this.useinfo();
@@ -387,20 +389,21 @@
                         axios.get(`/admin/student/${this.stuid}`)
                             .then(res => {
                                 this.stu = res.data;
-                                console.log(this.stu);
+                                this.smode = "exampleModal";
+
                             })
                             .catch(err => {
-                                console.error(err);
+                                alert("学生不存在");
                             })
                     },
                     showtea() {
                         axios.get(`/admin/teacher/${this.teaid}`)
                             .then(res => {
                                 this.teacher = res.data;
-                                console.log(this.stu);
+                                this.tmode = "exampleModal1";
                             })
                             .catch(err => {
-                                console.error(err);
+                                alert("教师不存在");
                             })
                     }
                 },

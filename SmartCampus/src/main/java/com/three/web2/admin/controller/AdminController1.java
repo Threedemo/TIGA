@@ -56,6 +56,11 @@ public class AdminController1 {
 	public String toshowmessage() {
 		return "showmessage.html";
 	}
+	
+	@GetMapping("/admin/toxk")
+	public String toxk() {
+		return "xk.html";
+	}
 	@GetMapping("/success")
 	public String ad() {
 		return "show.html";

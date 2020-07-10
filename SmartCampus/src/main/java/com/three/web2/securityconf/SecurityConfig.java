@@ -49,13 +49,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .defaultSuccessUrl("/").successHandler(new LoginSuccessHandle())
         .and()
         .authorizeRequests()
-        .antMatchers("/login.html","index.html","/"
-        		,"/notice","/notice/*","/teacher/classcourse").permitAll()
-        .antMatchers("/student","/student/*").hasRole("STUDENT")
-        .antMatchers("/teacher","/teacher/*").hasRole("TEACHER")
-        .antMatchers("/admin","/admin/*").hasRole("ADMIN")
+//        .antMatchers("/login.html","index.html","/"
+//        		,"/notice","/notice/*","/teacher/classcourse").permitAll()
+//        .antMatchers("/student","/student/*").hasRole("STUDENT")
+//        .antMatchers("/teacher","/teacher/*").hasRole("TEACHER")
+//        .antMatchers("/admin","/admin/*").hasRole("ADMIN")
         .anyRequest()
-        .authenticated();
+        .permitAll();
 	}
 	
 	//认证	1.基于内存 2.基于数据库

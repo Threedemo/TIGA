@@ -338,6 +338,17 @@ public class AdminController2 {
 	public XuanKe saveXuanke(@RequestBody XuanKe xuanKe) {
 		return xuanKeRepository.save(xuanKe);
 	}
+	
+	@GetMapping("/xuanke/{semeid}")
+	public List<XuanKe> saveXuanke(@PathVariable String semeid) {
+		return xuanKeRepository.findBySemesterId(semeid);
+	}
+	
+	@DeleteMapping("/xuanke/{xkid}")
+	public String delXuanke(@PathVariable String xkid) {
+		xuanKeRepository.deleteById(xkid);
+		return "ok";
+	}
 	/**
 	 * 通过id查询一个教师的基本信息
 	 * @param id

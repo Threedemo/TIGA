@@ -110,7 +110,7 @@
                                 <a href="/admin/toaddteachers" class="btn btn-primary">添加教师</a>
                             </li>
                             <li class="lg-2">
-                                <a href="/admin/toshowstudent" class="btn btn-primary">查询学生基本信息</a>
+                                <a href="/admin/toshowstudent" class="btn btn-primary">查询学生教师基本信息</a>
                             </li>
                             <li class="lg-2">
                                 <a href="/admin/showstusco" class="btn btn-primary">查询成绩</a>
@@ -122,6 +122,41 @@
                                 <a href="/admin/showmessage" class="btn btn-primary">查看意见箱</a>
                             </li>
                         </ul>
+                        <ul style="margin-top: 5%;" class="row">
+                            <li class="lg-2">
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">发布公告</button>
+                            </li>
+                            <li class="lg-2">
+                                <a href="/admin/toxk" class="btn btn-primary">选课管理</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">发布公告</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="tit">标题</label>
+                                        <input id="tit" v-model="notice.noticeTitle" class="form-control" type="text" name="tit">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="con">内容</label>
+                                        <input id="con" v-model="notice.noticeContent" class="form-control" type="text" name="con">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" @click="addnotice" class="btn btn-primary" data-dismiss="modal">发布</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -142,7 +177,11 @@
                         air_level: "",
                         tem: ""
                     },
-                    info: {}
+                    info: {},
+                    notice: {
+                        noticeTitle: "",
+                        noticeContent: ""
+                    }
                 },
                 mounted() {
                     var req = new XMLHttpRequest();
@@ -182,6 +221,15 @@
                             })
                             .catch(err => {
                                 console.error(err);
+                            })
+                    },
+                    addnotice() {
+                        axios.post("/admin/notice", this.notice)
+                            .then(res => {
+                                alert("发布成功");
+                            })
+                            .catch(err => {
+                                alert("发布失败");
                             })
                     }
 

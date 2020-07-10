@@ -127,7 +127,7 @@
                         <button type="button" @click="getscore" class="btn btn-primary">查询</button>
                     </div>
 
-                    <div class="row">
+                    <div class="row" v-if="flag">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -171,7 +171,8 @@
                     seme: "",
                     semelist: [],
                     clalist: [],
-                    marlist: []
+                    marlist: [],
+                    flag: false
                 },
                 mounted() {
                     this.useinfo();
@@ -241,11 +242,10 @@
                             .then(res => {
                                 this.score = res.data;
                                 this.keylist = Object.keys(res.data[0].score);
-                                console.log(this.semelist);
-                                console.log(this.keylist);
+                                this.flag = true;
                             })
                             .catch(err => {
-                                console.error(err);
+                                alert("查询信息不存在");
                             })
                     }
                 },
