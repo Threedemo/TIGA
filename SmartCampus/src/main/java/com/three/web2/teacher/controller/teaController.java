@@ -23,4 +23,9 @@ public class teaController {
 	public String teaScore() {
 		return"teaScore.html";
 	}
+	
+	@GetMapping("/stuScore")
+	public String stuteaScore() {
+		return"score.html";
+	}
 }

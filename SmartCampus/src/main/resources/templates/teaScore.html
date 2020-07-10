@@ -40,6 +40,19 @@
                     </div>
                 </div>
             </p>
+            <p class="lead">
+                <div class="dropdown show">
+                    <a class="btn btn-primary btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                      选择学期
+                                                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item">第一学期</a>
+                        <a class="dropdown-item">第二学期</a>
+                        <a class="dropdown-item">第三学期</a>
+                    </div>
+                </div>
+            </p>
 
         </div>
         <div class="table-responsive-sm" style="margin-top: -32px;">
@@ -49,25 +62,22 @@
                         <th>学号</th>
                         <th>姓名</th>
                         <th>班级</th>
-                        <th>平時成績</th>
-                        <th>考試成績</th>
-                        <th>成績</th>
+                        <th>平时成绩</th>
+                        <th>考试成绩</th>
+                        <th>成绩</th>
                         <th>操作</th>
-
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(ssr, index) in stuScore">
+                    <tr v-for="(ssr, index) in stuScore" :key="index">
                         <td scope="row">{{ssr.stuId.loginName}}</td>
                         <td>{{ssr.stuId.stuName}}</td>
                         <th>{{ssr.stuId.claId.claName}}</th>
 
-                        <td><input type="text" name="" id="" v-model="ping"></td>
-                        <td><input type="text" name="" id="" v-model="kao"></td>
+                        <td><input type="text" name="" id=""></td>
+                        <td><input type="text" name="" id=""></td>
                         <td>{{kong}}</td>
                         <td><button @click="a()">添加</button></td>
-
-
                     </tr>
 
                 </tbody>
